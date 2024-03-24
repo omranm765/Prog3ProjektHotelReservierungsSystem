@@ -3,13 +3,11 @@ package com.example.prog3projekthotelreservierungssystem;
 import java.time.LocalDate;
 
 public abstract class Person {
-    private String vorname;
-    private String name;
+    private final String vorname;
+    private final String name;
     private String email;
-    private LocalDate geburtsdatum;
+    private final LocalDate geburtsdatum;
     private String telefonNr;
-
-    private int personID;
 
     public Person(String vorname, String name, String email,
                   LocalDate geburtsdatum, String telefonNr) throws HotelException {
@@ -49,6 +47,9 @@ public abstract class Person {
     public String getEmail() {
         return email;
     }
+    public void setEmail(String email){
+        this.email = email;
+    }
 
     public LocalDate getGeburtsdatum() {
         return geburtsdatum;
@@ -73,7 +74,8 @@ public abstract class Person {
             return false;
         if (getName() != null ? !getName().equals(person.getName()) : person.getName() != null) return false;
         if (getEmail() != null ? !getEmail().equals(person.getEmail()) : person.getEmail() != null) return false;
-        if (getGeburtsdatum() != null ? !getGeburtsdatum().equals(person.getGeburtsdatum()) : person.getGeburtsdatum() != null)
+        if (getGeburtsdatum() != null
+                ? !getGeburtsdatum().equals(person.getGeburtsdatum()) : person.getGeburtsdatum() != null)
             return false;
         return getTelefonNr() != null ? getTelefonNr().equals(person.getTelefonNr()) : person.getTelefonNr() == null;
     }
