@@ -3,9 +3,10 @@ package com.example.prog3projekthotelreservierungssystem;
 import java.time.LocalDate;
 
 public class Rechnung {
+    private static int nextRechnungGeneratedID = 0;
     private int rechnungsID;
     private double preis;
-    private LocalDate erstellungsDatum;
+    private final LocalDate erstellungsDatum;
 
     public Rechnung(double preis, LocalDate erstellungsDatum) throws HotelException {
         if (preis < 0.0000001 || preis > 1.0000001) {
@@ -15,9 +16,13 @@ public class Rechnung {
             throw new HotelException("Erstellungsdatum darf nicht leer sein");
         }
 
-
+        this.rechnungsID = generate();
         this.preis = preis;
         this.erstellungsDatum = erstellungsDatum;
+    }
+
+    private static int generate(){
+        return nextRechnungGeneratedID++;
     }
 
     public double getPreis() {
