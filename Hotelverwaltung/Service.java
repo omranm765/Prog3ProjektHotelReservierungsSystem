@@ -1,9 +1,10 @@
 package com.example.prog3projekthotelreservierungssystem;
 
 public class Service {
-    private String serviceName;
+    private final String serviceName;
     private int serviceID;
     private double servicePreis;
+    private static int nextServiceGeneratedID = 0;
 
     public Service(String serviceName, double servicePreis) throws HotelException {
         if (serviceName == null || serviceName.trim().isEmpty()){
@@ -14,6 +15,11 @@ public class Service {
         }
         this.serviceName = serviceName;
         this.servicePreis = servicePreis;
+        this.serviceID = generate();
+    }
+
+    private static int generate(){
+        return nextServiceGeneratedID++;
     }
 
     public String getServiceName() {
