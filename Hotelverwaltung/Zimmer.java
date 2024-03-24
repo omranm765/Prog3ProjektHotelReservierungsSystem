@@ -47,6 +47,26 @@ public class Zimmer {
         this.buchungen.remove(buchung);
     }
 
+    public int getZimmerNr() {
+        return zimmerNr;
+    }
+
+    public int getEtage() {
+        return etage;
+    }
+
+    public int getFlaeche() {
+        return flaeche;
+    }
+
+    public double getPreis() {
+        return preis;
+    }
+
+    public List<Buchung> getBuchungen() {
+        return buchungen;
+    }
+
     @Override
     public String toString() {
         return "Zimmer: " + "\nzimmerNr: " + zimmerNr +
