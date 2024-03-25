@@ -11,7 +11,7 @@ public class Gast extends Person{
         super(vorname, name, email, geburtsdatum, telefonNr);
     }
 
-
+    //HALLO
     @Override
     public String toString() {
         return super.toString() + "\nGastID: ";
