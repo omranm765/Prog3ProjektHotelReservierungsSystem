@@ -1,121 +1,62 @@
 package com.example.prog3projekthotelreservierungssystem;
 
-import java.time.LocalDate;
-import java.util.List;
-import java.util.ArrayList;
+import jakarta.persistence.Entity;
+import jakarta.persistence.Table;
 
-/**
- * Beschreiben Sie hier die Klasse Buchung.
- *
- * @author (Ihr Name)
- * @version (eine Versionsnummer oder ein Datum)
- */
-public class Buchung {
-    private static int nextBuchungGeneratedID = 0;
-    private Gast gast;
-    private LocalDate buchungDatumBeginn;
-    private LocalDate buchungDatumEnde;
-    private int zimmerNr;
-    private final int BuchungID; // forgein key
-    private List<Service> services;
+@Table(name ="Service")
+@Entity
+public class Service {
+    private final String serviceName;
+    private int serviceID;
+    private double servicePreis;
+    private static int nextServiceGeneratedID = 0;
 
-    public Buchung(Gast gast, LocalDate buchungDatumBeginn, LocalDate buchungDatumEnde,
-                   int zimmerNr) throws HotelException {
-        if (gast == null) {
-            throw new HotelException("Gast existiert nicht");
+    public Service(String serviceName, double servicePreis) throws HotelException {
+        if (serviceName == null || serviceName.trim().isEmpty()){
+            throw new HotelException("Service Name darf nicht leer sein");
         }
-        if (buchungDatumBeginn == null || buchungDatumEnde == null
-                || buchungDatumBeginn.isAfter(buchungDatumEnde)) {
-            throw new HotelException("Ungültige Buchungsdaten");
+        if (servicePreis < 0.0000001 || servicePreis > 1.0000001){
+            throw new HotelException("Preis darf nicht 0 sein");
         }
-        if (String.valueOf(zimmerNr).length() != 4) {
-            throw new HotelException("ZimmerNr muss vierstellig sein");
-        }
-        this.gast = gast;
-        this.buchungDatumBeginn = buchungDatumBeginn;
-        this.buchungDatumEnde = buchungDatumEnde;
-        this.zimmerNr = zimmerNr;
-        this.BuchungID = generate();
-        this.services = new ArrayList<>();
+        this.serviceName = serviceName;
+        this.servicePreis = servicePreis;
+        this.serviceID = generate();
     }
 
-    public static int generate() {
-        return nextBuchungGeneratedID++;
+    private static int generate(){
+        return nextServiceGeneratedID++;
     }
 
-    //database
-    public Rechnung rechnungErstellen(Rechnung rechnung) {
-        return rechnung;
-        // need to be implemented
+    public String getServiceName() {
+        return serviceName;
     }
 
-    //database
-    public void rechnungStornieren(Rechnung rechnung) {
-        // need to be implemented
+    public double getServicePreis() {
+        return servicePreis;
     }
 
-    public void serviceErstellen(Service service) throws HotelException {
-        if (service == null) {
-            throw new HotelException("service existiert nicht");
-        }
-        services.add(service);
-    }
-
-    public void serviceEntfernen(Service service) throws HotelException {
-        if (service == null) {
-            throw new HotelException("service existiert nicht");
-        }
-        services.remove(service);
-    }
-
-    public void setGast(Gast gast) {
-        this.gast = gast;
-    }
-
-    public void setBuchungDatumBegin(LocalDate buchungDatumBegin) {
-        this.buchungDatumBeginn = buchungDatumBegin;
-    }
-
-    public void setBuchungDatumEnde(LocalDate buchungDatumEnde) {
-        this.buchungDatumEnde = buchungDatumEnde;
-    }
-
-    public void setZimmerNr(int zimmerNr) {
-        this.zimmerNr = zimmerNr;
-    }
-
-    public Gast getGast() {
-        return gast;
-    }
-
-    public LocalDate getBuchungDatumBeginn() {
-        return buchungDatumBeginn;
-    }
-
-    public LocalDate getBuchungDatumEnde() {
-        return buchungDatumEnde;
-    }
-
-    public int getZimmerNr() {
-        return zimmerNr;
-    }
-
-    public int getBuchungID() {
-        return BuchungID;
-    }
-
-    public List<Service> getServices() {
-        return services;
+    public String toString(){
+        return "ServiceName: " + serviceName + "\nServicePreis: " + servicePreis;
     }
 
     @Override
-    public String toString() {
-        return "Buchung: " + "\ngast: " + gast +
-                "\nzimmerNr: " + zimmerNr + "," +
-                "\nbuchungDatumBegin: " + buchungDatumBeginn +
-                "\nbuchungDatumEnde: " + buchungDatumEnde +
-                "\nBuchungID: " + BuchungID +
-                "\nservices: " + services;
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (!(o instanceof Service)) return false;
+
+        Service service = (Service) o;
+
+        if (Double.compare(service.getServicePreis(), getServicePreis()) != 0) return false;
+        return getServiceName() != null ? getServiceName().equals(service.getServiceName()) : service.getServiceName() == null;
+    }
+
+    @Override
+    public int hashCode() {
+        int result;
+        long temp;
+        result = getServiceName() != null ? getServiceName().hashCode() : 0;
+        temp = Double.doubleToLongBits(getServicePreis());
+        result = 31 * result + (int) (temp ^ (temp >>> 32));
+        return result;
     }
 }
-
