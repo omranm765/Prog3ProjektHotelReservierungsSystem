@@ -1,24 +1,25 @@
 package com.example.prog3projekthotelreservierungssystem;
 
-import jakarta.persistence.Entity;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.GenerationType;
-import jakarta.persistence.Id;
-import jakarta.persistence.Inheritance;
-import jakarta.persistence.InheritanceType;
+import jakarta.persistence.*;
 
 import java.time.LocalDate;
 
 @Entity
 @Inheritance(strategy = InheritanceType.JOINED)
 public abstract class Person {
+    private final String EMAIL_REGEX = "^[\\w-\\.]+@([\\w-]+\\.)+[\\w-]{2,4}$";
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id;
+    @Column(name = "firstname")
     private final String vorname;
+    @Column(name = "lastname")
     private final String name;
+    @Column
     private String email;
+    @Column
     private final LocalDate geburtsdatum;
+    @Column(name = "telefonnummer")
     private String telefonNr;
 
     public Person(String vorname, String name, String email,
@@ -32,7 +33,7 @@ public abstract class Person {
         if (email == null || email.trim().isEmpty()) {
             throw new HotelException("Email darf nicht leer sein");
         }
-        if (!email.matches("^[\\w-\\.]+@([\\w-]+\\.)+[\\w-]{2,4}$")){
+        if (!email.matches(EMAIL_REGEX)){
             throw new HotelException("Die Email ist ungültig");
         }
         if (geburtsdatum == null){

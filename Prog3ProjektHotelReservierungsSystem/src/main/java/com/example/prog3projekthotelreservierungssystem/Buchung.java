@@ -1,13 +1,9 @@
 package com.example.prog3projekthotelreservierungssystem;
 
-import jakarta.persistence.Column;
-import jakarta.persistence.Entity;
-import jakarta.persistence.Id;
-import jakarta.persistence.Table;
+import jakarta.persistence.*;
+import org.hibernate.annotations.Type;
 
 import java.time.LocalDate;
-import java.util.List;
-import java.util.ArrayList;
 
 /**
  * Beschreiben Sie hier die Klasse Buchung.
@@ -18,19 +14,32 @@ import java.util.ArrayList;
 @Entity
 @Table(name = "buchung")
 public class Buchung {
-    private static int nextBuchungGeneratedID = 0;
-    private Gast gast;
-    @Column
-    private LocalDate buchungDatumBeginn;
-    @Column
-    private LocalDate buchungDatumEnde;
 
+    @ManyToOne(fetch = FetchType.EAGER)
+    @JoinColumn(name = "gast_id", nullable = true)
+    private Person gast;
+
+    @OneToOne(fetch = FetchType.EAGER, cascade = CascadeType.ALL)
+    @JoinColumn(name = "zimmer_id", nullable = false)
+    private Zimmer zimmer;
+    @Column(name = "datum_beginn", nullable = false)
+    private LocalDate buchungDatumBeginn;
+    @Column(name = "datum_ende", nullable = false)
+    private LocalDate buchungDatumEnde;
+    @Transient
     private int zimmerNr;
     @Id
-    private final int BuchungID; // forgein key
-    private List<Service> services;
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Column(name = "buchung_id")
+    private int BuchungID;
+    @Column
+    private boolean storniert = false;
 
-    public Buchung(Gast gast, LocalDate buchungDatumBeginn, LocalDate buchungDatumEnde,
+    @OneToOne(cascade = CascadeType.ALL)
+    @JoinColumn(name = "rechnung_id", nullable = false)
+    private Rechnung rechnung;
+
+    public Buchung(Person gast, LocalDate buchungDatumBeginn, LocalDate buchungDatumEnde,
                    int zimmerNr) throws HotelException {
         if (gast == null) {
             throw new HotelException("Gast existiert nicht");
@@ -46,37 +55,30 @@ public class Buchung {
         this.buchungDatumBeginn = buchungDatumBeginn;
         this.buchungDatumEnde = buchungDatumEnde;
         this.zimmerNr = zimmerNr;
-        this.BuchungID = generate();
-        this.services = new ArrayList<>();
     }
 
-    public static int generate() {
-        return nextBuchungGeneratedID++;
-    }
 
-    //database
-    public Rechnung rechnungErstellen(Rechnung rechnung) {
-        return rechnung;
-        // need to be implemented
+    public Rechnung rechnungErstellen(double preis1,
+    LocalDate erstellungsDatum1, Rechnung.Status status1) throws HotelException {
+        Rechnung rechnung1 = new Rechnung(preis1, erstellungsDatum1, status1);
+        return rechnung1;
     }
 
     //database
     public void rechnungStornieren(Rechnung rechnung) {
-        // need to be implemented
+        rechnung = null;
     }
 
-    public void serviceErstellen(Service service) throws HotelException {
-        if (service == null) {
-            throw new HotelException("service existiert nicht");
+    public void pay(LocalDate bezahlDatum, Rechnung.Status status, double preis) throws HotelException {
+
+        if (bezahlDatum == null) {
+            throw new IllegalArgumentException("Ungültiges Zahlungsdatum");
         }
-        services.add(service);
+        this.rechnung = new Rechnung(preis, bezahlDatum, Rechnung.Status.BEZAHLT);
     }
 
-    public void serviceEntfernen(Service service) throws HotelException {
-        if (service == null) {
-            throw new HotelException("service existiert nicht");
-        }
-        services.remove(service);
+    public void buchungStornieren() {
+        storniert = true;
     }
 
     public void setGast(Gast gast) {
@@ -95,7 +97,7 @@ public class Buchung {
         this.zimmerNr = zimmerNr;
     }
 
-    public Gast getGast() {
+    public Person getGast() {
         return gast;
     }
 
@@ -115,18 +117,13 @@ public class Buchung {
         return BuchungID;
     }
 
-    public List<Service> getServices() {
-        return services;
-    }
-
     @Override
     public String toString() {
         return "Buchung: " + "\ngast: " + gast +
                 "\nzimmerNr: " + zimmerNr + "," +
                 "\nbuchungDatumBegin: " + buchungDatumBeginn +
                 "\nbuchungDatumEnde: " + buchungDatumEnde +
-                "\nBuchungID: " + BuchungID +
-                "\nservices: " + services;
+                "\nBuchungID: " + BuchungID;
     }
 }
 

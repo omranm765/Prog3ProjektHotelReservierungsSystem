@@ -1,9 +1,6 @@
 package com.example.prog3projekthotelreservierungssystem;
 
-import jakarta.persistence.Column;
-import jakarta.persistence.Entity;
-import jakarta.persistence.Id;
-import jakarta.persistence.Table;
+import jakarta.persistence.*;
 
 import java.util.List;
 import java.util.ArrayList;
@@ -18,13 +15,15 @@ import java.util.ArrayList;
 @Entity
 public class Zimmer {
     @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private final int zimmerNr; //Primary Key
-    @Column(name ="etage")
+    @Column
     private int etage;
-    @Column(name = "flaeche")
+    @Column
     private int flaeche;
-    @Column(name = "preis")
+    @Column
     private double preis;
+    @Transient
     private List<Buchung> buchungen;
 
     public Zimmer(int zimmerNr, int etage, int flaeche, double preis) throws HotelException {

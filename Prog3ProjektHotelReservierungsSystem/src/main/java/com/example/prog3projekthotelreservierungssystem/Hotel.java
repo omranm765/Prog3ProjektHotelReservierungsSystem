@@ -38,13 +38,10 @@ public class Hotel {
         buchung.setBuchungDatumEnde(buchungDatumEnde);
         buchung.setGast(gast);
         buchung.setZimmerNr(zimmerNr);
-        //weiter database
+
     }
 
-    public void buchungStornieren() {
-        //später
-        //database
-    }
+
 
     public String toString() {
         return "HotelBewertung: " + hotelBewertung;
