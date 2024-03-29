@@ -52,11 +52,7 @@ public class BuchungConnector implements DbOperator{
     {
         try (EntityManager manager = JDBCConnector.getEntityManager()){
             manager.getTransaction().begin();
-            String moveQuery = "INSERT INTO Buchung_trash_collection SELECT * FROM Buchung";
-            manager.createNativeQuery(moveQuery).executeUpdate();
-
-            String deleteQuery = "DELETE FROM Buchung";
-            manager.createNativeQuery(deleteQuery).executeUpdate();
+            // wird noch implementiert;
             manager.getTransaction().commit();
 
         }
@@ -67,13 +63,7 @@ public class BuchungConnector implements DbOperator{
         EntityManager manager = JDBCConnector.getEntityManager();
         manager.getTransaction().begin();
 
-        manager.createNativeQuery("INSERT INTO Buchung_trash_collection SELECT * FROM Buchung WHERE Buchung_id = :id")  //--> !!
-                .setParameter("id", id)
-                .executeUpdate();
-
-        manager.createNativeQuery("DELETE FROM Buchung WHERE Buchung_id = :id")
-                .setParameter("id", id)
-                .executeUpdate();
+        //wird noch implementiert
 
         manager.getTransaction().commit();
         manager.close();

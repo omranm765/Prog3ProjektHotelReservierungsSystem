@@ -1,6 +1,7 @@
 package com.example.database;
 
 
+import com.example.prog3projekthotelreservierungssystem.Gast;
 import com.example.prog3projekthotelreservierungssystem.Person;
 import jakarta.persistence.EntityManager;
 import jakarta.persistence.TypedQuery;
@@ -14,7 +15,7 @@ public class PersonConnector implements DbOperator {
     {
 
         EntityManager manager = JDBCConnector.getEntityManager();
-        Person person = (Person) object;
+        Person person = (Gast) object;
         manager.getTransaction().begin();
         manager.persist(person);
         manager.getTransaction().commit();
@@ -55,11 +56,7 @@ public class PersonConnector implements DbOperator {
 
         try (EntityManager manager = JDBCConnector.getEntityManager()){
             manager.getTransaction().begin();
-            String moveQuery = "INSERT INTO Person_trash_collection SELECT * FROM Person";
-            manager.createNativeQuery(moveQuery).executeUpdate();
-
-            String deleteQuery = "DELETE FROM Person";
-            manager.createNativeQuery(deleteQuery).executeUpdate();
+            //wird noch implementiert
             manager.getTransaction().commit();
 
         }
@@ -70,13 +67,7 @@ public class PersonConnector implements DbOperator {
         EntityManager manager = JDBCConnector.getEntityManager();
         manager.getTransaction().begin();
 
-        manager.createNativeQuery("INSERT INTO Person_trash_collection SELECT * FROM Person WHERE Person_id = :id")  //--> !!
-                .setParameter("id", id)
-                .executeUpdate();
-
-        manager.createNativeQuery("DELETE FROM Person WHERE Person_id = :id")
-                .setParameter("id", id)
-                .executeUpdate();
+        //wird noch implementiert
 
         manager.getTransaction().commit();
         manager.close();
