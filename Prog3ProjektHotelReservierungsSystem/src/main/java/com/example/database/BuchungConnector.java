@@ -1,64 +1,61 @@
 package com.example.database;
 
-
+import com.example.prog3projekthotelreservierungssystem.Buchung;
 import com.example.prog3projekthotelreservierungssystem.Person;
 import jakarta.persistence.EntityManager;
 import jakarta.persistence.TypedQuery;
 
 import java.util.List;
 
-public class PersonConnector implements DbOperator {
+public class BuchungConnector implements DbOperator{
 
     @Override
     public void datenbankErstellen(Object object)
     {
 
         EntityManager manager = JDBCConnector.getEntityManager();
-        Person person = (Person) object;
+        Buchung buchung = (Buchung) object;
         manager.getTransaction().begin();
-        manager.persist(person);
+        manager.persist(buchung);
         manager.getTransaction().commit();
         manager.close();
     }
 
     @Override
-    public List<Person> datenbankSuchAlles()
+    public List<Buchung> datenbankSuchAlles()
     {
         EntityManager manager = JDBCConnector.getEntityManager();
         manager.getTransaction().begin();
 
-        String queryString = "SELECT * FROM Person";
-        TypedQuery<Person> query = manager.createQuery(queryString, Person.class);
-        List<Person> allPerson = query.getResultList();
+        String queryString = "SELECT * FROM Buchung";
+        TypedQuery<Buchung> query = manager.createQuery(queryString, Buchung.class);
+        List<Buchung> allBuchung = query.getResultList();
 
         manager.getTransaction().commit();
         manager.close();
-        return allPerson;
+        return allBuchung;
     }
+
 
     @Override
     public <T> T datenbankSuchNachId(int id) {
         try (EntityManager manager = JDBCConnector.getEntityManager()) {
             manager.getTransaction().begin();
-            Person person = manager.find(Person.class, id);
+            Buchung buchung = manager.find(Buchung.class, id);
             manager.getTransaction().commit();
-            return (T) person;
+            return (T) buchung;
         }
     }
-
-
 
     @Override
     public void datenbankLoeschAlles()
     {
-
-
         try (EntityManager manager = JDBCConnector.getEntityManager()){
             manager.getTransaction().begin();
-            String moveQuery = "INSERT INTO Person_trash_collection SELECT * FROM Person";
+            String moveQuery = "INSERT INTO Buchung_trash_collection SELECT * FROM Buchung";
             manager.createNativeQuery(moveQuery).executeUpdate();
 
-            String deleteQuery = "DELETE FROM Person";
+            String deleteQuery = "DELETE FROM Buchung";
             manager.createNativeQuery(deleteQuery).executeUpdate();
             manager.getTransaction().commit();
 
@@ -70,11 +67,11 @@ public class PersonConnector implements DbOperator {
         EntityManager manager = JDBCConnector.getEntityManager();
         manager.getTransaction().begin();
 
-        manager.createNativeQuery("INSERT INTO Person_trash_collection SELECT * FROM Person WHERE Person_id = :id")  //--> !!
+        manager.createNativeQuery("INSERT INTO Buchung_trash_collection SELECT * FROM Buchung WHERE Buchung_id = :id")  //--> !!
                 .setParameter("id", id)
                 .executeUpdate();
 
-        manager.createNativeQuery("DELETE FROM Person WHERE Person_id = :id")
+        manager.createNativeQuery("DELETE FROM Buchung WHERE Buchung_id = :id")
                 .setParameter("id", id)
                 .executeUpdate();
 
@@ -83,18 +80,18 @@ public class PersonConnector implements DbOperator {
 
     }
 
-
     @Override
     public void datenbankAktualisieren(Object object) {
 
         try (EntityManager manager = JDBCConnector.getEntityManager()) {
-            Person person = (Person) object;
+            Buchung buchung = (Buchung) object;
             manager.getTransaction().begin();
-            manager.merge(person);
+            manager.merge(buchung);
             manager.getTransaction().commit();
         } catch (Exception e) {
             e.printStackTrace();
         }
     }
+
 
 }
