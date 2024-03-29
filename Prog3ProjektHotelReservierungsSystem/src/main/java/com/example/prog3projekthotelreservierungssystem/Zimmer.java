@@ -1,5 +1,6 @@
 package com.example.prog3projekthotelreservierungssystem;
 
+import com.example.database.BuchungConnector;
 import jakarta.persistence.*;
 
 import java.util.List;
@@ -84,7 +85,7 @@ public class Zimmer {
                 "\netage: " + etage +
                 "\nflaeche: " + flaeche +
                 "\npreis: " + preis +
-                "buchungen: " + buchungen;
+                "\nbuchungen: " + buchungen;
     }
 }
 

@@ -3,6 +3,7 @@ package com.example.prog3projekthotelreservierungssystem;
 import jakarta.persistence.*;
 
 import java.time.LocalDate;
+import java.util.List;
 
 @Entity
 @Inheritance(strategy = InheritanceType.JOINED)
@@ -21,6 +22,8 @@ public abstract class Person {
     private final LocalDate geburtsdatum;
     @Column(name = "telefonnummer")
     private String telefonNr;
+    @OneToMany(mappedBy = "")
+    private List<Buchung> buchungList;
 
     public Person(String vorname, String name, String email,
                   LocalDate geburtsdatum, String telefonNr) throws HotelException {
@@ -74,6 +77,14 @@ public abstract class Person {
 
     public void setTelefonNr(String telefonNr) {
         this.telefonNr = telefonNr;
+    }
+
+    public List<Buchung> getBuchungList() {
+        return buchungList;
+    }
+
+    public void setBuchungList(List<Buchung> buchungList) {
+        this.buchungList = buchungList;
     }
 
     @Override

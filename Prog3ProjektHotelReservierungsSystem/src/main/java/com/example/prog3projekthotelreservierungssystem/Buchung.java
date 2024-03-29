@@ -117,13 +117,25 @@ public class Buchung {
         return BuchungID;
     }
 
+    public Zimmer getZimmer() {
+        return zimmer;
+    }
+
+
+    public boolean isStorniert() {
+        return storniert;
+    }
+
+    public Rechnung getRechnung() {
+        return rechnung;
+    }
+
     @Override
     public String toString() {
         return "Buchung: " + "\ngast: " + gast +
                 "\nzimmerNr: " + zimmerNr + "," +
                 "\nbuchungDatumBegin: " + buchungDatumBeginn +
-                "\nbuchungDatumEnde: " + buchungDatumEnde +
-                "\nBuchungID: " + BuchungID;
+                "\nbuchungDatumEnde: " + buchungDatumEnde;
     }
 }
 
