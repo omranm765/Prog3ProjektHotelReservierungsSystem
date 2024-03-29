@@ -54,13 +54,13 @@ public class PersonConnector implements DbOperator {
 
 
         try (EntityManager manager = JDBCConnector.getEntityManager()){
-        manager.getTransaction().begin();
+            manager.getTransaction().begin();
             String moveQuery = "INSERT INTO Person_trash_collection SELECT * FROM Person";
             manager.createNativeQuery(moveQuery).executeUpdate();
 
             String deleteQuery = "DELETE FROM Person";
             manager.createNativeQuery(deleteQuery).executeUpdate();
-        manager.getTransaction().commit();
+            manager.getTransaction().commit();
 
         }
     }
@@ -81,14 +81,14 @@ public class PersonConnector implements DbOperator {
         manager.getTransaction().commit();
         manager.close();
 
-        }
+    }
 
 
     @Override
     public void datenbankAktualisieren(Object object) {
 
-        Person person = (Person) object;
-        try (EntityManager manager = JDBCConnector.getEntityManager()){
+        try (EntityManager manager = JDBCConnector.getEntityManager()) {
+            Person person = (Person) object;
             manager.getTransaction().begin();
             manager.merge(person);
             manager.getTransaction().commit();
@@ -97,4 +97,4 @@ public class PersonConnector implements DbOperator {
         }
     }
 
-    }
+}
