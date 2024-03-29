@@ -33,8 +33,8 @@ public class Zimmer {
         if (etage < 1 || etage > 5){
             throw new HotelException("Ungültige Eingabe");
         }
-        if (preis < 0.0000001 || preis > 1.0000001) {
-            throw new HotelException("Preis darf nicht 0 sein");
+        if (preis < 0) {
+            throw new HotelException("Preis darf nicht kleiner 0 sein");
         }
         this.zimmerNr = zimmerNr;
         this.etage = etage;
@@ -55,6 +55,7 @@ public class Zimmer {
             throw new HotelException("Buchung existiert nicht");
         }
         this.buchungen.remove(buchung);
+        buchung.buchungStornieren();
     }
 
     public int getZimmerNr() {

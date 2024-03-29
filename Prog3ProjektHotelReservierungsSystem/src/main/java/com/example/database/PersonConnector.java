@@ -87,19 +87,13 @@ public class PersonConnector implements DbOperator {
     @Override
     public void datenbankAktualisieren(Object object) {
 
-        EntityManager manager = JDBCConnector.getEntityManager();
         Person person = (Person) object;
-        try {
+        try (EntityManager manager = JDBCConnector.getEntityManager()){
             manager.getTransaction().begin();
             manager.merge(person);
             manager.getTransaction().commit();
         } catch (Exception e) {
-            if (manager.getTransaction().isActive())
-                manager.getTransaction().rollback();
             e.printStackTrace();
-        } finally {
-            if (manager != null && manager.isOpen())
-                manager.close();
         }
     }
 
