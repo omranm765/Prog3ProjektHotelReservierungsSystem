@@ -21,9 +21,11 @@ public class Rechnung {
     private double preis;
     @Column(name = "rechnung_erstellungsdatum")
     private final LocalDate erstellungsDatum;
+    @OneToOne
+    private Buchung buchung;
 
     public Rechnung(double preis, LocalDate erstellungsDatum, Status status) throws HotelException {
-        if (preis < 0.0000001 || preis > 1.0000001) {
+        if (preis < 0.0000001 && preis > -0.0000001) {
             throw new HotelException("Preis darf nicht 0 sein");
         }
         if (erstellungsDatum == null){

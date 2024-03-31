@@ -6,8 +6,9 @@ import java.time.LocalDate;
 import java.util.List;
 
 @Entity
-@Inheritance(strategy = InheritanceType.JOINED)
+@Inheritance(strategy = InheritanceType.SINGLE_TABLE)
 public abstract class Person {
+    @Transient
     private final String EMAIL_REGEX = "^[\\w-\\.]+@([\\w-]+\\.)+[\\w-]{2,4}$";
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -22,7 +23,7 @@ public abstract class Person {
     private final LocalDate geburtsdatum;
     @Column(name = "telefonnummer")
     private String telefonNr;
-    @OneToMany(mappedBy = "")
+    @OneToMany(mappedBy = "gast")
     private List<Buchung> buchungList;
 
     public Person(String vorname, String name, String email,

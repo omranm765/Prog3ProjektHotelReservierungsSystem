@@ -11,8 +11,9 @@ import java.time.LocalDate;
  * @author (Ihr Name)
  * @version (eine Versionsnummer oder ein Datum)
  */
-@Entity
+
 @Table(name = "buchung")
+@Entity
 public class Buchung {
 
     @ManyToOne(fetch = FetchType.EAGER)
@@ -58,18 +59,12 @@ public class Buchung {
     }
 
 
-    public Rechnung rechnungErstellen(double preis1,
-    LocalDate erstellungsDatum1, Rechnung.Status status1) throws HotelException {
-        Rechnung rechnung1 = new Rechnung(preis1, erstellungsDatum1, status1);
-        return rechnung1;
-    }
-
     //database
     public void rechnungStornieren(Rechnung rechnung) {
         rechnung = null;
     }
 
-    public void pay(LocalDate bezahlDatum, Rechnung.Status status, double preis) throws HotelException {
+    public void bezahlen(LocalDate bezahlDatum, Rechnung.Status status, double preis) throws HotelException {
 
         if (bezahlDatum == null) {
             throw new IllegalArgumentException("Ungültiges Zahlungsdatum");

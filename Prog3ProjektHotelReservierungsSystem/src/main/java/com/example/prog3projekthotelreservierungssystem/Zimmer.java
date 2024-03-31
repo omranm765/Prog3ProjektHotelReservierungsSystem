@@ -1,6 +1,5 @@
 package com.example.prog3projekthotelreservierungssystem;
 
-import com.example.database.BuchungConnector;
 import jakarta.persistence.*;
 
 import java.util.List;
@@ -77,6 +76,10 @@ public class Zimmer {
 
     public List<Buchung> getBuchungen() {
         return buchungen;
+    }
+
+    public void setBuchungen(List<Buchung> buchungen) {
+        this.buchungen = buchungen;
     }
 
     @Override

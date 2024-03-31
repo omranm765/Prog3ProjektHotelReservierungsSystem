@@ -6,7 +6,7 @@ import jakarta.persistence.Table;
 import java.time.LocalDate;
 
 @Entity
-@Table(name ="gast")
+@Table(name = "gast")
 public class Gast extends Person{
     public Gast(String vorname, String name, String email, LocalDate geburtsdatum, String telefonNr) throws HotelException {
         super(vorname, name, email, geburtsdatum, telefonNr);

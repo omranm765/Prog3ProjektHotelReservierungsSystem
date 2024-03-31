@@ -1,9 +1,5 @@
 package com.example.database;
 
-
-import com.example.prog3projekthotelreservierungssystem.Gast;
-import com.example.prog3projekthotelreservierungssystem.Person;
-
 import com.example.prog3projekthotelreservierungssystem.Rechnung;
 import jakarta.persistence.EntityManager;
 import jakarta.persistence.TypedQuery;
@@ -11,27 +7,34 @@ import org.hibernate.Session;
 
 import java.util.List;
 
-public class PersonConnector implements DbOperator {
+public class RechnungConnector implements DbOperator {
+
 
     @Override
     public void datenbankErstellen(Object object) {
-        Session session = JDBCConnector.getSession();
-            Person person = (Gast) object;
+        try (Session session = JDBCConnector.getSession()) {
+            Rechnung rechnung = (Rechnung) object;
             session.getTransaction().begin();
-            session.persist(person);
+            session.persist(rechnung);
             session.getTransaction().commit();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+
     }
 
     @Override
-    public List<Person> datenbankSuchAlles() {
+    public List<?> datenbankSuchAlles() {
+
         try (Session session = JDBCConnector.getSession()) {
             session.getTransaction().begin();
-            String queryString = "SELECT * FROM Person";
-            TypedQuery<Person> query = session.createQuery(queryString, Person.class);
-            List<Person> allPerson = query.getResultList();
+
+            String queryString = "SELECT * FROM Rechnung";
+            TypedQuery<Rechnung> query = session.createQuery(queryString, Rechnung.class);
+            List<Rechnung> allrechnung = query.getResultList();
             session.getTransaction().commit();
             session.close();
-            return allPerson;
+            return allrechnung;
         } catch (Exception e) {
             e.printStackTrace();
         }
@@ -42,16 +45,11 @@ public class PersonConnector implements DbOperator {
     public <T> T datenbankSuchNachId(int id) {
         try (Session session = JDBCConnector.getSession()) {
             session.getTransaction().begin();
-            Person person = session.find(Person.class, id);
+            Rechnung rechnung = session.find(Rechnung.class, id);
             session.getTransaction().commit();
-            session.close();
-            return (T) person;
-        } catch (Exception e) {
-            e.printStackTrace();
+            return (T) rechnung;
         }
-        return null;
     }
-
 
     @Override
     public void datenbankLoeschAlles() {
@@ -64,31 +62,27 @@ public class PersonConnector implements DbOperator {
         }
     }
 
-
     @Override
     public void datenbankLoeschNachId(int id) {
+
         try (Session session = JDBCConnector.getSession()) {
             session.getTransaction().begin();
-            // wird noch implementiert
+            //wird noch implementiert
             session.getTransaction().commit();
         } catch (Exception e) {
             e.printStackTrace();
         }
-
     }
-
 
     @Override
     public void datenbankAktualisieren(Object object) {
-
         try (Session session = JDBCConnector.getSession()) {
-            Person person = (Person) object;
+            Rechnung rechnung = (Rechnung) object;
             session.getTransaction().begin();
-            session.merge(person);
+            session.merge(rechnung);
             session.getTransaction().commit();
         } catch (Exception e) {
             e.printStackTrace();
         }
     }
-
 }
