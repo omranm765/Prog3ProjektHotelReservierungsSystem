@@ -1,5 +1,6 @@
 package com.example.database;
 
+import com.example.prog3projekthotelreservierungssystem.HotelException;
 import com.example.prog3projekthotelreservierungssystem.Zimmer;
 import jakarta.persistence.EntityManager;
 import jakarta.persistence.TypedQuery;
@@ -12,15 +13,15 @@ public class ZimmerConnector implements DbOperator {
 
 
     @Override
-    public void datenbankErstellen(Object object) {
-        try (Session session = JDBCConnector.getSession()) {
+    public void datenbankErstellen(Object object) throws HotelException {
+        if(!(object instanceof Zimmer)){
+            throw new HotelException("Das Objekt ist kein Zimmer");
+        }
+        Session session = JDBCConnector.getSession();
             Zimmer zimmer = (Zimmer) object;
             session.getTransaction().begin();
             session.persist(zimmer);
             session.getTransaction().commit();
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
     }
 
     @Override

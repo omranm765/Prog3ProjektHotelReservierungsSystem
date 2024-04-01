@@ -16,7 +16,7 @@ import java.util.ArrayList;
 public class Zimmer {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private final int zimmerNr; //Primary Key
+    private int zimmerNr; //Primary Key
     @Column
     private int etage;
     @Column
@@ -43,6 +43,9 @@ public class Zimmer {
         this.buchungen = new ArrayList<>();
     }
 
+    public Zimmer(){
+        this.buchungen = new ArrayList<>();
+    }
     public void buchungHinzufuegen(Buchung buchung) throws HotelException {
         if (buchung == null) {
             throw new HotelException("Buchung existiert nicht");

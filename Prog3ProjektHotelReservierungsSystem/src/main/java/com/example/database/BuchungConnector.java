@@ -1,8 +1,6 @@
 package com.example.database;
 
-import com.example.prog3projekthotelreservierungssystem.Buchung;
-import com.example.prog3projekthotelreservierungssystem.Gast;
-import com.example.prog3projekthotelreservierungssystem.Person;
+import com.example.prog3projekthotelreservierungssystem.*;
 import jakarta.persistence.EntityManager;
 import jakarta.persistence.TypedQuery;
 import org.hibernate.Session;
@@ -12,7 +10,10 @@ import java.util.List;
 public class BuchungConnector implements DbOperator {
 
     @Override
-    public void datenbankErstellen(Object object) {
+    public void datenbankErstellen(Object object) throws HotelException {
+        if(!(object instanceof Buchung)){
+            throw new HotelException("Das Objekt ist kein Buchung");
+        }
         Session session = JDBCConnector.getSession();
         Buchung buchung = (Buchung) object;
             session.getTransaction().begin();

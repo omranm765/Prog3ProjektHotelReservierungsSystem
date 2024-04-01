@@ -125,6 +125,18 @@ public class Buchung {
         return rechnung;
     }
 
+    public void setRechnung(Rechnung rechnung) {
+        this.rechnung = rechnung;
+    }
+
+    public void setGast(Person gast) {
+        this.gast = gast;
+    }
+
+    public void setZimmer(Zimmer zimmer) {
+        this.zimmer = zimmer;
+    }
+
     @Override
     public String toString() {
         return "Buchung: " + "\ngast: " + gast +
