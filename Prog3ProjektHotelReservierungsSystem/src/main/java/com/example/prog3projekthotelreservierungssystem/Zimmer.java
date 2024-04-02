@@ -15,7 +15,6 @@ import java.util.ArrayList;
 @Entity
 public class Zimmer {
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int zimmerNr; //Primary Key
     @Column
     private int etage;

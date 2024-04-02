@@ -2,7 +2,6 @@ package com.example.database;
 
 import com.example.prog3projekthotelreservierungssystem.HotelException;
 import com.example.prog3projekthotelreservierungssystem.Zimmer;
-import jakarta.persistence.EntityManager;
 import jakarta.persistence.TypedQuery;
 import org.hibernate.Session;
 

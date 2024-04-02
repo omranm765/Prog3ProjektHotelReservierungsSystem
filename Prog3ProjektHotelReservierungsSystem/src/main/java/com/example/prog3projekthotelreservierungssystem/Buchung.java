@@ -15,6 +15,10 @@ import java.time.LocalDate;
 @Table(name = "buchung")
 @Entity
 public class Buchung {
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Column(name = "buchung_id")
+    private int BuchungID;
 
     @ManyToOne(fetch = FetchType.EAGER)
     @JoinColumn(name = "gast_id", nullable = true)
@@ -29,10 +33,7 @@ public class Buchung {
     private LocalDate buchungDatumEnde;
     @Transient
     private int zimmerNr;
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "buchung_id")
-    private int BuchungID;
+
     @Column
     private boolean storniert = false;
 
@@ -49,9 +50,9 @@ public class Buchung {
                 || buchungDatumBeginn.isAfter(buchungDatumEnde)) {
             throw new HotelException("Ungültige Buchungsdaten");
         }
-        if (String.valueOf(zimmerNr).length() != 4) {
+        /*if (String.valueOf(zimmerNr).length() != 4) {
             throw new HotelException("ZimmerNr muss vierstellig sein");
-        }
+        }*/
         this.gast = gast;
         this.buchungDatumBeginn = buchungDatumBeginn;
         this.buchungDatumEnde = buchungDatumEnde;

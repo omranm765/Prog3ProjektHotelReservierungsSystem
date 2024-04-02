@@ -21,8 +21,6 @@ public class Rechnung {
     private double preis;
     @Column(name = "rechnung_erstellungsdatum")
     private final LocalDate erstellungsDatum;
-    @OneToOne
-    private Buchung buchung;
 
     public Rechnung(double preis, LocalDate erstellungsDatum, Status status) throws HotelException {
         if (preis < 0.0000001 && preis > -0.0000001) {
@@ -64,6 +62,10 @@ public class Rechnung {
     public Status getStatus(){
         return status;
     }
+
+    /*public void setBuchung(Buchung buchung) {
+        this.buchung = buchung;
+    }*/
 
     @Override
     public int hashCode() {

@@ -64,19 +64,19 @@ public class MainTest {
         //LocalDate datumEnde = addDatum();
         LocalDate beginDatum = LocalDate.of(2002, 1, 1);
         LocalDate endeDatum = LocalDate.of(2003, 1, 1);
-        z1 = JDBCConnector.getSession().merge(z1);
-        Buchung buchung = new Buchung(gast, beginDatum, endeDatum, z1.getZimmerNr());
-        z1.buchungHinzufuegen(buchung);
-        Rechnung rechnung = new Rechnung(z1.getPreis(), LocalDate.now(), Rechnung.Status.NICHT_BEZAHLT);
+        Zimmer merged = JDBCConnector.getSession().merge(z1);
+        Buchung buchung = new Buchung(gast, beginDatum, endeDatum, merged.getZimmerNr());
+        merged.buchungHinzufuegen(buchung);
+        Rechnung rechnung = new Rechnung(merged.getPreis(), LocalDate.now(), Rechnung.Status.NICHT_BEZAHLT);
         buchung.setRechnung(rechnung);
         ZimmerConnector zimmerConnector = new ZimmerConnector();
-        zimmerConnector.datenbankErstellen(z1);
+        zimmerConnector.datenbankErstellen(merged);
         PersonConnector personConnector = new PersonConnector();
         personConnector.datenbankErstellen(gast);
-        BuchungConnector buchungConnector = new BuchungConnector();
-        buchungConnector.datenbankErstellen(buchung);
         RechnungConnector rechnungConnector = new RechnungConnector();
         rechnungConnector.datenbankErstellen(rechnung);
+        BuchungConnector buchungConnector = new BuchungConnector();
+        buchungConnector.datenbankErstellen(buchung);
     }
 
     private void addMitarbeiter() throws HotelException {
