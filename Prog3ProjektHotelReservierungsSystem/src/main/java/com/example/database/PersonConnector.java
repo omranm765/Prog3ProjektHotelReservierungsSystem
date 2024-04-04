@@ -50,7 +50,7 @@ public class PersonConnector implements DbOperator {
         } catch (Exception e) {
             e.printStackTrace();
         }
-        return null;
+        return null;//TODO niemals null zurück KEINE UMLAUTE
     }
 
 
@@ -70,7 +70,9 @@ public class PersonConnector implements DbOperator {
     public void datenbankLoeschNachId(int id) {
         try (Session session = JDBCConnector.getSession()) {
             session.getTransaction().begin();
-            // wird noch implementiert
+            //wird noch implementiert
+            //Hier wollten wir eine frage stellen und zwar dürfen wir ein Person löschen wenn er Buchung storniert?
+            //oder müssen wir eine extra tabelle für Personen machen die wir "Löschen" bzw in die andere tabelle rein machen
             session.getTransaction().commit();
         } catch (Exception e) {
             e.printStackTrace();

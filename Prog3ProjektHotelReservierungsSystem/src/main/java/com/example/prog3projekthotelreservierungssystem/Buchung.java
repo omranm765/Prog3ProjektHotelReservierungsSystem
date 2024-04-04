@@ -31,7 +31,7 @@ public class Buchung {
     private LocalDate buchungDatumBeginn;
     @Column(name = "datum_ende", nullable = false)
     private LocalDate buchungDatumEnde;
-    @Transient
+    @Column
     private int zimmerNr;
 
     @Column
@@ -140,7 +140,7 @@ public class Buchung {
 
     @Override
     public String toString() {
-        return "Buchung: " + "\ngast: " + gast +
+        return "\nBuchung " + "\ngast: " + gast +
                 "\nzimmerNr: " + zimmerNr + "," +
                 "\nbuchungDatumBegin: " + buchungDatumBeginn +
                 "\nbuchungDatumEnde: " + buchungDatumEnde;

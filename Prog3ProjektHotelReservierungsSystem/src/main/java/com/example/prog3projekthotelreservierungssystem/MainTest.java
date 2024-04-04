@@ -9,7 +9,7 @@ import java.util.Scanner;
 
 public class MainTest {
     private final Scanner scanner;
-    private Zimmer z1;
+    private Zimmer zimmer1;
     private Mitarbeiter m1;
     //private LocalDate datum;
     private List<Buchung> buchungList;
@@ -51,7 +51,7 @@ public class MainTest {
             buche();
         }
         if (zahl == INFOS) {
-            System.out.println(z1);
+            System.out.println(zimmer1);
         }
     }
 
@@ -59,24 +59,33 @@ public class MainTest {
         System.out.println("Gast hinzufuegen");
         Person gast = addGast();
         System.out.println("DatumBeginn");
-        //LocalDate datumBeginn = addDatum();
+        LocalDate datumBeginn = addDatum();
         System.out.println("DatumEnde");
-        //LocalDate datumEnde = addDatum();
-        LocalDate beginDatum = LocalDate.of(2002, 1, 1);
-        LocalDate endeDatum = LocalDate.of(2003, 1, 1);
-        Zimmer merged = JDBCConnector.getSession().merge(z1);
-        Buchung buchung = new Buchung(gast, beginDatum, endeDatum, merged.getZimmerNr());
-        merged.buchungHinzufuegen(buchung);
-        Rechnung rechnung = new Rechnung(merged.getPreis(), LocalDate.now(), Rechnung.Status.NICHT_BEZAHLT);
+        LocalDate datumEnde = addDatum();
+
+        Buchung buchung = new Buchung(gast, datumBeginn, datumEnde, zimmer1.getZimmerNr());
+
+        //Zimmer merged = JDBCConnector.getSession().merge(zimmer1);
+        zimmer1.buchungHinzufuegen(buchung);
+        zimmer1.buchungHinzufuegen(buchung);
+        Rechnung rechnung = new Rechnung(zimmer1.getPreis(), LocalDate.now(), Rechnung.Status.NICHT_BEZAHLT);
         buchung.setRechnung(rechnung);
-        ZimmerConnector zimmerConnector = new ZimmerConnector();
-        zimmerConnector.datenbankErstellen(merged);
-        PersonConnector personConnector = new PersonConnector();
-        personConnector.datenbankErstellen(gast);
-        RechnungConnector rechnungConnector = new RechnungConnector();
-        rechnungConnector.datenbankErstellen(rechnung);
-        BuchungConnector buchungConnector = new BuchungConnector();
-        buchungConnector.datenbankErstellen(buchung);
+        try {
+            ZimmerConnector zimmerConnector = new ZimmerConnector();
+            zimmerConnector.datenbankErstellen(zimmer1);
+
+            PersonConnector personConnector = new PersonConnector();
+            personConnector.datenbankErstellen(gast);
+
+            RechnungConnector rechnungConnector = new RechnungConnector();
+            rechnungConnector.datenbankErstellen(rechnung);
+
+            BuchungConnector buchungConnector = new BuchungConnector();
+            buchungConnector.datenbankErstellen(buchung);
+        } catch (Exception e) {
+            e.printStackTrace();
+            throw new HotelException("Fehler beim Speichern der Daten");
+        }
     }
 
     private void addMitarbeiter() throws HotelException {
@@ -88,7 +97,7 @@ public class MainTest {
     }
 
     private void addZimmer() throws HotelException {
-        z1 = new Zimmer(1234, 1, 60, 200.0);
+        zimmer1 = new Zimmer(1234, 1, 60, 200.0);
     }
 
     private LocalDate addDatum() {
@@ -102,22 +111,21 @@ public class MainTest {
     }
 
     private Person addGast() throws HotelException {
-        //scanner.nextLine();
+        scanner.nextLine();
         System.out.println("Gast Vorname eingeben");
-        // String vorname = scanner.nextLine();
+        String vorname = scanner.nextLine();
         System.out.println("Gast Nachname eingeben");
-        //String name = scanner.nextLine();
+        String name = scanner.nextLine();
         System.out.println("Gast Email eingeben");
-        //String email = scanner.nextLine();
+        String email = scanner.nextLine();
         System.out.println("Gast Geburtsdatum eingeben");
-        //LocalDate datum = addDatum();
+        LocalDate geburtsdatum = addDatum();
         System.out.println("Gast TelefonNr eingeben");
-        /*scanner.nextLine();
-        String telefonNr = scanner.nextLine();*/
-        //ID ist final
-        return new Gast("s", "d", "s@gmail.com",
-                LocalDate.of(2001, 1, 1)
-                , "123");
+        scanner.nextLine();
+        String telefonNr = scanner.nextLine();
+        return new Gast(vorname, name, email,
+                geburtsdatum
+                , telefonNr);
     }
 
     public static void main(String[] args) throws HotelException {

@@ -28,24 +28,13 @@ public abstract class Person {
 
     public Person(String vorname, String name, String email,
                   LocalDate geburtsdatum, String telefonNr) throws HotelException {
-        if (vorname == null || vorname.trim().isEmpty()) {
-            throw new HotelException("Vorname darf nicht leer sein");
-        }
-        if (name == null || name.trim().isEmpty()) {
-            throw new HotelException("Name darf nicht leer sein");
-        }
-        if (email == null || email.trim().isEmpty()) {
-            throw new HotelException("Email darf nicht leer sein");
-        }
-        if (!email.matches(EMAIL_REGEX)){
-            throw new HotelException("Die Email ist ungültig");
-        }
-        if (geburtsdatum == null){
-            throw new HotelException("Geburtsdatum darf nicht leer sein");
-        }
-        if (telefonNr == null){
-            throw new HotelException("TelefonNr darf nicht leer sein");
-        }
+        Validator.check(StringValidtor.stringCheckNullOrEmpty(vorname),"Vorname darf nicht leer sein");
+        Validator.check(StringValidtor.stringCheckNullOrEmpty(name),"Name darf nicht leer sein");
+        Validator.check(StringValidtor.stringCheckNullOrEmpty(email),"Email darf nicht leer sein");
+        Validator.check(StringValidtor.stringCheckREGEX(email,EMAIL_REGEX),"Die Email ist ungültig");
+        Validator.check(geburtsdatum == null,"Geburtsdatum darf nicht leer sein");
+        Validator.check(telefonNr == null,"TelefonNr darf nicht leer sein");
+        //später für anderen klassen
         this.vorname = vorname;
         this.name = name;
         this.email = email;

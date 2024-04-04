@@ -1,0 +1,69 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import com.gluonhq.charm.glisten.control.TextField?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.ChoiceBox?>
+<?import javafx.scene.control.DatePicker?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.text.Font?>
+<?import javafx.scene.text.Text?>
+
+
+<?import javafx.scene.control.TextField?>
+<VBox maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="510.0" prefWidth="350.0" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1">
+    <children>
+        <AnchorPane prefHeight="511.0" prefWidth="776.0" style="-fx-background-color: C39746;">
+            <children>
+                <Text layoutX="14.0" layoutY="42.0" strokeType="OUTSIDE" strokeWidth="0.0" text="New Booking">
+                    <font>
+                        <Font size="26.0" />
+                    </font>
+                </Text>
+                <TextField layoutX="16.0" layoutY="57.0" promptText="Guest Id or Email" />
+                <Text layoutX="14.0" layoutY="122.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Arrival">
+                    <font>
+                        <Font size="20.0" />
+                    </font>
+                </Text>
+                <Text layoutX="195.0" layoutY="121.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Depature">
+                    <font>
+                        <Font size="20.0" />
+                    </font>
+                </Text>
+                <DatePicker layoutX="14.0" layoutY="129.0" prefHeight="25.0" prefWidth="138.0" />
+                <DatePicker layoutX="195.0" layoutY="129.0" prefHeight="25.0" prefWidth="138.0" />
+                <Text layoutX="17.0" layoutY="203.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Floor">
+                    <font>
+                        <Font size="20.0" />
+                    </font>
+                </Text>
+                <Text layoutX="195.0" layoutY="203.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Room">
+                    <font>
+                        <Font size="20.0" />
+                    </font>
+                </Text>
+                <ChoiceBox layoutX="16.0" layoutY="211.0" prefHeight="25.0" prefWidth="138.0" />
+                <ChoiceBox layoutX="195.0" layoutY="211.0" prefHeight="25.0" prefWidth="138.0" />
+                <Text layoutX="16.0" layoutY="290.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Guests">
+                    <font>
+                        <Font size="20.0" />
+                    </font>
+                </Text>
+                <TextField layoutX="16.0" layoutY="298.0" promptText="number" />
+                <Text layoutX="16.0" layoutY="369.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Price">
+                    <font>
+                        <Font size="20.0" />
+                    </font>
+                </Text>
+                <TextField layoutX="16.0" layoutY="377.0" promptText="price" />
+                <Button layoutX="16.0" layoutY="451.0" mnemonicParsing="false" text="Add booking" />
+                <Button layoutX="277.0" layoutY="451.0" mnemonicParsing="false" style="-fx-background-color: Black;" text="Cancel" textFill="#c93333">
+                    <font>
+                        <Font name="System Bold" size="12.0" />
+                    </font>
+                </Button>
+            </children>
+        </AnchorPane>
+    </children>
+</VBox>

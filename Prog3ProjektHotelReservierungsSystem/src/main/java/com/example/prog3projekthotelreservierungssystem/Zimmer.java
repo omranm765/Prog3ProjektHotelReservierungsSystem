@@ -15,7 +15,12 @@ import java.util.ArrayList;
 @Entity
 public class Zimmer {
     @Id
-    private int zimmerNr; //Primary Key
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @JoinColumn(name = "zimmer_id", referencedColumnName = "buchung_id")
+    private int zimmerId;
+
+    @Column
+    private int zimmerNr;
     @Column
     private int etage;
     @Column
