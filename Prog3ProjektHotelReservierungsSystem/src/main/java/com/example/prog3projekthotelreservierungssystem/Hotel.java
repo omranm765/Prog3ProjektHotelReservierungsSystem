@@ -12,43 +12,42 @@ import java.util.List;
  * @version (eine Versionsnummer oder ein Datum)
  */
 public class Hotel {
-    private int hotelBewertung;
-    private List<Zimmer> zimmern;
-    private List<Person> mitarbeitern;
-    private List<Person> gaeste;
 
-    public Hotel(int hotelBewertung) throws HotelException {
-        if (hotelBewertung < 1 || hotelBewertung > 5) {
-            throw new HotelException("Hotelbewertung muss zwischen 1 und 5 sein");
-        }
-        this.hotelBewertung = hotelBewertung;
-        this.zimmern = new ArrayList<>();
-        this.mitarbeitern = new ArrayList<>();
-        this.gaeste = new ArrayList<>();
+    private static List<Zimmer> zimmern;
+    private static List<Person> mitarbeitern;
+    private static List<Person> gaeste;
+
+    public Hotel() throws HotelException {
+
+
+
+        zimmern = new ArrayList<>();
+        mitarbeitern = new ArrayList<>();
+        gaeste = new ArrayList<>();
     }
 
-    public void zimmerHinzufuegen(Zimmer zimmer) throws HotelException {
+    public static void zimmerHinzufuegen(Zimmer zimmer) throws HotelException {
         if (zimmer == null){
             throw new HotelException("Zimmer existiert nicht");
         }
         zimmern.add(zimmer);
     }
 
-    public void gastHinzufuegen(Person gast) throws HotelException {
+    public static void gastHinzufuegen(Person gast) throws HotelException {
         if (gast == null){
             throw new HotelException("Gast existiert nicht");
         }
         gaeste.add(gast);
     }
 
-    public void mitarbeiterHinzufuegen(Person mitarbeiter) throws HotelException {
+    public static void mitarbeiterHinzufuegen(Person mitarbeiter) throws HotelException {
         if (mitarbeiter == null){
             throw new HotelException("Mitarbeiter existiert nicht");
         }
         mitarbeitern.add(mitarbeiter);
     }
 
-    public Buchung buchungErstellen(Gast gast, LocalDate buchungDatumBeginn,
+    public static Buchung buchungErstellen(Gast gast, LocalDate buchungDatumBeginn,
                                     LocalDate buchungDatumEnde, int zimmerNr) throws HotelException {
         return new Buchung(gast, buchungDatumBeginn, buchungDatumEnde, zimmerNr);
     }
@@ -65,10 +64,9 @@ public class Hotel {
 
 
     public String toString() {
-        return "HotelBewertung: " + hotelBewertung +
+        return
                 "\nZimmer: " + zimmern +
-                "\nMitarbeiter: " + mitarbeitern +
-                "\nGaeste: " + gaeste;
+                        "\nMitarbeiter: " + mitarbeitern +
+                        "\nGaeste: " + gaeste;
     }
 }
-

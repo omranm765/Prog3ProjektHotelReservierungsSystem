@@ -5,11 +5,14 @@ import javafx.fxml.FXML;
 import javafx.scene.control.Button;
 import javafx.scene.control.DatePicker;
 import javafx.scene.control.TextField;
+import com.example.prog3projekthotelreservierungssystem.*;
+import com.example.prog3projekthotelreservierungssystem.Hotel;
+
+
 
 public class AddGuestController {
 
-    @FXML
-    private Button addGuestBtn;
+
 
     @FXML
     private DatePicker dateChooser;
@@ -27,7 +30,19 @@ public class AddGuestController {
     private TextField telefonNrTxtfield;
 
     @FXML
-    void onClickAddGuest(ActionEvent event) {
+    void onClickAddGuest(ActionEvent event) throws Exception
+    {
+        if (lastNameTxtfield.getText().trim().isEmpty() || emailTxtfield.getText().trim().isEmpty())
+        {
+            throw  new  HotelException ("");
+        }
 
+        Person guest = new Gast(firstNameTxtfield.getText(), lastNameTxtfield.getText(), emailTxtfield.getText(),dateChooser.getValue(), telefonNrTxtfield.getText()
+        );
+
+        //add guest to database
+        Hotel.gastHinzufuegen(guest);
     }
+
+
 }
