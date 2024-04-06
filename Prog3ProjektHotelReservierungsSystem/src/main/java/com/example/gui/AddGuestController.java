@@ -32,10 +32,8 @@ public class AddGuestController {
     @FXML
     void onClickAddGuest(ActionEvent event) throws Exception
     {
-        if (lastNameTxtfield.getText().trim().isEmpty() || emailTxtfield.getText().trim().isEmpty())
-        {
-            throw  new  HotelException ("");
-        }
+        Validator.check(lastNameTxtfield.getText().trim().isEmpty() || emailTxtfield.getText().trim().isEmpty()
+                , "Bitte füllen sie die Felder aus");
 
         Person guest = new Gast(firstNameTxtfield.getText(), lastNameTxtfield.getText(), emailTxtfield.getText(),dateChooser.getValue(), telefonNrTxtfield.getText()
         );

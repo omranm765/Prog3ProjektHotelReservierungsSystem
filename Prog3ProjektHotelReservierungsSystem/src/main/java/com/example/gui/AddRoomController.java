@@ -2,6 +2,7 @@ package com.example.gui;
 
 import com.example.prog3projekthotelreservierungssystem.Hotel;
 import com.example.prog3projekthotelreservierungssystem.HotelException;
+import com.example.prog3projekthotelreservierungssystem.Validator;
 import com.example.prog3projekthotelreservierungssystem.Zimmer;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
@@ -33,10 +34,8 @@ public class AddRoomController {
         String roomNr = roomNrTxtfield.getText();
         String price = costTxtfield.getText();
 
-        if (roomNrTxtfield.getText().trim().isEmpty() || costTxtfield.getText().trim().isEmpty())
-        {
-            throw  new HotelException("Sie dürfen nicht leer sein");
-        }
+        Validator.check(roomNrTxtfield.getText().trim().isEmpty() || costTxtfield.getText().trim().isEmpty()
+        , "Bitte füllen sie die Felder aus");
 
         Zimmer zimmer = new Zimmer(Integer.parseInt(roomNr),floorChoiceBox.getValue() ,areaChoicheBox.getValue() , Double.parseDouble(price));
 
