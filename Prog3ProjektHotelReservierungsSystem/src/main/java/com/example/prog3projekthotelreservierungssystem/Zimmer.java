@@ -31,15 +31,8 @@ public class Zimmer {
     private List<Buchung> buchungen;
 
     public Zimmer(int zimmerNr, int etage, int flaeche, double preis) throws HotelException {
-        if (String.valueOf(zimmerNr).length() != 4) {
-            throw new HotelException("ZimmerNr muss vierstellig sein");
-        }
-        if (etage < 1 || etage > 5){
-            throw new HotelException("Ungültige Eingabe");
-        }
-        if (preis < 0) {
-            throw new HotelException("Preis darf nicht kleiner 0 sein");
-        }
+        Validator.check(etage < 1 || etage > 5, "Ungültige Eingabe");
+        Validator.check(preis < 0, "Preis darf nicht kleiner 0 sein");
         this.zimmerNr = zimmerNr;
         this.etage = etage;
         this.flaeche = flaeche;
@@ -51,16 +44,12 @@ public class Zimmer {
         this.buchungen = new ArrayList<>();
     }
     public void buchungHinzufuegen(Buchung buchung) throws HotelException {
-        if (buchung == null) {
-            throw new HotelException("Buchung existiert nicht");
-        }
+        Validator.check(buchung == null, "Buchung existiert nicht");
         this.buchungen.add(buchung);
     }
 
     public void buchungEntfernen(Buchung buchung) throws HotelException {
-        if (buchung == null) {
-            throw new HotelException("Buchung existiert nicht");
-        }
+        Validator.check(buchung == null, "Buchung existiert nicht");
         this.buchungen.remove(buchung);
         buchung.buchungStornieren();
     }

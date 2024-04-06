@@ -23,12 +23,8 @@ public class Rechnung {
     private final LocalDate erstellungsDatum;
 
     public Rechnung(double preis, LocalDate erstellungsDatum, Status status) throws HotelException {
-        if (preis < 0.0000001 && preis > -0.0000001) {
-            throw new HotelException("Preis darf nicht 0 sein");
-        }
-        if (erstellungsDatum == null){
-            throw new HotelException("Erstellungsdatum darf nicht leer sein");
-        }
+        Validator.check(preis < 0.0000001 && preis > -0.0000001, "Preis darf nicht 0 sein");
+        Validator.check(erstellungsDatum == null, "Erstellungsdatum darf nicht leer sein");
 
         this.preis = preis;
         this.erstellungsDatum = erstellungsDatum;
@@ -62,10 +58,6 @@ public class Rechnung {
     public Status getStatus(){
         return status;
     }
-
-    /*public void setBuchung(Buchung buchung) {
-        this.buchung = buchung;
-    }*/
 
     @Override
     public int hashCode() {

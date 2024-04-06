@@ -20,35 +20,28 @@ public class Hotel {
     public Hotel() throws HotelException {
 
 
-
         zimmern = new ArrayList<>();
         mitarbeitern = new ArrayList<>();
         gaeste = new ArrayList<>();
     }
 
     public static void zimmerHinzufuegen(Zimmer zimmer) throws HotelException {
-        if (zimmer == null){
-            throw new HotelException("Zimmer existiert nicht");
-        }
+        Validator.check(zimmer == null, "Zimmer existiert nicht");
         zimmern.add(zimmer);
     }
 
     public static void gastHinzufuegen(Person gast) throws HotelException {
-        if (gast == null){
-            throw new HotelException("Gast existiert nicht");
-        }
+        Validator.check(gast == null, "Gast existiert nicht");
         gaeste.add(gast);
     }
 
     public static void mitarbeiterHinzufuegen(Person mitarbeiter) throws HotelException {
-        if (mitarbeiter == null){
-            throw new HotelException("Mitarbeiter existiert nicht");
-        }
+        Validator.check(mitarbeiter == null, "mitarbeiter existiert nicht");
         mitarbeitern.add(mitarbeiter);
     }
 
     public static Buchung buchungErstellen(Gast gast, LocalDate buchungDatumBeginn,
-                                    LocalDate buchungDatumEnde, int zimmerNr) throws HotelException {
+                                           LocalDate buchungDatumEnde, int zimmerNr) throws HotelException {
         return new Buchung(gast, buchungDatumBeginn, buchungDatumEnde, zimmerNr);
     }
 
@@ -62,11 +55,9 @@ public class Hotel {
     }
 
 
-
     public String toString() {
-        return
-                "\nZimmer: " + zimmern +
-                        "\nMitarbeiter: " + mitarbeitern +
-                        "\nGaeste: " + gaeste;
+        return "\nZimmer: " + zimmern +
+                "\nMitarbeiter: " + mitarbeitern +
+                "\nGaeste: " + gaeste;
     }
 }

@@ -43,16 +43,9 @@ public class Buchung {
 
     public Buchung(Person gast, LocalDate buchungDatumBeginn, LocalDate buchungDatumEnde,
                    int zimmerNr) throws HotelException {
-        if (gast == null) {
-            throw new HotelException("Gast existiert nicht");
-        }
-        if (buchungDatumBeginn == null || buchungDatumEnde == null
-                || buchungDatumBeginn.isAfter(buchungDatumEnde)) {
-            throw new HotelException("Ungültige Buchungsdaten");
-        }
-        /*if (String.valueOf(zimmerNr).length() != 4) {
-            throw new HotelException("ZimmerNr muss vierstellig sein");
-        }*/
+        Validator.check(gast == null, "Gast existiert nicht");
+        Validator.check(buchungDatumBeginn == null || buchungDatumEnde == null
+                || buchungDatumBeginn.isAfter(buchungDatumEnde), "Ungültige Buchungsdaten");
         this.gast = gast;
         this.buchungDatumBeginn = buchungDatumBeginn;
         this.buchungDatumEnde = buchungDatumEnde;
@@ -67,9 +60,7 @@ public class Buchung {
 
     public void bezahlen(LocalDate bezahlDatum, Rechnung.Status status, double preis) throws HotelException {
 
-        if (bezahlDatum == null) {
-            throw new IllegalArgumentException("Ungültiges Zahlungsdatum");
-        }
+        Validator.check(bezahlDatum == null, "Ungültiges Zahlungsdatum");
         this.rechnung = new Rechnung(preis, bezahlDatum, Rechnung.Status.BEZAHLT);
     }
 

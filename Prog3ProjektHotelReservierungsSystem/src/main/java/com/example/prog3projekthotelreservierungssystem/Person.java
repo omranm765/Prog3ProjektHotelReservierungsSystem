@@ -28,12 +28,12 @@ public abstract class Person {
 
     public Person(String vorname, String name, String email,
                   LocalDate geburtsdatum, String telefonNr) throws HotelException {
-        Validator.check(StringValidtor.stringCheckNullOrEmpty(vorname),"Vorname darf nicht leer sein");
-        Validator.check(StringValidtor.stringCheckNullOrEmpty(name),"Name darf nicht leer sein");
-        Validator.check(StringValidtor.stringCheckNullOrEmpty(email),"Email darf nicht leer sein");
-        Validator.check(StringValidtor.stringCheckREGEX(email,EMAIL_REGEX),"Die Email ist ungültig");
-        Validator.check(geburtsdatum == null,"Geburtsdatum darf nicht leer sein");
-        Validator.check(telefonNr == null,"TelefonNr darf nicht leer sein");
+        Validator.check(StringValidtor.stringCheckNullOrEmpty(vorname), "Vorname darf nicht leer sein");
+        Validator.check(StringValidtor.stringCheckNullOrEmpty(name), "Name darf nicht leer sein");
+        Validator.check(StringValidtor.stringCheckNullOrEmpty(email), "Email darf nicht leer sein");
+        Validator.check(StringValidtor.stringCheckREGEX(email, EMAIL_REGEX), "Die Email ist ungültig");
+        Validator.check(geburtsdatum == null, "Geburtsdatum darf nicht leer sein");
+        Validator.check(telefonNr == null, "TelefonNr darf nicht leer sein");
         //später für anderen klassen
         this.vorname = vorname;
         this.name = name;
@@ -53,7 +53,8 @@ public abstract class Person {
     public String getEmail() {
         return email;
     }
-    public void setEmail(String email){
+
+    public void setEmail(String email) {
         this.email = email;
     }
 
