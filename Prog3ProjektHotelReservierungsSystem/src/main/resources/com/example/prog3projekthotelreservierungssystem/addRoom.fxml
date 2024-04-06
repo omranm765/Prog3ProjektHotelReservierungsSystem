@@ -7,8 +7,7 @@
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.text.Font?>
 
-
-<AnchorPane prefHeight="479.0" prefWidth="359.0" style="-fx-background-color: #C39746;" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.prog3projekthotelreservierungssystem.AddRoom">
+<AnchorPane prefHeight="479.0" prefWidth="359.0" style="-fx-background-color: #C39746;" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.gui.AddRoomController">
     <children>
         <Label layoutX="30.0" layoutY="26.0" prefHeight="27.0" prefWidth="103.0" text="New Room">
             <font>
@@ -20,25 +19,25 @@
                 <Font size="14.0" />
             </font>
         </Label>
-        <TextField layoutX="40.0" layoutY="117.0" />
+        <TextField fx:id="roomNrTxtfield" layoutX="40.0" layoutY="117.0" />
         <Label layoutX="50.0" layoutY="168.0" text="Floor">
             <font>
                 <Font size="14.0" />
             </font>
         </Label>
-        <ChoiceBox layoutX="40.0" layoutY="200.0" prefWidth="150.0" />
+        <ChoiceBox fx:id="floorChoiceBox" layoutX="40.0" layoutY="200.0" prefWidth="150.0" />
         <Label layoutX="52.0" layoutY="247.0" text="Area">
             <font>
                 <Font size="14.0" />
             </font>
         </Label>
-        <ChoiceBox layoutX="40.0" layoutY="279.0" prefWidth="150.0" />
+        <ChoiceBox fx:id="areaChoicheBox" layoutX="40.0" layoutY="279.0" prefWidth="150.0" />
         <Label layoutX="38.0" layoutY="350.0" text="Cost">
             <font>
                 <Font size="14.0" />
             </font>
         </Label>
-        <TextField layoutX="82.0" layoutY="348.0" promptText="price per night" />
-        <Button layoutX="66.0" layoutY="425.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="207.0" text="add Room" />
+        <TextField fx:id="costTxtfield" layoutX="82.0" layoutY="348.0" promptText="price per night" />
+        <Button fx:id="addRoomBtn" layoutX="66.0" layoutY="425.0" mnemonicParsing="false" onAction="#onClickAddRoom" prefHeight="25.0" prefWidth="207.0" text="add Room" />
     </children>
 </AnchorPane>

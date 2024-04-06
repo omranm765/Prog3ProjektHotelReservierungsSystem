@@ -8,8 +8,7 @@
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
-
-<VBox maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="418.0" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1">
+<VBox maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="418.0" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.gui.editGastController">
     <children>
         <AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="554.0" prefWidth="425.0" style="-fx-background-color: #C39746;">
             <children>
@@ -38,17 +37,17 @@
                         <Font size="14.0" />
                     </font>
                 </Label>
-                <TextField layoutX="217.0" layoutY="130.0" promptText="Last Name" />
-                <TextField layoutX="27.0" layoutY="230.0" promptText="name@example.com" />
-                <TextField layoutX="26.0" layoutY="324.0" promptText="Tel-number" />
-                <TextField layoutX="27.0" layoutY="130.0" promptText="First Name" />
+                <TextField fx:id="lastNameTxtfield" layoutX="217.0" layoutY="130.0" promptText="Last Name" />
+                <TextField fx:id="emailTxtfield" layoutX="27.0" layoutY="230.0" promptText="name@example.com" />
+                <TextField fx:id="telefonNrTxtfield" layoutX="26.0" layoutY="324.0" promptText="Tel-number" />
+                <TextField fx:id="firstNameTxtfield" layoutX="27.0" layoutY="130.0" promptText="First Name" />
                 <Label layoutX="271.0" layoutY="181.0" text="B-date">
                     <font>
                         <Font size="14.0" />
                     </font>
                 </Label>
-                <DatePicker layoutX="209.0" layoutY="230.0" />
-                <Button layoutX="98.0" layoutY="428.0" mnemonicParsing="false" prefHeight="31.0" prefWidth="222.0" text="Save changes ">
+                <DatePicker fx:id="dateChooser" layoutX="209.0" layoutY="230.0" />
+                <Button fx:id="saveChangesBtn" layoutX="98.0" layoutY="428.0" mnemonicParsing="false" onAction="#onClickSaveChanges" prefHeight="31.0" prefWidth="222.0" text="Save changes ">
                     <font>
                         <Font size="15.0" />
                     </font>

@@ -2,21 +2,22 @@
 
 <?import java.lang.String?>
 <?import javafx.scene.control.ProgressBar?>
+<?import javafx.scene.control.ProgressIndicator?>
 <?import javafx.scene.image.Image?>
 <?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.layout.VBox?>
 
-<VBox prefHeight="400.0" prefWidth="640.0" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1">
+<VBox prefHeight="400.0" prefWidth="640.0" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.gui.loadingPageController">
     <children>
         <AnchorPane maxHeight="-1.0" maxWidth="-1.0" VBox.vgrow="ALWAYS">
             <children>
-                <ImageView fitHeight="538.0" fitWidth="1027.0" layoutY="-3.0" nodeOrientation="INHERIT">
+                <ImageView fx:id="image" fitHeight="538.0" fitWidth="1027.0" layoutY="-3.0" nodeOrientation="INHERIT">
                     <image>
                         <Image url="@../../../StartImage.jpg" />
                     </image>
                 </ImageView>
-                <ProgressBar layoutX="25.0" layoutY="384.0" nodeOrientation="LEFT_TO_RIGHT" prefWidth="200.0" progress="0.41" stylesheets="@SY.css">
+                <ProgressBar layoutX="25.0" layoutY="384.0" nodeOrientation="LEFT_TO_RIGHT" prefWidth="200.0" progress="0.41">
                     <styleClass>
                         <String fx:value="dot_1" />
                         <String fx:value="dot_2" />
@@ -25,6 +26,8 @@
                         <String fx:value="dot_5" />
                     </styleClass>
                 </ProgressBar>
+                <ProgressIndicator layoutX="125.0" layoutY="442.0" prefHeight="85.0" prefWidth="113.0" scaleX="1.4" scaleY="1.4" AnchorPane.bottomAnchor="315.0" AnchorPane.leftAnchor="950.0" AnchorPane.rightAnchor="217.0" AnchorPane.topAnchor="320.0">
+                </ProgressIndicator>
             </children>
         </AnchorPane>
     </children>
