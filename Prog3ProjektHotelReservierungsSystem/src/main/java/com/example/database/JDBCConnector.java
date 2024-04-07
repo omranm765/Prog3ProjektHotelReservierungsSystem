@@ -16,7 +16,9 @@ import org.hibernate.service.ServiceRegistry;
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.SQLException;
-
+/**
+ * Die Klasse JDBCConnector stellt eine Verbindung zur Datenbank her und verwaltet Entity Manager und Sessions.
+ */
 public class JDBCConnector {
     private static final String URL = "jdbc:mysql://localhost:3306/hotel";
     private static final String USERNAME = "root";
@@ -40,7 +42,13 @@ public class JDBCConnector {
         session = sessionFactory.openSession();
     }
 
-    // Methode zum Herstellen der Verbindung zur Datenbank
+
+    /**
+     * Methode zum Herstellen der Verbindung zur Datenbank.
+     *
+     * @return Die hergestellte Verbindung zur Datenbank.
+     * @throws SQLException Wenn ein Fehler beim Herstellen der Verbindung auftritt.
+     */
     public static Connection getConnection() throws SQLException {
         try {
             Class.forName("com.mysql.cj.jdbc.Driver");
@@ -51,7 +59,12 @@ public class JDBCConnector {
         }
     }
 
-    // Methode zum Schließen der Verbindung zur Datenbank
+
+    /**
+     * Methode zum Schließen einer Verbindung zur Datenbank.
+     *
+     * @param connection Die zu schließende Verbindung.
+     */
     public static void closeConnection(Connection connection) {
         if (connection != null) {
             try {
@@ -61,17 +74,32 @@ public class JDBCConnector {
             }
         }
     }
-
+    /**
+     * Methode zum Erhalten einer Hibernate-Session.
+     *
+     * @return Die Hibernate-Session.
+     */
     public static Session getSession(){
         return session;
     }
-    // Methode zum Erhalten des Entity Managers
+
+
+    /**
+     * Methode zum Erhalten des Entity Managers.
+     *
+     * @return Der Entity Manager.
+     */
     public static EntityManager getEntityManager() {
         if (entityManager == null || !entityManager.isOpen()) {
             entityManager = sessionFactory.createEntityManager();
         }
         return entityManager;
     }
+    /**
+     * Methode zum Erhalten des Entity Manager Factory.
+     *
+     * @return Die Entity Manager Factory.
+     */
 
     public static EntityManagerFactory getEntityManagerFactory(){
         if (entityManagerFactory == null){
@@ -80,12 +108,17 @@ public class JDBCConnector {
         return entityManagerFactory;
     }
 
-    // Methode zum Schließen des Entity Managers
+    /**
+     * Methode zum Schließen des Entity Managers.
+     */
     public static void closeEntityManager() {
         if (entityManager != null && entityManager.isOpen()) {
             entityManager.close();
         }
     }
+    /**
+     * Methode zum Schließen der Hibernate-Session.
+     */
     public static void closeSession(){
         if(session != null && session.isOpen()){
             session.close();

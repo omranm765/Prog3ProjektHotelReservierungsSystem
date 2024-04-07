@@ -4,12 +4,8 @@ import jakarta.persistence.*;
 import org.hibernate.annotations.Type;
 
 import java.time.LocalDate;
-
 /**
- * Beschreiben Sie hier die Klasse Buchung.
- *
- * @author (Ihr Name)
- * @version (eine Versionsnummer oder ein Datum)
+ * Diese Klasse repräsentiert eine Buchung für ein Hotelzimmer.
  */
 
 @Table(name = "buchung")
@@ -41,6 +37,15 @@ public class Buchung {
     @JoinColumn(name = "rechnung_id", nullable = false)
     private Rechnung rechnung;
 
+    /**
+     * Konstruktor für eine Buchung.
+     *
+     * @param gast Der Gast, der die Buchung vornimmt.
+     * @param buchungDatumBeginn Startdatum der Buchung.
+     * @param buchungDatumEnde Enddatum der Buchung.
+     * @param zimmerNr Die Zimmernummer für die Buchung.
+     * @throws HotelException Wenn Buchungsdaten ungültig sind.
+     */
     public Buchung(Person gast, LocalDate buchungDatumBeginn, LocalDate buchungDatumEnde,
                    int zimmerNr) throws HotelException {
         Validator.check(gast == null, "Gast existiert nicht");
@@ -54,16 +59,32 @@ public class Buchung {
 
 
     //database
+
+    /**
+     * Storniert die Rechnung dieser Buchung.
+     *
+     * @param rechnung Die zu stornierende Rechnung.
+     */
     public void rechnungStornieren(Rechnung rechnung) {
         rechnung = null;
     }
-
+    /**
+     * Bezahlt die Buchung mit einer Rechnung.
+     *
+     * @param bezahlDatum Das Datum der Zahlung.
+     * @param status      Der Status der Rechnung.
+     * @param preis       Der zu zahlende Betrag.
+     * @throws HotelException Wenn das Zahlungsdatum ungültig ist.
+     */
     public void bezahlen(LocalDate bezahlDatum, Rechnung.Status status, double preis) throws HotelException {
 
         Validator.check(bezahlDatum == null, "Ungültiges Zahlungsdatum");
         this.rechnung = new Rechnung(preis, bezahlDatum, Rechnung.Status.BEZAHLT);
     }
 
+    /**
+     * Storniert diese Buchung.
+     */
     public void buchungStornieren() {
         storniert = true;
     }

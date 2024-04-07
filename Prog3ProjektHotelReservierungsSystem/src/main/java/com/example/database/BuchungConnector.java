@@ -6,9 +6,17 @@ import jakarta.persistence.TypedQuery;
 import org.hibernate.Session;
 
 import java.util.List;
-
+/**
+ * Stellt Methoden bereit, um mit Buchungsdaten in der Datenbank zu interagieren.
+ */
 public class BuchungConnector implements DbOperator {
 
+    /**
+     * Fügt eine Buchung der Datenbank hinzu.
+     *
+     * @param object Das Buchungsobjekt, das hinzugefügt werden soll.
+     * @throws HotelException Wenn das übergebene Objekt keine Buchung ist.
+     */
     @Override
     public void datenbankErstellen(Object object) throws HotelException {
         if(!(object instanceof Buchung)){
@@ -20,7 +28,11 @@ public class BuchungConnector implements DbOperator {
             session.persist(buchung);
             session.getTransaction().commit();
     }
-
+    /**
+     * Sucht und gibt alle Buchungen aus der Datenbank zurück.
+     *
+     * @return Eine Liste von Buchungsobjekten aus der Datenbank.
+     */
     @Override
     public List<Buchung> datenbankSuchAlles() {
         try (Session session = JDBCConnector.getSession()) {
@@ -37,7 +49,12 @@ public class BuchungConnector implements DbOperator {
         return null;
     }
 
-
+    /**
+     * Sucht nach einer Buchung anhand der ID in der Datenbank.
+     *
+     * @param id Die ID der gesuchten Buchung.
+     * @return Das Buchungsobjekt mit der angegebenen ID.
+     */
     @Override
     public <T> T datenbankSuchNachId(int id) {
         try (Session session = JDBCConnector.getSession()) {
@@ -51,7 +68,9 @@ public class BuchungConnector implements DbOperator {
         }
         return null;
     }
-
+    /**
+     * Löscht alle Buchungsdaten aus der Datenbank.
+     */
     @Override
     public void datenbankLoeschAlles() {
         try (Session session = JDBCConnector.getSession()) {
@@ -62,6 +81,11 @@ public class BuchungConnector implements DbOperator {
             e.printStackTrace();
         }
     }
+    /**
+     * Löscht eine Buchung anhand der ID aus der Datenbank.
+     *
+     * @param id Die ID der zu löschenden Buchung.
+     */
 
     @Override
     public void datenbankLoeschNachId(int id) {
@@ -74,6 +98,11 @@ public class BuchungConnector implements DbOperator {
         }
 
     }
+    /**
+     * Aktualisiert eine Buchung in der Datenbank.
+     *
+     * @param object Das aktualisierte Buchungsobjekt.
+     */
 
     @Override
     public void datenbankAktualisieren(Object object) {

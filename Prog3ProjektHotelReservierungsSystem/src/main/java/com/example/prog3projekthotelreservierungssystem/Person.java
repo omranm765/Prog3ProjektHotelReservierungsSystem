@@ -4,7 +4,9 @@ import jakarta.persistence.*;
 
 import java.time.LocalDate;
 import java.util.List;
-
+/**
+ * Eine abstrakte Klasse, die eine Person im Hotel repräsentiert.
+ */
 @Entity
 @Inheritance(strategy = InheritanceType.SINGLE_TABLE)
 public abstract class Person {
@@ -26,6 +28,16 @@ public abstract class Person {
     @OneToMany(mappedBy = "gast")
     private List<Buchung> buchungList;
 
+    /**
+     * Konstruktor für eine Person im Hotel.
+     *
+     * @param vorname      Der Vorname der Person.
+     * @param name         Der Nachname der Person.
+     * @param email        Die E-Mail-Adresse der Person.
+     * @param geburtsdatum Das Geburtsdatum der Person.
+     * @param telefonNr    Die Telefonnummer der Person.
+     * @throws HotelException Wenn einer der übergebenen Parameter ungültig ist.
+     */
     public Person(String vorname, String name, String email,
                   LocalDate geburtsdatum, String telefonNr) throws HotelException {
         Validator.check(StringValidtor.stringCheckNullOrEmpty(vorname), "Vorname darf nicht leer sein");
@@ -78,6 +90,12 @@ public abstract class Person {
         this.buchungList = buchungList;
     }
 
+    /**
+     * Überprüft, ob ein Objekt gleich dieser Person ist.
+     *
+     * @param o Das zu vergleichende Objekt.
+     * @return true, wenn das Objekt gleich dieser Person ist, andernfalls false.
+     */
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
@@ -94,6 +112,11 @@ public abstract class Person {
             return false;
         return getTelefonNr() != null ? getTelefonNr().equals(person.getTelefonNr()) : person.getTelefonNr() == null;
     }
+    /**
+     * Gibt den Hashcode dieser Person zurück.
+     *
+     * @return Der Hashcode der Person.
+     */
 
     @Override
     public int hashCode() {
@@ -104,7 +127,11 @@ public abstract class Person {
         result = 31 * result + (getTelefonNr() != null ? getTelefonNr().hashCode() : 0);
         return result;
     }
-
+    /**
+     * Gibt eine String-Repräsentation dieser Person zurück.
+     *
+     * @return Eine String-Repräsentation der Person.
+     */
     public String toString() {
         return this.getClass().getSimpleName() +
                 "\nName: " + vorname + " " + name + "\nGeburtsdatum: " + geburtsdatum

@@ -8,10 +8,17 @@ import jakarta.persistence.TypedQuery;
 import org.hibernate.Session;
 
 import java.util.List;
-
+/**
+ * Die Klasse RechnungConnector implementiert die DbOperator-Schnittstelle und ermöglicht Operationen für Rechnungen in der Datenbank.
+ */
 public class RechnungConnector implements DbOperator {
 
-
+    /**
+     * Methode zum Erstellen einer Rechnung in der Datenbank.
+     *
+     * @param object Die zu erstellende Rechnung.
+     * @throws HotelException Wenn das übergebene Objekt keine Rechnung ist.
+     */
     @Override
     public void datenbankErstellen(Object object) throws HotelException {
         if(!(object instanceof Rechnung)){
@@ -23,7 +30,11 @@ public class RechnungConnector implements DbOperator {
         session.persist(rechnung);
         session.getTransaction().commit();
     }
-
+    /**
+     * Methode zum Abrufen aller Rechnungen aus der Datenbank.
+     *
+     * @return Eine Liste aller Rechnungen in der Datenbank.
+     */
     @Override
     public List<?> datenbankSuchAlles() {
 
@@ -41,7 +52,12 @@ public class RechnungConnector implements DbOperator {
         }
         return null;
     }
-
+    /**
+     * Methode zum Suchen einer Rechnung anhand ihrer ID in der Datenbank.
+     *
+     * @param id Die ID der gesuchten Rechnung.
+     * @return Die gefundene Rechnung oder null, wenn keine Rechnung mit dieser ID gefunden wurde.
+     */
     @Override
     public <T> T datenbankSuchNachId(int id) {
         try (Session session = JDBCConnector.getSession()) {
@@ -51,7 +67,9 @@ public class RechnungConnector implements DbOperator {
             return (T) rechnung;
         }
     }
-
+    /**
+     * Methode zum Löschen aller Rechnungen aus der Datenbank (wird noch implementiert).
+     */
     @Override
     public void datenbankLoeschAlles() {
         try (Session session = JDBCConnector.getSession()) {
@@ -62,7 +80,11 @@ public class RechnungConnector implements DbOperator {
             e.printStackTrace();
         }
     }
-
+    /**
+     * Methode zum Löschen einer Rechnung anhand ihrer ID aus der Datenbank (wird noch implementiert).
+     *
+     * @param id Die ID der zu löschenden Rechnung.
+     */
     @Override
     public void datenbankLoeschNachId(int id) {
 
@@ -74,7 +96,11 @@ public class RechnungConnector implements DbOperator {
             e.printStackTrace();
         }
     }
-
+    /**
+     * Methode zum Aktualisieren einer Rechnung in der Datenbank.
+     *
+     * @param object Die zu aktualisierende Rechnung.
+     */
     @Override
     public void datenbankAktualisieren(Object object) {
         try (Session session = JDBCConnector.getSession()) {

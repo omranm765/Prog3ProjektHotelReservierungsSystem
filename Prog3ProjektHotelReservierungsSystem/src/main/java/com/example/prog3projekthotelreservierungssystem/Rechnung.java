@@ -3,7 +3,9 @@ package com.example.prog3projekthotelreservierungssystem;
 import jakarta.persistence.*;
 
 import java.time.LocalDate;
-
+/**
+ * Diese Klasse repräsentiert eine Rechnung im Hotelreservierungssystem.
+ */
 @Entity
 @Table(name = "Rechnung")
 public class Rechnung {
@@ -22,6 +24,14 @@ public class Rechnung {
     @Column(name = "rechnung_erstellungsdatum")
     private final LocalDate erstellungsDatum;
 
+    /**
+     * Konstruktor für eine Rechnung.
+     *
+     * @param preis           Der Preis der Rechnung.
+     * @param erstellungsDatum Das Erstellungsdatum der Rechnung.
+     * @param status          Der Status der Rechnung (BEZAHLT oder NICHT_BEZAHLT).
+     * @throws HotelException Wenn der Preis ungültig ist oder das Erstellungsdatum leer ist.
+     */
     public Rechnung(double preis, LocalDate erstellungsDatum, Status status) throws HotelException {
         Validator.check(preis < 0.0000001 && preis > -0.0000001, "Preis darf nicht 0 sein");
         Validator.check(erstellungsDatum == null, "Erstellungsdatum darf nicht leer sein");
@@ -36,9 +46,20 @@ public class Rechnung {
         return preis;
     }
 
+    /**
+     * Gibt das Erstellungsdatum der Rechnung zurück.
+     *
+     * @return Das Erstellungsdatum der Rechnung.
+     */
     public LocalDate getErstellungsDatum() {
         return erstellungsDatum;
     }
+
+    /**
+     * Gibt eine String-Repräsentation der Rechnung zurück.
+     *
+     * @return Eine String-Repräsentation der Rechnung.
+     */
 
     public String toString(){
         return "Rechnung\nPreis: " + preis + "\nErstellungsdatum: " + erstellungsDatum;

@@ -8,9 +8,17 @@ import jakarta.persistence.TypedQuery;
 import org.hibernate.Session;
 
 import java.util.List;
-
+/**
+ * Die Klasse PersonConnector implementiert die DbOperator-Schnittstelle und ermöglicht Operationen für Personen in der Datenbank.
+ */
 public class PersonConnector implements DbOperator {
 
+    /**
+     * Methode zum Erstellen einer Person in der Datenbank.
+     *
+     * @param object Die zu erstellende Person.
+     * @throws HotelException Wenn das übergebene Objekt keine Person ist.
+     */
     @Override
     public void datenbankErstellen(Object object) throws HotelException {
         if(!(object instanceof Person)){
@@ -22,7 +30,11 @@ public class PersonConnector implements DbOperator {
             session.persist(person);
             session.getTransaction().commit();
     }
-
+    /**
+     * Methode zum Abrufen aller Personen aus der Datenbank.
+     *
+     * @return Eine Liste aller Personen in der Datenbank.
+     */
     @Override
     public List<Person> datenbankSuchAlles() {
         try (Session session = JDBCConnector.getSession()) {
@@ -38,7 +50,12 @@ public class PersonConnector implements DbOperator {
         }
         return null;
     }
-
+    /**
+     * Methode zum Suchen einer Person anhand ihrer ID in der Datenbank.
+     *
+     * @param id Die ID der gesuchten Person.
+     * @return Die gefundene Person oder null, wenn keine Person mit dieser ID gefunden wurde.
+     */
     @Override
     public <T> T datenbankSuchNachId(int id) {
         try (Session session = JDBCConnector.getSession()) {
@@ -53,7 +70,9 @@ public class PersonConnector implements DbOperator {
         return null;//TODO niemals null zurück KEINE UMLAUTE
     }
 
-
+    /**
+     * Methode zum Löschen aller Personen aus der Datenbank (wird noch implementiert).
+     */
     @Override
     public void datenbankLoeschAlles() {
         try (Session session = JDBCConnector.getSession()) {
@@ -65,7 +84,11 @@ public class PersonConnector implements DbOperator {
         }
     }
 
-
+    /**
+     * Methode zum Löschen einer Person anhand ihrer ID aus der Datenbank (wird noch implementiert).
+     *
+     * @param id Die ID der zu löschenden Person.
+     */
     @Override
     public void datenbankLoeschNachId(int id) {
         try (Session session = JDBCConnector.getSession()) {
@@ -80,7 +103,11 @@ public class PersonConnector implements DbOperator {
 
     }
 
-
+    /**
+     * Methode zum Aktualisieren einer Person in der Datenbank.
+     *
+     * @param object Die zu aktualisierende Person.
+     */
     @Override
     public void datenbankAktualisieren(Object object) {
 

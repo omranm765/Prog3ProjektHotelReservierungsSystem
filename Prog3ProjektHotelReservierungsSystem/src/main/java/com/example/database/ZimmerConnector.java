@@ -6,11 +6,18 @@ import jakarta.persistence.TypedQuery;
 import org.hibernate.Session;
 
 import java.util.List;
-
+/**
+ * Die Klasse ZimmerConnector implementiert die DbOperator-Schnittstelle und ermöglicht Operationen für Zimmer in der Datenbank.
+ */
 
 public class ZimmerConnector implements DbOperator {
 
-
+    /**
+     * Methode zum Erstellen eines Zimmers in der Datenbank.
+     *
+     * @param object Das zu erstellende Zimmer.
+     * @throws HotelException Wenn das übergebene Objekt kein Zimmer ist.
+     */
     @Override
     public void datenbankErstellen(Object object) throws HotelException {
         if(!(object instanceof Zimmer)){
@@ -22,7 +29,11 @@ public class ZimmerConnector implements DbOperator {
             session.persist(zimmer);
             session.getTransaction().commit();
     }
-
+    /**
+     * Methode zum Abrufen aller Zimmer aus der Datenbank.
+     *
+     * @return Eine Liste aller Zimmer in der Datenbank.
+     */
     @Override
     public List<?> datenbankSuchAlles() {
 
@@ -40,7 +51,12 @@ public class ZimmerConnector implements DbOperator {
         }
         return null;
     }
-
+    /**
+     * Methode zum Suchen eines Zimmers anhand seiner ID in der Datenbank.
+     *
+     * @param id Die ID des gesuchten Zimmers.
+     * @return Das gefundene Zimmer oder null, wenn kein Zimmer mit dieser ID gefunden wurde.
+     */
     @Override
     public <T> T datenbankSuchNachId(int id) {
         try (Session session = JDBCConnector.getSession()) {
@@ -53,7 +69,9 @@ public class ZimmerConnector implements DbOperator {
         }
         return null;
     }
-
+    /**
+     * Methode zum Löschen aller Zimmer aus der Datenbank (wird noch implementiert).
+     */
     @Override
     public void datenbankLoeschAlles() {
 
@@ -65,7 +83,11 @@ public class ZimmerConnector implements DbOperator {
             e.printStackTrace();
         }
     }
-
+    /**
+     * Methode zum Löschen eines Zimmers anhand seiner ID aus der Datenbank (wird noch implementiert).
+     *
+     * @param id Die ID des zu löschenden Zimmers.
+     */
     @Override
     public void datenbankLoeschNachId(int id) {
 
@@ -78,7 +100,11 @@ public class ZimmerConnector implements DbOperator {
             e.printStackTrace();
         }
     }
-
+    /**
+     * Methode zum Aktualisieren eines Zimmers in der Datenbank.
+     *
+     * @param object Das zu aktualisierende Zimmer.
+     */
     @Override
     public void datenbankAktualisieren(Object object) {
 
