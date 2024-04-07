@@ -38,10 +38,10 @@ public class AddMitarbeiterController {
 
     @FXML
     void onClickAddMitarbeiter(ActionEvent event) throws HotelException {
-        String firstName = firstNameTxtfield.getText().strip();
-        String lastName = lastNameTxtfield.getText().strip();
-        String email = emailTxtfield.getText().strip();
-        String telefonNr = telefonNrTxtfield.getText().strip();
+        String firstName = firstNameTxtfield.getText().trim();
+        String lastName = lastNameTxtfield.getText().trim();
+        String email = emailTxtfield.getText().trim();
+        String telefonNr = telefonNrTxtfield.getText().trim();
 
         if (firstName.isEmpty() || lastName.isEmpty() || email.isEmpty() || telefonNr.isEmpty() || dateChooser.getValue() == null) {
             Validator.check(false, "Bitte alle Textfelder ausfüllen");

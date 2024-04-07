@@ -1,9 +1,13 @@
 package com.example.prog3projekthotelreservierungssystem;
 
+import com.example.database.PersonConnector;
+import com.example.database.ZimmerConnector;
+
 import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.LinkedList;
 import java.util.List;
+
 /**
  * Diese Klasse repräsentiert ein Hotel.
  */
@@ -12,6 +16,7 @@ public class Hotel {
     private static List<Zimmer> zimmern;
     private static List<Person> mitarbeitern;
     private static List<Person> gaeste;
+
 
     /**
      * Konstruktor für ein Hotel.
@@ -25,6 +30,12 @@ public class Hotel {
         mitarbeitern = new ArrayList<>();
         gaeste = new ArrayList<>();
     }
+
+    static {
+        zimmern = new ArrayList<>();
+        mitarbeitern = new ArrayList<>();
+        gaeste = new ArrayList<>();
+    }
     /**
      * Fügt ein Zimmer zur Liste der Hotelzimmer hinzu.
      *
@@ -34,7 +45,10 @@ public class Hotel {
     public static void zimmerHinzufuegen(Zimmer zimmer) throws HotelException {
         Validator.check(zimmer == null, "Zimmer existiert nicht");
         zimmern.add(zimmer);
+        ZimmerConnector zimmerConnector = new ZimmerConnector();
+        zimmerConnector.datenbankErstellen(zimmer);
     }
+
     /**
      * Fügt einen Gast zur Liste der Hotelgäste hinzu.
      *
@@ -44,7 +58,10 @@ public class Hotel {
     public static void gastHinzufuegen(Person gast) throws HotelException {
         Validator.check(gast == null, "Gast existiert nicht");
         gaeste.add(gast);
+        PersonConnector personConnector = new PersonConnector();
+        personConnector.datenbankErstellen(gast);
     }
+
     /**
      * Fügt einen Mitarbeiter zur Liste der Hotelmitarbeiter hinzu.
      *
@@ -54,7 +71,10 @@ public class Hotel {
     public static void mitarbeiterHinzufuegen(Person mitarbeiter) throws HotelException {
         Validator.check(mitarbeiter == null, "mitarbeiter existiert nicht");
         mitarbeitern.add(mitarbeiter);
+        PersonConnector personConnector = new PersonConnector();
+        personConnector.datenbankErstellen(mitarbeiter);
     }
+
     /**
      * Erstellt eine Buchung für einen Gast im Hotel.
      *
@@ -69,6 +89,20 @@ public class Hotel {
                                            LocalDate buchungDatumEnde, int zimmerNr) throws HotelException {
         return new Buchung(gast, buchungDatumBeginn, buchungDatumEnde, zimmerNr);
     }
+
+    public static void buchungHinzufuegen(Buchung buchung) throws HotelException {
+        Validator.check(buchung == null, "Buchung existiert nicht");
+        Zimmer zimmer = null;
+        for (Zimmer z : zimmern) {
+            if (z.getZimmerNr() == buchung.getZimmerNr()) {
+                zimmer = z;
+                break;
+            }
+        }
+        Validator.check(zimmer == null, "Zimmer für Buchung nicht gefunden");
+        zimmer.buchungHinzufuegen(buchung);
+    }
+
     /**
      * Ändert eine bestehende Buchung im Hotel.
      *

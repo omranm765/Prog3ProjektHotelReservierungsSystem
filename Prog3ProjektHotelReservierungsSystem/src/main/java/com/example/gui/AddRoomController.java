@@ -31,14 +31,25 @@ public class AddRoomController {
 
     @FXML
     void onClickAddRoom(ActionEvent event) throws Exception {
-        String roomNr = roomNrTxtfield.getText();
-        String price = costTxtfield.getText();
+        String roomNrString = roomNrTxtfield.getText();
+        String priceString = costTxtfield.getText();
 
-        Validator.check(roomNrTxtfield.getText().trim().isEmpty() || costTxtfield.getText().trim().isEmpty()
-        , "Bitte füllen sie die Felder aus");
+        Validator.check(roomNrString.trim().isEmpty() || priceString.trim().isEmpty(), "Bitte füllen Sie die Felder aus");
 
-        Zimmer zimmer = new Zimmer(Integer.parseInt(roomNr),floorChoiceBox.getValue() ,areaChoicheBox.getValue() , Double.parseDouble(price));
+        try {
+            int roomNr = Integer.parseInt(roomNrString);
+            double price = Double.parseDouble(priceString);
 
-        Hotel.zimmerHinzufuegen(zimmer);
+            // Wert aus der areaChoiceBox als String abrufen und dann in Integer umwandeln
+            String areaString = areaChoicheBox.getValue().toString();
+            int area = Integer.parseInt(areaString);
+
+            Zimmer zimmer = new Zimmer(roomNr, floorChoiceBox.getValue(), area, price);
+
+            Hotel.zimmerHinzufuegen(zimmer);
+        } catch (NumberFormatException e) {
+            // Handle invalid input
+            System.err.println("Ungültige Eingabe: Stellen Sie sicher, dass Sie gültige Zahlen eingeben.");
+        }
     }
 }

@@ -1,11 +1,12 @@
-// NUR TEST
-
 package com.example.gui;
 
 import javafx.application.Application;
 import javafx.application.Platform;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
+import javafx.scene.image.Image;
+import javafx.scene.image.ImageView;
+import javafx.scene.layout.AnchorPane;
 import javafx.stage.Stage;
 
 import java.io.IOException;
@@ -16,9 +17,24 @@ public class HelloApplication extends Application {
     @Override
     public void start(Stage stage) throws IOException {
         FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("/com/example/prog3projekthotelreservierungssystem/loadingPage.fxml"));
-        Scene scene = new Scene(fxmlLoader.load(), 1000, 800);
+        AnchorPane anchorPane = fxmlLoader.load();
+        Scene scene = new Scene(anchorPane);
+
+        Image image = new Image("StartImage.jpg");
+        ImageView imageView = new ImageView(image);
+        stage.getIcons().add(image);
+
+        imageView.fitWidthProperty().bind(scene.widthProperty());
+        imageView.fitHeightProperty().bind(scene.heightProperty());
+
+        anchorPane.getChildren().add(imageView);
+
         stage.setTitle("Test");
         stage.setScene(scene);
+
+        stage.setMaximized(true);
+        stage.setResizable(false);
+
         stage.show();
 
         Timer timer = new Timer();
@@ -28,8 +44,9 @@ public class HelloApplication extends Application {
                 Platform.runLater(() -> {
                     try {
                         FXMLLoader mainLoader = new FXMLLoader(getClass().getResource("/com/example/prog3projekthotelreservierungssystem/Main.fxml"));
-                        Scene mainScene = new Scene(mainLoader.load(), 1000, 800);
+                        Scene mainScene = new Scene(mainLoader.load());
                         stage.setScene(mainScene);
+                        stage.setMaximized(true);
                     } catch (IOException e) {
                         e.printStackTrace();
                     }
