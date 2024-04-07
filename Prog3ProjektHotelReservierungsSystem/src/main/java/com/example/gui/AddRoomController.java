@@ -40,7 +40,6 @@ public class AddRoomController {
             int roomNr = Integer.parseInt(roomNrString);
             double price = Double.parseDouble(priceString);
 
-            // Wert aus der areaChoiceBox als String abrufen und dann in Integer umwandeln
             String areaString = areaChoicheBox.getValue().toString();
             int area = Integer.parseInt(areaString);
 
@@ -48,7 +47,6 @@ public class AddRoomController {
 
             Hotel.zimmerHinzufuegen(zimmer);
         } catch (NumberFormatException e) {
-            // Handle invalid input
             System.err.println("Ungültige Eingabe: Stellen Sie sicher, dass Sie gültige Zahlen eingeben.");
         }
     }
