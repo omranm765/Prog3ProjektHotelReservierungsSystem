@@ -43,7 +43,5 @@ public class GastsDashboardController {
 
     @FXML
     void onClickaddGuest(ActionEvent event) {
-
     }
-
 }

@@ -94,6 +94,10 @@ public abstract class Person {
         this.buchungList = buchungList;
     }
 
+    public int getId(){
+        return id;
+    }
+
     /**
      * Überprüft, ob ein Objekt gleich dieser Person ist.
      *

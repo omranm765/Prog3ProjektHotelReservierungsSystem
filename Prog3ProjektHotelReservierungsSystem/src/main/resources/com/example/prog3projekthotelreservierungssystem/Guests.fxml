@@ -12,7 +12,6 @@
             </font>
         </Text>
         <ListView fx:id="listView" layoutX="48.0" layoutY="90.0" prefHeight="363.0" prefWidth="622.0" />
-        <Button fx:id="cancelBtn" layoutX="487.0" layoutY="34.0" mnemonicParsing="false" onAction="#onClickCancelBooking" prefHeight="25.0" prefWidth="77.0" text="Cancel" />
         <Button layoutX="48.0" layoutY="469.0" mnemonicParsing="false" onAction="#onClickAddGuest" prefHeight="26.0" prefWidth="78.0" style="-fx-cursor: HAND;" text="Add Guest" />
         <Button layoutX="245.0" layoutY="469.0" mnemonicParsing="false" onAction="#onClickDeleteGuest" prefHeight="26.0" prefWidth="78.0" text="Delete" />
     </children>

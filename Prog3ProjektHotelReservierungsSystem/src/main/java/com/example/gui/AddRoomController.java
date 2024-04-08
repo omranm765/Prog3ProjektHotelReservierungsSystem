@@ -8,6 +8,7 @@ import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
 import javafx.scene.control.ChoiceBox;
+import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
 import javafx.stage.Stage;
 
@@ -31,13 +32,16 @@ public class AddRoomController {
     private TextField roomNrTxtfield;
     private Stage stage;
     private RoomsController roomsController;
+    @FXML
+    private Label errorLabel;
 
     @FXML
     void onClickAddRoom(ActionEvent event) throws Exception {
         String roomNrString = roomNrTxtfield.getText();
         String priceString = costTxtfield.getText();
 
-        Validator.check(roomNrString.trim().isEmpty() || priceString.trim().isEmpty(), "Bitte füllen Sie die Felder aus");
+        if (roomNrString.trim().isEmpty() || priceString.trim().isEmpty())
+        errorLabel.setText("Bitte füllen Sie die Felder aus");
 
         try {
             int roomNr = Integer.parseInt(roomNrString);

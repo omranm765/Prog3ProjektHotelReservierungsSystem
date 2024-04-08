@@ -44,8 +44,13 @@ public class Hotel {
      */
     public static void zimmerHinzufuegen(Zimmer zimmer) throws HotelException {
         Validator.check(zimmer == null, "Zimmer existiert nicht");
-        zimmern.add(zimmer);
         ZimmerConnector zimmerConnector = new ZimmerConnector();
+        List<Zimmer> tempZimmer = zimmerConnector.datenbankSuchAlles();
+        for (Zimmer z: tempZimmer){
+            Validator.check(z.getZimmerNr() == zimmer.getZimmerNr(),
+                    "Es existiert bereits ein Zimmer mit diesen ZimmerNr");
+        }
+        zimmern.add(zimmer);
         zimmerConnector.datenbankErstellen(zimmer);
     }
 
@@ -67,6 +72,13 @@ public class Hotel {
         gaeste.add(gast);
         PersonConnector personConnector = new PersonConnector();
         personConnector.datenbankErstellen(gast);
+    }
+
+    public static void GastEntfernen(Person gast) throws HotelException {
+        Validator.check(gast == null, "Zimmer existiert nicht");
+        zimmern.remove(gast);
+        PersonConnector personConnector = new PersonConnector();
+        personConnector.datenbankLoeschNachId(gast.getId());
     }
 
     /**
@@ -100,7 +112,9 @@ public class Hotel {
     public static void buchungHinzufuegen(Buchung buchung) throws HotelException {
         Validator.check(buchung == null, "Buchung existiert nicht");
         Zimmer zimmer = null;
-        for (Zimmer z : zimmern) {
+        ZimmerConnector zimmerConnector = new ZimmerConnector();
+        List<Zimmer> tempZimmer = zimmerConnector.datenbankSuchAlles();
+        for (Zimmer z : tempZimmer) {
             if (z.getZimmerNr() == buchung.getZimmerNr()) {
                 zimmer = z;
                 break;
@@ -108,6 +122,13 @@ public class Hotel {
         }
         Validator.check(zimmer == null, "Zimmer für Buchung nicht gefunden");
         zimmer.buchungHinzufuegen(buchung);
+        //TODO nix null aber null
+        Rechnung rechnung = new Rechnung(zimmer.getPreis(), LocalDate.now(), Rechnung.Status.NICHT_BEZAHLT);
+        RechnungConnector rechnungConnector = new RechnungConnector();
+        rechnungConnector.datenbankErstellen(rechnung);
+        buchung.setRechnung(rechnung);
+        BuchungConnector buchungConnector = new BuchungConnector();
+        buchungConnector.datenbankErstellen(buchung);
     }
 
     public static List<Person> getAllGasts(){
@@ -130,22 +151,22 @@ public class Hotel {
         return (List<Buchung>) buchungConnector.datenbankSuchAlles();
     }
 
-    public void getPersonById(int gastId){
+    public static Person getPersonById(int gastId){
         PersonConnector personConnector = new PersonConnector();
-        personConnector.datenbankSuchNachId(gastId);
+        return personConnector.datenbankSuchNachId(gastId);
     }
 
-    public Buchung getBuchungById(int buchungId) {
+    public static Buchung getBuchungById(int buchungId) {
         BuchungConnector buchungConnector = new BuchungConnector();
         return buchungConnector.datenbankSuchNachId(buchungId);
     }
 
-    public Rechnung getRechnungById(int rechnungId) {
+    public static Rechnung getRechnungById(int rechnungId) {
         RechnungConnector rechnungConnector = new RechnungConnector();
         return rechnungConnector.datenbankSuchNachId(rechnungId);
     }
 
-    public Zimmer getZimmerById(int zimmerId) {
+    public static Zimmer getZimmerById(int zimmerId) {
         ZimmerConnector zimmerConnector = new ZimmerConnector();
         return zimmerConnector.datenbankSuchNachId(zimmerId);
     }

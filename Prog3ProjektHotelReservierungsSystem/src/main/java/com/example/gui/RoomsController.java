@@ -57,13 +57,6 @@ public class RoomsController {
         this.listView = listView;
     }
 
-
-
-    @FXML
-    void onClickCancelBooking(ActionEvent event) {
-
-    }
-
     @FXML
     void onClickDeleteRoom(ActionEvent event) {
         try {

@@ -6,6 +6,7 @@ import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
 import javafx.scene.control.DatePicker;
+import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
 
 public class AddMitarbeiterController {
@@ -23,6 +24,8 @@ public class AddMitarbeiterController {
 
     @FXML
     private TextField telefonNrTxtfield;
+    @FXML
+    private Label errorLabel;
 
     @FXML
     void onClickAddMitarbeiter(ActionEvent event) throws HotelException {
@@ -33,34 +36,10 @@ public class AddMitarbeiterController {
         String telefonNr = telefonNrTxtfield.getText().trim();
 
         if (firstName.isEmpty() || lastName.isEmpty() || email.isEmpty() || telefonNr.isEmpty() || dateChooser.getValue() == null) {
-            Validator.check(false, "Bitte alle Textfelder ausfüllen");
+            errorLabel.setText("Bitte alle Textfelder ausfüllen");
         }
         Person mitarbeiter = new Mitarbeiter(firstName, lastName, email, geburtsdatum,
                 telefonNr);
         Hotel.mitarbeiterHinzufuegen(mitarbeiter);
     }
-
-    /*private void addMitarbeiterToDatabase(String firstName, String lastName, String email, LocalDate geburtsdatum, String telefonNr) throws HotelException {
-        try {
-            Connection connection = JDBCConnector.getConnection();
-            EntityManager entityManager = JDBCConnector.getEntityManager();
-            EntityTransaction transaction = entityManager.getTransaction();
-            transaction.begin();
-
-            Mitarbeiter existingMitarbeiter = entityManager.find(Mitarbeiter.class, email);
-            if (existingMitarbeiter != null) {
-                Validator.check(false, "Mitarbeiter existiert bereits");
-            }
-
-            Mitarbeiter newMitarbeiter = new Mitarbeiter(firstName, lastName, email, geburtsdatum, telefonNr);
-            entityManager.persist(newMitarbeiter);
-
-            transaction.commit();
-            entityManager.close();
-            JDBCConnector.closeConnection(connection);
-        } catch (SQLException e) {
-            e.printStackTrace();
-            throw new HotelException("Fehler beim Hinzufügen des Mitarbeiters zur Datenbank");
-        }
-    }*/
 }

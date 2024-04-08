@@ -38,7 +38,8 @@ public class MainController {
         stage.setScene(new Scene(root));
 
         NewBookingController newBookingController = fxmlLoader.getController();
-        //newBookingController.setStage(stage);
+        newBookingController.setStage(stage);
+        newBookingController.fillRoomChoiceBox();
 
         stage.showAndWait();
     }
@@ -60,6 +61,7 @@ public class MainController {
         Parent node = fxmlLoader.load();
         dashboardController = fxmlLoader.getController();
         dashboardController.updateListView(Hotel.getAllBuchungen());
+
         borderpane.setCenter(node);
     }
 
@@ -71,5 +73,13 @@ public class MainController {
         roomsController = fxmlLoader.getController();
         roomsController.updateListView(Hotel.getAllZimmer());
         borderpane.setCenter(node);
+    }
+    @FXML
+    public void initialize() {
+        try {
+            onClickOpenZimmerDashboard(null);
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
     }
 }

@@ -56,5 +56,9 @@
         </Label>
         <TextField fx:id="costTxtfield" layoutX="82.0" layoutY="348.0" promptText="price per night" />
         <Button fx:id="addRoomBtn" layoutX="66.0" layoutY="425.0" mnemonicParsing="false" onAction="#onClickAddRoom" prefHeight="25.0" prefWidth="207.0" text="add Room" />
+        <Label fx:id="errorLabel" alignment="CENTER" layoutX="6.0" layoutY="77.0" prefHeight="18.0" prefWidth="406.0" textFill="#ff0900">
+            <font>
+                <Font size="16.0" />
+            </font></Label>
     </children>
 </AnchorPane>

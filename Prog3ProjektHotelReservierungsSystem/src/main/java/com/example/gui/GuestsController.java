@@ -1,7 +1,6 @@
 package com.example.gui;
 
-import com.example.prog3projekthotelreservierungssystem.Person;
-import com.example.prog3projekthotelreservierungssystem.Zimmer;
+import com.example.prog3projekthotelreservierungssystem.*;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
@@ -9,8 +8,6 @@ import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
-import javafx.scene.control.Button;
-import javafx.scene.control.ChoiceBox;
 import javafx.scene.control.ListView;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
@@ -22,11 +19,6 @@ import java.util.List;
 public class GuestsController {
     @FXML
     private ListView<Person> listView;
-
-    @FXML
-    void onClickCancelBooking(ActionEvent event) throws IOException {
-
-    }
 
     @FXML
     void onClickAddGuest(ActionEvent event) throws IOException {
@@ -49,7 +41,17 @@ public class GuestsController {
 
     @FXML
     void onClickDeleteGuest(ActionEvent event) {
-
+        try {
+            Person selectedPerson = listView.getSelectionModel().getSelectedItem();
+            if (selectedPerson != null) {
+                Hotel.GastEntfernen(selectedPerson);
+                updateListView(Hotel.getAllGasts());
+            } else {
+                System.out.println("Bitte wählen Sie ein Gast zum Löschen aus.");
+            }
+        } catch (HotelException e) {
+            System.out.println("Fehler beim Löschen des Gasts: " + e.getMessage());
+        }
     }
 
     public void updateListView(List<Person> personList) {

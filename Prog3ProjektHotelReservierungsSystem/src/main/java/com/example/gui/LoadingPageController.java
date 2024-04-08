@@ -25,7 +25,6 @@ public class LoadingPageController extends Application {
     @FXML
     private ProgressIndicator progressIndicator;
 
-    // Methode zum Aktualisieren des Fortschrittsindikators
 
     @Override
     public void start(Stage stage) throws IOException {
@@ -66,7 +65,7 @@ public class LoadingPageController extends Application {
                     }
                 });
             }
-        }, 3000);
+        }, 1000);
     }
 
     public static void main(String[] args) {
