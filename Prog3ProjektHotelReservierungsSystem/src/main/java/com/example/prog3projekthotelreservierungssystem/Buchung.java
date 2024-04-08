@@ -57,9 +57,6 @@ public class Buchung {
         this.zimmerNr = zimmerNr;
     }
 
-
-    //database
-
     /**
      * Storniert die Rechnung dieser Buchung.
      *

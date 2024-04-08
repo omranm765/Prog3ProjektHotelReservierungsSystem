@@ -27,7 +27,7 @@
                 <Font size="14.0" />
             </font>
         </Label>
-        <ChoiceBox fx:id="floorChoiceBox" layoutX="40.0" layoutY="200.0" prefWidth="150.0" value="1">
+        <ChoiceBox fx:id="floorChoiceBox" layoutX="40.0" layoutY="200.0" prefWidth="150.0">
             <items>
                 <FXCollections fx:factory="observableArrayList">
                     <Integer fx:value="1" />
@@ -40,7 +40,7 @@
                 <Font size="14.0" />
             </font>
         </Label>
-        <ChoiceBox fx:id="areaChoicheBox" layoutX="40.0" layoutY="279.0" prefWidth="150.0" value="50">
+        <ChoiceBox fx:id="areaChoicheBox" layoutX="40.0" layoutY="279.0" prefWidth="150.0">
             <items>
                 <FXCollections fx:factory="observableArrayList">
                     <Integer fx:value="50" />

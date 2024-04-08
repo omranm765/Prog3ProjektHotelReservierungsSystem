@@ -37,7 +37,7 @@ public class BuchungConnector implements DbOperator {
     public List<Buchung> datenbankSuchAlles() {
         try (Session session = JDBCConnector.getSession()) {
             session.getTransaction().begin();
-            String queryString = "SELECT * FROM Person";
+            String queryString = "FROM Person";
             TypedQuery<Buchung> query = session.createQuery(queryString, Buchung.class);
             List<Buchung> allBuchung = query.getResultList();
             session.getTransaction().commit();

@@ -39,7 +39,7 @@ public class PersonConnector implements DbOperator {
     public List<Person> datenbankSuchAlles() {
         try (Session session = JDBCConnector.getSession()) {
             session.getTransaction().begin();
-            String queryString = "SELECT * FROM Person";
+            String queryString = "FROM Person";
             TypedQuery<Person> query = session.createQuery(queryString, Person.class);
             List<Person> allPerson = query.getResultList();
             session.getTransaction().commit();

@@ -25,6 +25,9 @@ public class Gast extends Person{
     public Gast(String vorname, String name, String email, LocalDate geburtsdatum, String telefonNr) throws HotelException {
         super(vorname, name, email, geburtsdatum, telefonNr);
     }
+    public Gast(){
+        super();
+    }
 
     /**
      * Gibt eine textuelle Repräsentation des Gastes zurück.

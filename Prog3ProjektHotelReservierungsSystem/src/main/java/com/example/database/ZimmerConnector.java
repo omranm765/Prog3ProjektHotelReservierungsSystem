@@ -6,6 +6,7 @@ import jakarta.persistence.TypedQuery;
 import org.hibernate.Session;
 
 import java.util.List;
+
 /**
  * Die Klasse ZimmerConnector implementiert die DbOperator-Schnittstelle und ermöglicht Operationen für Zimmer in der Datenbank.
  */
@@ -20,37 +21,37 @@ public class ZimmerConnector implements DbOperator {
      */
     @Override
     public void datenbankErstellen(Object object) throws HotelException {
-        if(!(object instanceof Zimmer)){
+        if (!(object instanceof Zimmer)) {
             throw new HotelException("Das Objekt ist kein Zimmer");
         }
         Session session = JDBCConnector.getSession();
-            Zimmer zimmer = (Zimmer) object;
-            session.getTransaction().begin();
-            session.persist(zimmer);
-            session.getTransaction().commit();
+        Zimmer zimmer = (Zimmer) object;
+        session.getTransaction().begin();
+        session.persist(zimmer);
+        session.getTransaction().commit();
     }
+
     /**
      * Methode zum Abrufen aller Zimmer aus der Datenbank.
      *
      * @return Eine Liste aller Zimmer in der Datenbank.
      */
     @Override
-    public List<?> datenbankSuchAlles() {
-
+    public List<Zimmer> datenbankSuchAlles() {
+        List<Zimmer> allzimmer = null;
         try (Session session = JDBCConnector.getSession()) {
             session.getTransaction().begin();
-
-            String queryString = "SELECT * FROM Zimmer";
+            String queryString = "FROM Zimmer";
             TypedQuery<Zimmer> query = session.createQuery(queryString, Zimmer.class);
-            List<Zimmer> allzimmer = query.getResultList();
+            allzimmer = query.getResultList();
             session.getTransaction().commit();
-            session.close();
             return allzimmer;
         } catch (Exception e) {
             e.printStackTrace();
         }
-        return null;
+        return allzimmer;
     }
+
     /**
      * Methode zum Suchen eines Zimmers anhand seiner ID in der Datenbank.
      *
@@ -69,6 +70,7 @@ public class ZimmerConnector implements DbOperator {
         }
         return null;
     }
+
     /**
      * Methode zum Löschen aller Zimmer aus der Datenbank (wird noch implementiert).
      */
@@ -83,6 +85,7 @@ public class ZimmerConnector implements DbOperator {
             e.printStackTrace();
         }
     }
+
     /**
      * Methode zum Löschen eines Zimmers anhand seiner ID aus der Datenbank (wird noch implementiert).
      *
@@ -100,6 +103,7 @@ public class ZimmerConnector implements DbOperator {
             e.printStackTrace();
         }
     }
+
     /**
      * Methode zum Aktualisieren eines Zimmers in der Datenbank.
      *

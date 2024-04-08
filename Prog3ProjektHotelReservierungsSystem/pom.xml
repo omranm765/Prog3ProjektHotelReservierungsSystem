@@ -104,7 +104,7 @@
                         <id>default-cli</id>
                         <configuration>
                             <mainClass>
-                                com.example.prog3projekthotelreservierungssystem/com.example.gui.HelloApplication
+                                com.example.prog3projekthotelreservierungssystem/com.example.gui.LoadingPageController
                             </mainClass>
                             <launcher>app</launcher>
                             <jlinkZipName>app</jlinkZipName>

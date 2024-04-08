@@ -9,6 +9,7 @@ import javafx.fxml.FXML;
 import javafx.scene.control.Button;
 import javafx.scene.control.ChoiceBox;
 import javafx.scene.control.TextField;
+import javafx.stage.Stage;
 
 import static java.lang.Double.parseDouble;
 
@@ -28,6 +29,8 @@ public class AddRoomController {
 
     @FXML
     private TextField roomNrTxtfield;
+    private Stage stage;
+    private RoomsController roomsController;
 
     @FXML
     void onClickAddRoom(ActionEvent event) throws Exception {
@@ -46,8 +49,19 @@ public class AddRoomController {
             Zimmer zimmer = new Zimmer(roomNr, floorChoiceBox.getValue(), area, price);
 
             Hotel.zimmerHinzufuegen(zimmer);
+            roomsController.updateListView(Hotel.getAllZimmer());
+            stage.close();
+
         } catch (NumberFormatException e) {
             System.err.println("Ungültige Eingabe: Stellen Sie sicher, dass Sie gültige Zahlen eingeben.");
         }
+    }
+
+    public void setStage(Stage stage) {
+        this.stage = stage;
+    }
+
+    public void setRoomsController(RoomsController roomsController) {
+        this.roomsController = roomsController;
     }
 }

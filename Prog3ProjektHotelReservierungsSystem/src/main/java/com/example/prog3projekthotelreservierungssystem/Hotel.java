@@ -1,6 +1,8 @@
 package com.example.prog3projekthotelreservierungssystem;
 
+import com.example.database.BuchungConnector;
 import com.example.database.PersonConnector;
+import com.example.database.RechnungConnector;
 import com.example.database.ZimmerConnector;
 
 import java.time.LocalDate;
@@ -24,8 +26,6 @@ public class Hotel {
      * @throws HotelException Wenn die Initialisierung fehlschlägt.
      */
     public Hotel() throws HotelException {
-
-
         zimmern = new ArrayList<>();
         mitarbeitern = new ArrayList<>();
         gaeste = new ArrayList<>();
@@ -103,6 +103,106 @@ public class Hotel {
         zimmer.buchungHinzufuegen(buchung);
     }
 
+    public static List<Person> getAllGasts(){
+        PersonConnector personConnector = new PersonConnector();
+        return (List<Person>) personConnector.datenbankSuchAlles();
+    }
+
+    public static List<Zimmer> getAllZimmer(){
+        ZimmerConnector zimmerConnector = new ZimmerConnector();
+        return (List<Zimmer>) zimmerConnector.datenbankSuchAlles();
+    }
+
+    public static List<Rechnung> getAllRechnungen(){
+        RechnungConnector rechnungConnector = new RechnungConnector();
+        return (List<Rechnung>) rechnungConnector.datenbankSuchAlles();
+    }
+
+    public static List<Buchung> getAllBuchungen(){
+        BuchungConnector buchungConnector = new BuchungConnector();
+        return (List<Buchung>) buchungConnector.datenbankSuchAlles();
+    }
+
+    public void getPersonById(int gastId){
+        PersonConnector personConnector = new PersonConnector();
+        personConnector.datenbankSuchNachId(gastId);
+    }
+
+    public Buchung getBuchungById(int buchungId) {
+        BuchungConnector buchungConnector = new BuchungConnector();
+        return buchungConnector.datenbankSuchNachId(buchungId);
+    }
+
+    public Rechnung getRechnungById(int rechnungId) {
+        RechnungConnector rechnungConnector = new RechnungConnector();
+        return rechnungConnector.datenbankSuchNachId(rechnungId);
+    }
+
+    public Zimmer getZimmerById(int zimmerId) {
+        ZimmerConnector zimmerConnector = new ZimmerConnector();
+        return zimmerConnector.datenbankSuchNachId(zimmerId);
+    }
+
+    public void removeGastId(int gastId){
+        PersonConnector personConnector = new PersonConnector();
+        personConnector.datenbankLoeschNachId(gastId);
+    }
+
+    public void removeZimmerId(int zimmerId) {
+        ZimmerConnector zimmerConnector = new ZimmerConnector();
+        zimmerConnector.datenbankLoeschNachId(zimmerId);
+    }
+
+    public void removeRechnungId(int rechnungId) {
+        RechnungConnector rechnungConnector = new RechnungConnector();
+        rechnungConnector.datenbankLoeschNachId(rechnungId);
+    }
+
+    public void removeBuchungId(int buchungId) {
+        BuchungConnector buchungConnector = new BuchungConnector();
+        buchungConnector.datenbankLoeschNachId(buchungId);
+    }
+
+    public void removeAllePersonen(){
+        PersonConnector personConnector = new PersonConnector();
+        personConnector.datenbankLoeschAlles();
+    }
+
+    public void removeAlleZimmer() {
+        ZimmerConnector zimmerConnector = new ZimmerConnector();
+        zimmerConnector.datenbankLoeschAlles();
+    }
+
+    public void removeAlleRechnungen() {
+        RechnungConnector rechnungConnector = new RechnungConnector();
+        rechnungConnector.datenbankLoeschAlles();
+    }
+
+    public void removeAlleBuchungen() {
+        BuchungConnector buchungConnector = new BuchungConnector();
+        buchungConnector.datenbankLoeschAlles();
+    }
+
+    public void aktualisierePersonen(Person person){
+        PersonConnector personConnector = new PersonConnector();
+        personConnector.datenbankAktualisieren(person);
+    }
+
+    public void aktualisiereZimmer(Zimmer zimmer) {
+        ZimmerConnector zimmerConnector = new ZimmerConnector();
+        zimmerConnector.datenbankAktualisieren(zimmer);
+    }
+
+    public void aktualisiereRechnung(Rechnung rechnung) {
+        RechnungConnector rechnungConnector = new RechnungConnector();
+        rechnungConnector.datenbankAktualisieren(rechnung);
+    }
+
+    public void aktualisiereBuchung(Buchung buchung) {
+        BuchungConnector buchungConnector = new BuchungConnector();
+        buchungConnector.datenbankAktualisieren(buchung);
+    }
+
     /**
      * Ändert eine bestehende Buchung im Hotel.
      *
@@ -119,7 +219,6 @@ public class Hotel {
         buchung.setBuchungDatumEnde(buchungDatumEnde);
         buchung.setGast(gast);
         buchung.setZimmerNr(zimmerNr);
-
     }
 
     /**

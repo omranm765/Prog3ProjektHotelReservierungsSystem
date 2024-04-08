@@ -2,27 +2,21 @@ package com.example.gui;
 
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
-import javafx.scene.control.Button;
 import javafx.scene.control.ChoiceBox;
 import javafx.scene.control.DatePicker;
 import javafx.scene.control.TextField;
 
-public class newBookingController {
+public class NewBookingController {
 
-    @FXML
-    private Button addBookingBtn;
 
     @FXML
     private DatePicker arrivalDateChooser;
 
     @FXML
-    private Button cancelProcessBtn;
-
-    @FXML
     private DatePicker departureDateChooser;
 
     @FXML
-    private ChoiceBox<?> floorChoiceBox;
+    private ChoiceBox<Integer> floorChoiceBox;
 
     @FXML
     private TextField guestId;
@@ -34,7 +28,7 @@ public class newBookingController {
     private TextField priceTxtfield;
 
     @FXML
-    private ChoiceBox<?> roomChoiceBox;
+    private ChoiceBox<Integer> roomChoiceBox;
 
     @FXML
     void onClickAddBooking(ActionEvent event) {

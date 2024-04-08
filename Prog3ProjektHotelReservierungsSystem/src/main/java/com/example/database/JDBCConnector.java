@@ -80,6 +80,9 @@ public class JDBCConnector {
      * @return Die Hibernate-Session.
      */
     public static Session getSession(){
+        if(session == null || !session.isOpen()){
+            session = sessionFactory.openSession();
+        }
         return session;
     }
 

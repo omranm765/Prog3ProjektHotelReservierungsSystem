@@ -41,7 +41,7 @@ public class RechnungConnector implements DbOperator {
         try (Session session = JDBCConnector.getSession()) {
             session.getTransaction().begin();
 
-            String queryString = "SELECT * FROM Rechnung";
+            String queryString = "FROM Rechnung";
             TypedQuery<Rechnung> query = session.createQuery(queryString, Rechnung.class);
             List<Rechnung> allrechnung = query.getResultList();
             session.getTransaction().commit();

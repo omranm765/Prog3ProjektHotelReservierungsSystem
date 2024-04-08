@@ -16,13 +16,13 @@ public abstract class Person {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id;
     @Column(name = "firstname")
-    private final String vorname;
+    private String vorname;
     @Column(name = "lastname")
-    private final String name;
+    private String name;
     @Column
     private String email;
     @Column
-    private final LocalDate geburtsdatum;
+    private LocalDate geburtsdatum;
     @Column(name = "telefonnummer")
     private String telefonNr;
     @OneToMany(mappedBy = "gast")
@@ -52,6 +52,10 @@ public abstract class Person {
         this.email = email;
         this.geburtsdatum = geburtsdatum;
         this.telefonNr = telefonNr;
+    }
+
+    public Person(){
+
     }
 
     public String getVorname() {
