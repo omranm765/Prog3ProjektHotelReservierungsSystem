@@ -1,5 +1,7 @@
 package com.example.gui;
 
+import com.example.prog3projekthotelreservierungssystem.Hotel;
+import com.example.prog3projekthotelreservierungssystem.HotelException;
 import com.example.prog3projekthotelreservierungssystem.Zimmer;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
@@ -71,7 +73,16 @@ public class RoomsController {
 
     @FXML
     void onClickDeleteRoom(ActionEvent event) {
-
+        try {
+            Zimmer selectedZimmer = listView.getSelectionModel().getSelectedItem();
+            if (selectedZimmer != null) {
+                Hotel.zimmerEntfernen(selectedZimmer);
+                updateListView(Hotel.getAllZimmer());
+            } else {
+                System.out.println("Bitte wählen Sie ein Zimmer zum Löschen aus.");
+            }
+        } catch (HotelException e) {
+            System.out.println("Fehler beim Löschen des Zimmers: " + e.getMessage());
+        }
     }
-
 }

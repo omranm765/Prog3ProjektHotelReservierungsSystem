@@ -34,7 +34,7 @@
                         <Font size="18.0" />
                      </font>
                   </Button>
-                  <Button fx:id="addBtn" mnemonicParsing="false" onAction="#addBtn" prefHeight="62.0" prefWidth="212.0" style="-fx-background-color: orange;" text="Add">
+                  <Button fx:id="addBtn" mnemonicParsing="false" onAction="#addBuchungBtn" prefHeight="62.0" prefWidth="212.0" style="-fx-background-color: orange;" text="Add">
                      <font>
                         <Font size="18.0" />
                      </font></Button>

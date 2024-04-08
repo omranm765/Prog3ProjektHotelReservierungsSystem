@@ -2,6 +2,7 @@ package com.example.database;
 
 import com.example.prog3projekthotelreservierungssystem.HotelException;
 import com.example.prog3projekthotelreservierungssystem.Zimmer;
+import jakarta.persistence.Query;
 import jakarta.persistence.TypedQuery;
 import org.hibernate.Session;
 
@@ -79,7 +80,10 @@ public class ZimmerConnector implements DbOperator {
 
         try (Session session = JDBCConnector.getSession()) {
             session.getTransaction().begin();
-            //wird noch implementiert
+            String queryString = "DELETE FROM Zimmer";
+            Query query = session.createQuery(queryString, Zimmer.class);
+            int geloeschteZimmer = query.executeUpdate();
+            System.out.println(geloeschteZimmer + " Zimmer erfolgreich gelöscht.");
             session.getTransaction().commit();
         } catch (Exception e) {
             e.printStackTrace();
@@ -95,9 +99,14 @@ public class ZimmerConnector implements DbOperator {
     public void datenbankLoeschNachId(int id) {
 
         try (Session session = JDBCConnector.getSession()) {
-
             session.getTransaction().begin();
-            //wird noch implementiert
+            Zimmer zimmer = session.find(Zimmer.class, id);
+            if (zimmer != null) {
+                session.remove(zimmer);
+                System.out.println("Zimmer mit ID " + id + " erfolgreich gelöscht.");
+            } else {
+                System.out.println("Zimmer mit ID " + id + " nicht gefunden.");
+            }
             session.getTransaction().commit();
         } catch (Exception e) {
             e.printStackTrace();

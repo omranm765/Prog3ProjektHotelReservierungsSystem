@@ -49,6 +49,13 @@ public class Hotel {
         zimmerConnector.datenbankErstellen(zimmer);
     }
 
+    public static void zimmerEntfernen(Zimmer zimmer) throws HotelException {
+        Validator.check(zimmer == null, "Zimmer existiert nicht");
+        zimmern.remove(zimmer);
+        ZimmerConnector zimmerConnector = new ZimmerConnector();
+        zimmerConnector.datenbankLoeschNachId(zimmer.getId());
+    }
+
     /**
      * Fügt einen Gast zur Liste der Hotelgäste hinzu.
      *

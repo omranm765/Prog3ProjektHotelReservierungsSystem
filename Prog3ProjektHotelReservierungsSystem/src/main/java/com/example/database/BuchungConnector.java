@@ -2,6 +2,7 @@ package com.example.database;
 
 import com.example.prog3projekthotelreservierungssystem.*;
 import jakarta.persistence.EntityManager;
+import jakarta.persistence.Query;
 import jakarta.persistence.TypedQuery;
 import org.hibernate.Session;
 
@@ -35,18 +36,19 @@ public class BuchungConnector implements DbOperator {
      */
     @Override
     public List<Buchung> datenbankSuchAlles() {
+        List<Buchung> allBuchung = null;
         try (Session session = JDBCConnector.getSession()) {
             session.getTransaction().begin();
             String queryString = "FROM Person";
             TypedQuery<Buchung> query = session.createQuery(queryString, Buchung.class);
-            List<Buchung> allBuchung = query.getResultList();
+            allBuchung = query.getResultList();
             session.getTransaction().commit();
             session.close();
             return allBuchung;
         } catch (Exception e) {
             e.printStackTrace();
         }
-        return null;
+        return allBuchung;
     }
 
     /**
@@ -75,7 +77,10 @@ public class BuchungConnector implements DbOperator {
     public void datenbankLoeschAlles() {
         try (Session session = JDBCConnector.getSession()) {
             session.getTransaction().begin();
-            // wird noch implementiert
+            String queryString = "DELETE FROM Zimmer";
+            Query query = session.createQuery(queryString, Buchung.class);
+            int geloeschteBuchung = query.executeUpdate();
+            System.out.println(geloeschteBuchung + " Buchung erfolgreich gelöscht.");
             session.getTransaction().commit();
         } catch (Exception e) {
             e.printStackTrace();
@@ -91,7 +96,13 @@ public class BuchungConnector implements DbOperator {
     public void datenbankLoeschNachId(int id) {
         try (Session session = JDBCConnector.getSession()) {
             session.getTransaction().begin();
-            // wird noch implementiert
+            Buchung buchung = session.find(Buchung.class, id);
+            if (buchung != null) {
+                session.remove(buchung);
+                System.out.println("Buchung mit ID " + id + " erfolgreich gelöscht.");
+            } else {
+                System.out.println("Buchung mit ID " + id + " nicht gefunden.");
+            }
             session.getTransaction().commit();
         } catch (Exception e) {
             e.printStackTrace();

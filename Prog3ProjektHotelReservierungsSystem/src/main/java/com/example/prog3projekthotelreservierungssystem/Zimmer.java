@@ -112,5 +112,8 @@ public class Zimmer {
                 "\npreis: " + preis +
                 "\nbuchungen: " + buchungen;
     }
+    public int getId(){
+        return zimmerId;
+    }
 }
 

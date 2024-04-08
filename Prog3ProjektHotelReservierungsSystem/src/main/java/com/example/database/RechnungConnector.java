@@ -4,6 +4,7 @@ import com.example.prog3projekthotelreservierungssystem.HotelException;
 import com.example.prog3projekthotelreservierungssystem.Rechnung;
 import com.example.prog3projekthotelreservierungssystem.Zimmer;
 import jakarta.persistence.EntityManager;
+import jakarta.persistence.Query;
 import jakarta.persistence.TypedQuery;
 import org.hibernate.Session;
 
@@ -36,21 +37,20 @@ public class RechnungConnector implements DbOperator {
      * @return Eine Liste aller Rechnungen in der Datenbank.
      */
     @Override
-    public List<?> datenbankSuchAlles() {
-
+    public List<Rechnung> datenbankSuchAlles() {
+            List<Rechnung> allrechnung = null;
         try (Session session = JDBCConnector.getSession()) {
             session.getTransaction().begin();
-
             String queryString = "FROM Rechnung";
             TypedQuery<Rechnung> query = session.createQuery(queryString, Rechnung.class);
-            List<Rechnung> allrechnung = query.getResultList();
+            allrechnung = query.getResultList();
             session.getTransaction().commit();
             session.close();
             return allrechnung;
         } catch (Exception e) {
             e.printStackTrace();
         }
-        return null;
+        return allrechnung;
     }
     /**
      * Methode zum Suchen einer Rechnung anhand ihrer ID in der Datenbank.
@@ -74,7 +74,10 @@ public class RechnungConnector implements DbOperator {
     public void datenbankLoeschAlles() {
         try (Session session = JDBCConnector.getSession()) {
             session.getTransaction().begin();
-            // wird noch implementiert
+            String queryString = "DELETE FROM Rechnung";
+            Query query = session.createQuery(queryString, Rechnung.class);
+            int geloeschteRechnung = query.executeUpdate();
+            System.out.println(geloeschteRechnung + " Rechnung erfolgreich gelöscht.");
             session.getTransaction().commit();
         } catch (Exception e) {
             e.printStackTrace();
@@ -90,7 +93,13 @@ public class RechnungConnector implements DbOperator {
 
         try (Session session = JDBCConnector.getSession()) {
             session.getTransaction().begin();
-            //wird noch implementiert
+            Rechnung rechnung = session.find(Rechnung.class, id);
+            if (rechnung != null) {
+                session.remove(rechnung);
+                System.out.println("Rechnung mit ID " + id + " erfolgreich gelöscht.");
+            } else {
+                System.out.println("Rechnung mit ID " + id + " nicht gefunden.");
+            }
             session.getTransaction().commit();
         } catch (Exception e) {
             e.printStackTrace();
