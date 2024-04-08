@@ -22,7 +22,7 @@ public class Rechnung {
     @Column(name = "rechnung_preis")
     private double preis;
     @Column(name = "rechnung_erstellungsdatum")
-    private final LocalDate erstellungsDatum;
+    private LocalDate erstellungsDatum;
 
     /**
      * Konstruktor für eine Rechnung.
@@ -39,6 +39,10 @@ public class Rechnung {
         this.preis = preis;
         this.erstellungsDatum = erstellungsDatum;
         this.status = status;
+    }
+
+    public Rechnung(){
+
     }
 
 

@@ -29,9 +29,6 @@ public class NewBookingController {
     private TextField guestId;
 
     @FXML
-    private TextField priceTxtfield;
-
-    @FXML
     private ChoiceBox<Integer> roomChoiceBox;
     private Stage stage;
     @FXML
@@ -40,7 +37,21 @@ public class NewBookingController {
 
     @FXML
     void onClickAddBooking(ActionEvent event) throws HotelException {
+        if (guestId.getText().trim().isEmpty()
+                || roomChoiceBox.getItems().isEmpty()
+                || floorChoiceBox.getItems().isEmpty() || departureDateChooser.getValue() == null
+                || arrivalDateChooser.getValue() == null) {
+            errorLabel.setText("Bitte füllen sie die Felder aus");
+            return;
+        }
+        int id = Integer.parseInt(guestId.getText());
+        Person guest = Hotel.getPersonById(id);
+        Buchung buchung = new Buchung(guest, arrivalDateChooser.getValue(),
+                departureDateChooser.getValue(), roomChoiceBox.getValue());
 
+        Hotel.buchungHinzufuegen(buchung);
+        dashboardController.updateListView(Hotel.getAllBuchungen());
+        stage.close();
     }
 
     public void fillRoomChoiceBox() {
@@ -63,5 +74,13 @@ public class NewBookingController {
 
     public void setStage(Stage stage) {
         this.stage = stage;
+    }
+
+    public void setDashboardController(DashboardController dashboardController) {
+        this.dashboardController = dashboardController;
+    }
+
+    public DashboardController getDashboardController() {
+        return dashboardController;
     }
 }

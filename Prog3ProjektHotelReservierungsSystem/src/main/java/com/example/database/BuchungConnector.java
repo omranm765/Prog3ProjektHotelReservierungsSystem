@@ -7,6 +7,7 @@ import jakarta.persistence.TypedQuery;
 import org.hibernate.Session;
 
 import java.util.List;
+
 /**
  * Stellt Methoden bereit, um mit Buchungsdaten in der Datenbank zu interagieren.
  */
@@ -20,15 +21,16 @@ public class BuchungConnector implements DbOperator {
      */
     @Override
     public void datenbankErstellen(Object object) throws HotelException {
-        if(!(object instanceof Buchung)){
+        if (!(object instanceof Buchung)) {
             throw new HotelException("Das Objekt ist kein Buchung");
         }
         Session session = JDBCConnector.getSession();
         Buchung buchung = (Buchung) object;
-            session.getTransaction().begin();
-            session.persist(buchung);
-            session.getTransaction().commit();
+        session.getTransaction().begin();
+        session.persist(buchung);
+        session.getTransaction().commit();
     }
+
     /**
      * Sucht und gibt alle Buchungen aus der Datenbank zurück.
      *
@@ -39,7 +41,7 @@ public class BuchungConnector implements DbOperator {
         List<Buchung> allBuchung = null;
         try (Session session = JDBCConnector.getSession()) {
             session.getTransaction().begin();
-            String queryString = "FROM Person";
+            String queryString = "FROM Buchung";
             TypedQuery<Buchung> query = session.createQuery(queryString, Buchung.class);
             allBuchung = query.getResultList();
             session.getTransaction().commit();
@@ -70,6 +72,7 @@ public class BuchungConnector implements DbOperator {
         }
         return null;
     }
+
     /**
      * Löscht alle Buchungsdaten aus der Datenbank.
      */
@@ -86,6 +89,7 @@ public class BuchungConnector implements DbOperator {
             e.printStackTrace();
         }
     }
+
     /**
      * Löscht eine Buchung anhand der ID aus der Datenbank.
      *
@@ -109,6 +113,7 @@ public class BuchungConnector implements DbOperator {
         }
 
     }
+
     /**
      * Aktualisiert eine Buchung in der Datenbank.
      *
@@ -128,5 +133,19 @@ public class BuchungConnector implements DbOperator {
         }
     }
 
-
+    public int getRechnungIdForBuchung(int buchungId) {
+        try (Session session = JDBCConnector.getSession()) {
+            session.getTransaction().begin();
+            String queryString = "SELECT rechnung_id FROM buchung WHERE buchung_id";
+            Query query = session.createQuery(queryString, Buchung.class);
+            query.setParameter("buchungId", buchungId);
+            Integer rechnungId = (Integer) query.getSingleResult();
+            int rechnungId1 = rechnungId;
+            session.getTransaction().commit();
+            return rechnungId;
+        } catch (Exception e) {
+            e.printStackTrace();
+            return -1;
+        }
+    }
 }

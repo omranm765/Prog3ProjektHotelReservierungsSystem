@@ -1,8 +1,13 @@
 package com.example.prog3projekthotelreservierungssystem;
 
+import com.example.database.BuchungConnector;
+import com.example.database.RechnungConnector;
 import jakarta.persistence.*;
 import org.hibernate.annotations.Type;
 
+import java.io.BufferedWriter;
+import java.io.FileWriter;
+import java.io.IOException;
 import java.time.LocalDate;
 /**
  * Diese Klasse repräsentiert eine Buchung für ein Hotelzimmer.
@@ -48,13 +53,17 @@ public class Buchung {
      */
     public Buchung(Person gast, LocalDate buchungDatumBeginn, LocalDate buchungDatumEnde,
                    int zimmerNr) throws HotelException {
-        Validator.check(gast == null, "Gast existiert nicht");
+        Validator.check(gast == null, "Gast existiert nichtt");
         Validator.check(buchungDatumBeginn == null || buchungDatumEnde == null
                 || buchungDatumBeginn.isAfter(buchungDatumEnde), "Ungültige Buchungsdaten");
         this.gast = gast;
         this.buchungDatumBeginn = buchungDatumBeginn;
         this.buchungDatumEnde = buchungDatumEnde;
         this.zimmerNr = zimmerNr;
+    }
+
+    public Buchung(){
+
     }
 
     /**
@@ -64,6 +73,52 @@ public class Buchung {
      */
     public void rechnungStornieren(Rechnung rechnung) {
         rechnung = null;
+    }
+    public void rechnungErstellen(){
+        if (!istGueltig()) {
+            System.err.println("Buchung ist nicht gültig für Rechnungserstellung.");
+            return;
+        }
+        BuchungConnector buchungConnector = new BuchungConnector();
+        int rechnungID = buchungConnector.getRechnungIdForBuchung(this.getBuchungID());
+        System.out.println(rechnungID);
+        RechnungConnector rechnungConnector = new RechnungConnector();
+        Rechnung rechnung1 = rechnungConnector.datenbankSuchNachId(rechnungID);
+        System.out.println(rechnung1);
+
+        StringBuilder sb = new StringBuilder();
+
+        sb.append("Rechnungsnummer: ").append(rechnungID).append("\n");
+        sb.append("Buchungsdatum: ").append(rechnung1.getErstellungsDatum()).append("\n");
+        sb.append("Betrag: ").append(this.getZimmer().getPreis()).append(" EUR\n");
+
+        String rechnungsText = sb.toString();
+
+        String dateiname = "Rechnung_" + rechnungID + ".txt";
+
+        try (BufferedWriter writer = new BufferedWriter(new FileWriter(dateiname))) {
+            writer.write(rechnungsText);
+            System.out.println("Rechnung erfolgreich erstellt: " + dateiname);
+        } catch (IOException e) {
+            System.err.println("Fehler beim Speichern der Rechnung: " + e.getMessage());
+        }
+    }
+
+    private boolean istGueltig() {
+        if (this.gast == null) {
+            System.err.println("Gast fehlt.");
+            return false;
+        }
+        if (this.buchungDatumBeginn == null || this.buchungDatumEnde == null
+                || this.buchungDatumBeginn.isAfter(this.buchungDatumEnde)) {
+            System.err.println("Ungültige Buchungsdaten.");
+            return false;
+        }
+        if (this.zimmerNr <= 0) {
+            System.err.println("Ungültige Zimmernummer");
+            return false;
+        }
+        return true;
     }
     /**
      * Bezahlt die Buchung mit einer Rechnung.
@@ -146,13 +201,17 @@ public class Buchung {
     public void setZimmer(Zimmer zimmer) {
         this.zimmer = zimmer;
     }
+    public void setStorniert(boolean storniert){
+        this.storniert = storniert;
+    }
 
     @Override
     public String toString() {
         return "\nBuchung " + "\ngast: " + gast +
                 "\nzimmerNr: " + zimmerNr + "," +
                 "\nbuchungDatumBegin: " + buchungDatumBeginn +
-                "\nbuchungDatumEnde: " + buchungDatumEnde;
+                "\nbuchungDatumEnde: " + buchungDatumEnde +
+                "\nStorniert: " + (!storniert ? "Nein" : "Ja");
     }
 }
 

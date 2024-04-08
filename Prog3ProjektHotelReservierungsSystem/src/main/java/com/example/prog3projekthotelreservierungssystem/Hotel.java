@@ -1,9 +1,6 @@
 package com.example.prog3projekthotelreservierungssystem;
 
-import com.example.database.BuchungConnector;
-import com.example.database.PersonConnector;
-import com.example.database.RechnungConnector;
-import com.example.database.ZimmerConnector;
+import com.example.database.*;
 
 import java.time.LocalDate;
 import java.util.ArrayList;
@@ -121,12 +118,13 @@ public class Hotel {
             }
         }
         Validator.check(zimmer == null, "Zimmer für Buchung nicht gefunden");
+        zimmer = JDBCConnector.getSession().merge(zimmer);
         zimmer.buchungHinzufuegen(buchung);
-        //TODO nix null aber null
         Rechnung rechnung = new Rechnung(zimmer.getPreis(), LocalDate.now(), Rechnung.Status.NICHT_BEZAHLT);
         RechnungConnector rechnungConnector = new RechnungConnector();
         rechnungConnector.datenbankErstellen(rechnung);
         buchung.setRechnung(rechnung);
+        buchung.setZimmer(zimmer);
         BuchungConnector buchungConnector = new BuchungConnector();
         buchungConnector.datenbankErstellen(buchung);
     }
@@ -247,6 +245,15 @@ public class Hotel {
         buchung.setBuchungDatumEnde(buchungDatumEnde);
         buchung.setGast(gast);
         buchung.setZimmerNr(zimmerNr);
+    }
+
+    public static Zimmer getZimmerByNummer(int nr) throws HotelException {
+        for(Zimmer z: zimmern){
+            if (nr == z.getZimmerNr()){
+                return z;
+            }
+        }
+        throw new HotelException("Zimmer mit Nummer " + nr + " nicht gefunden");
     }
 
     /**

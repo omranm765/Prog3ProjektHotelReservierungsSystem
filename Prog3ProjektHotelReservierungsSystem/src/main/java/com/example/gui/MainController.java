@@ -26,25 +26,6 @@ public class MainController {
     private DashboardController dashboardController;
 
     @FXML
-    void addBuchungBtn(ActionEvent event) throws IOException {
-        String windowTitle = "Add Room";
-        URL fxmlName = getClass().getResource("/com/example/prog3projekthotelreservierungssystem/newBooking.fxml");
-        FXMLLoader fxmlLoader = new FXMLLoader(fxmlName);
-        Parent root = fxmlLoader.load();
-
-        Stage stage = new Stage();
-        stage.initModality(Modality.APPLICATION_MODAL);
-        stage.setTitle(windowTitle);
-        stage.setScene(new Scene(root));
-
-        NewBookingController newBookingController = fxmlLoader.getController();
-        newBookingController.setStage(stage);
-        newBookingController.fillRoomChoiceBox();
-
-        stage.showAndWait();
-    }
-
-    @FXML
     void onClickOpenGuestDashboard(ActionEvent event) throws IOException {
         URL fxmlName = getClass().getResource("/com/example/prog3projekthotelreservierungssystem/Guests.fxml");
         FXMLLoader fxmlLoader = new FXMLLoader(fxmlName);
@@ -55,7 +36,7 @@ public class MainController {
     }
 
     @FXML
-    void onClickOpenDashboard(ActionEvent event) throws IOException {
+    void onClickOpenBuchungDashboard(ActionEvent event) throws IOException {
         URL fxmlName = getClass().getResource("/com/example/prog3projekthotelreservierungssystem/Dashboard.fxml");
         FXMLLoader fxmlLoader = new FXMLLoader(fxmlName);
         Parent node = fxmlLoader.load();

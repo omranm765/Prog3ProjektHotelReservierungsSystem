@@ -46,6 +46,7 @@ public abstract class Person {
         Validator.check(StringValidtor.stringCheckREGEX(email, EMAIL_REGEX), "Die Email ist ungültig");
         Validator.check(geburtsdatum == null, "Geburtsdatum darf nicht leer sein");
         Validator.check(telefonNr == null, "TelefonNr darf nicht leer sein");
+        Validator.check(geburtsdatum.isAfter(LocalDate.now()), "Ungültige Eingabe");
         //später für anderen klassen
         this.vorname = vorname;
         this.name = name;

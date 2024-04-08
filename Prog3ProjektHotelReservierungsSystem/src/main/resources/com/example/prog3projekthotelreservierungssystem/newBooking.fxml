@@ -53,12 +53,6 @@
                 </items>
                 </ChoiceBox>
                 <ChoiceBox fx:id="roomChoiceBox" layoutX="195.0" layoutY="211.0" prefHeight="25.0" prefWidth="138.0" />
-                <Text layoutX="18.0" layoutY="288.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Price">
-                    <font>
-                        <Font size="20.0" />
-                    </font>
-                </Text>
-                <TextField fx:id="priceTxtfield" layoutX="18.0" layoutY="307.0" promptText="price" />
                 <Button fx:id="addBookingBtn" layoutX="125.0" layoutY="452.0" mnemonicParsing="false" onAction="#onClickAddBooking" text="Add booking" />
             </children>
         </AnchorPane>

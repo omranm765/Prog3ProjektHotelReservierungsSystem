@@ -86,6 +86,10 @@ public class JDBCConnector {
         return session;
     }
 
+    public static SessionFactory getSessionFactory(){
+        return sessionFactory;
+    }
+
 
     /**
      * Methode zum Erhalten des Entity Managers.
