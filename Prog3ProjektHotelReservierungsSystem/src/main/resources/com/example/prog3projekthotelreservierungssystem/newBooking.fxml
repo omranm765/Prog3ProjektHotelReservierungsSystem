@@ -4,53 +4,67 @@
 <?import javafx.scene.layout.*?>
 <?import javafx.scene.text.*?>
 
-<VBox maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="510.0" prefWidth="350.0" xmlns="http://javafx.com/javafx/17.0.2-ea" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.gui.NewBookingController">
+<?import javafx.collections.FXCollections?>
+<?import java.lang.Integer?>
+<VBox maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="510.0"
+      prefWidth="350.0" xmlns="http://javafx.com/javafx/17.0.2-ea" xmlns:fx="http://javafx.com/fxml/1"
+      fx:controller="com.example.gui.NewBookingController">
     <children>
         <AnchorPane prefHeight="511.0" prefWidth="776.0" style="-fx-background-color: C39746;">
             <children>
                 <Text layoutX="14.0" layoutY="42.0" strokeType="OUTSIDE" strokeWidth="0.0" text="New Booking">
                     <font>
-                        <Font size="26.0" />
+                        <Font size="26.0"/>
                     </font>
                 </Text>
-                <TextField fx:id="guestId" layoutX="16.0" layoutY="57.0" promptText="Guest Id or Email" />
+                <TextField fx:id="guestId" layoutX="16.0" layoutY="57.0" promptText="Guest Id or Email"/>
                 <Text layoutX="14.0" layoutY="122.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Arrival">
                     <font>
-                        <Font size="20.0" />
+                        <Font size="20.0"/>
                     </font>
                 </Text>
                 <Text layoutX="195.0" layoutY="121.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Depature">
                     <font>
-                        <Font size="20.0" />
+                        <Font size="20.0"/>
                     </font>
                 </Text>
-                <DatePicker fx:id="arrivalDateChooser" layoutX="14.0" layoutY="129.0" prefHeight="25.0" prefWidth="138.0" />
-                <DatePicker fx:id="departureDateChooser" layoutX="195.0" layoutY="129.0" prefHeight="25.0" prefWidth="138.0" />
+                <DatePicker fx:id="arrivalDateChooser" layoutX="14.0" layoutY="129.0" prefHeight="25.0"
+                            prefWidth="138.0"/>
+                <DatePicker fx:id="departureDateChooser" layoutX="195.0" layoutY="129.0" prefHeight="25.0"
+                            prefWidth="138.0"/>
                 <Text layoutX="17.0" layoutY="203.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Floor">
                     <font>
-                        <Font size="20.0" />
+                        <Font size="20.0"/>
                     </font>
                 </Text>
                 <Text layoutX="195.0" layoutY="203.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Room">
                     <font>
-                        <Font size="20.0" />
+                        <Font size="20.0"/>
                     </font>
                 </Text>
-                <ChoiceBox fx:id="floorChoiceBox" layoutX="16.0" layoutY="211.0" prefHeight="25.0" prefWidth="138.0" />
-                <ChoiceBox fx:id="roomChoiceBox" layoutX="195.0" layoutY="211.0" prefHeight="25.0" prefWidth="138.0" />
+                <ChoiceBox fx:id="floorChoiceBox" layoutX="16.0" layoutY="211.0" prefHeight="25.0" prefWidth="138.0">
+                <items>
+                    <FXCollections fx:factory="observableArrayList">
+                        <Integer fx:value="1" />
+                        <Integer fx:value="2" />
+                    </FXCollections>
+                </items>
+                </ChoiceBox>
+                <ChoiceBox fx:id="roomChoiceBox" layoutX="195.0" layoutY="211.0" prefHeight="25.0" prefWidth="138.0"/>
                 <Text layoutX="16.0" layoutY="290.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Guests">
                     <font>
-                        <Font size="20.0" />
+                        <Font size="20.0"/>
                     </font>
                 </Text>
-                <TextField fx:id="guestsCountTxtfield" layoutX="16.0" layoutY="298.0" promptText="number" />
+                <TextField fx:id="guestsCountTxtfield" layoutX="16.0" layoutY="298.0" promptText="number"/>
                 <Text layoutX="16.0" layoutY="369.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Price">
                     <font>
-                        <Font size="20.0" />
+                        <Font size="20.0"/>
                     </font>
                 </Text>
-                <TextField fx:id="priceTxtfield" layoutX="16.0" layoutY="377.0" promptText="price" />
-                <Button fx:id="addBookingBtn" layoutX="125.0" layoutY="452.0" mnemonicParsing="false" onAction="#onClickAddBooking" text="Add booking" />
+                <TextField fx:id="priceTxtfield" layoutX="16.0" layoutY="377.0" promptText="price"/>
+                <Button fx:id="addBookingBtn" layoutX="125.0" layoutY="452.0" mnemonicParsing="false"
+                        onAction="#onClickAddBooking" text="Add booking"/>
             </children>
         </AnchorPane>
     </children>

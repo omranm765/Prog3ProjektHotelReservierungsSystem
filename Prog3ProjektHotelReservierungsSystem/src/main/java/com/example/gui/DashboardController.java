@@ -15,7 +15,7 @@ import java.util.List;
 public class DashboardController {
 
     @FXML
-    private ChoiceBox<?> bookingChoiceBox;
+    private ChoiceBox<String> bookingChoiceBox;
 
     @FXML
     private ListView<Buchung> listView;

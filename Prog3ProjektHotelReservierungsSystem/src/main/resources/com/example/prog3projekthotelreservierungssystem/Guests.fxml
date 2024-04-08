@@ -4,22 +4,16 @@
 <?import javafx.scene.layout.*?>
 <?import javafx.scene.text.*?>
 
-<AnchorPane prefHeight="518.0" prefWidth="705.0" style="-fx-background-color: #C39746;"
-            xmlns="http://javafx.com/javafx/17.0.2-ea" xmlns:fx="http://javafx.com/fxml/1"
-            fx:controller="com.example.gui.GuestsController">
+<AnchorPane prefHeight="518.0" prefWidth="705.0" style="-fx-background-color: #C39746;" xmlns="http://javafx.com/javafx/17.0.2-ea" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.gui.GuestsController">
     <children>
         <Text layoutX="57.0" layoutY="53.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Guests">
             <font>
-                <Font size="16.0"/>
+                <Font size="16.0" />
             </font>
         </Text>
-        <ListView fx:id="listView" layoutX="48.0" layoutY="90.0" prefHeight="363.0" prefWidth="622.0"/>
-        <Button fx:id="cancelBtn" layoutX="487.0" layoutY="34.0" mnemonicParsing="false"
-                onAction="#onClickCancelBooking" prefHeight="25.0" prefWidth="77.0" text="Cancel"/>
-        <ChoiceBox fx:id="bookingChoiceBox" layoutX="209.0" layoutY="34.0" prefWidth="150.0"/>
-        <Button layoutX="48.0" layoutY="469.0" mnemonicParsing="false" onAction="#onClickAddGuest" prefHeight="26.0"
-                prefWidth="78.0" style="-fx-cursor: HAND;" text="Add Guest"/>
-        <Button layoutX="245.0" layoutY="469.0" mnemonicParsing="false" onAction="#onClickDeleteGuest" prefHeight="26.0"
-                prefWidth="78.0" text="Delete"/>
+        <ListView fx:id="listView" layoutX="48.0" layoutY="90.0" prefHeight="363.0" prefWidth="622.0" />
+        <Button fx:id="cancelBtn" layoutX="487.0" layoutY="34.0" mnemonicParsing="false" onAction="#onClickCancelBooking" prefHeight="25.0" prefWidth="77.0" text="Cancel" />
+        <Button layoutX="48.0" layoutY="469.0" mnemonicParsing="false" onAction="#onClickAddGuest" prefHeight="26.0" prefWidth="78.0" style="-fx-cursor: HAND;" text="Add Guest" />
+        <Button layoutX="245.0" layoutY="469.0" mnemonicParsing="false" onAction="#onClickDeleteGuest" prefHeight="26.0" prefWidth="78.0" text="Delete" />
     </children>
 </AnchorPane>

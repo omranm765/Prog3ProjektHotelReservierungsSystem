@@ -1,5 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<?import java.lang.*?>
+<?import javafx.collections.*?>
 <?import javafx.scene.control.*?>
 <?import javafx.scene.layout.*?>
 <?import javafx.scene.text.*?>
@@ -13,6 +15,14 @@
         </Text>
         <ListView fx:id="listView" layoutX="48.0" layoutY="90.0" prefHeight="400.0" prefWidth="622.0" />
         <Button fx:id="cancelBtn" layoutX="487.0" layoutY="34.0" mnemonicParsing="false" onAction="#onClickCancelBooking" prefHeight="25.0" prefWidth="77.0" text="Cancel" />
-        <ChoiceBox fx:id="bookingChoiceBox" layoutX="209.0" layoutY="34.0" prefWidth="150.0" />
+        <ChoiceBox fx:id="bookingChoiceBox" layoutX="209.0" layoutY="34.0" prefWidth="150.0">
+            <items>
+                <FXCollections fx:factory="observableArrayList">
+                    <String fx:value="Alle" />
+                    <String fx:value="Aktiv" />
+                    <String fx:value="Storniert" />
+                </FXCollections>
+            </items>
+        </ChoiceBox>
     </children>
 </AnchorPane>

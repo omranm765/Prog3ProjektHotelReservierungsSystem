@@ -21,13 +21,6 @@ import java.net.URL;
 import java.util.List;
 
 public class RoomsController {
-
-    @FXML
-    private ChoiceBox<?> bookingChoiceBox;
-
-    @FXML
-    private Button cancelBtn;
-
     @FXML
     private ListView<Zimmer> listView;
     @FXML

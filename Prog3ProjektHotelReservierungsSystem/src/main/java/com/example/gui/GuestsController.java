@@ -20,10 +20,6 @@ import java.net.URL;
 import java.util.List;
 
 public class GuestsController {
-
-    @FXML
-    private ChoiceBox<?> bookingChoiceBox;
-
     @FXML
     private ListView<Person> listView;
 
