@@ -34,9 +34,4 @@ public class NewBookingController {
     void onClickAddBooking(ActionEvent event) {
 
     }
-
-    @FXML
-    void onClickCancelProccess(ActionEvent event) {
-
-    }
 }

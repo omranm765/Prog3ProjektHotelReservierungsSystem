@@ -14,7 +14,6 @@ import javafx.stage.Stage;
 public class AddGuestController {
 
 
-
     @FXML
     private DatePicker dateChooser;
 
@@ -33,23 +32,23 @@ public class AddGuestController {
     private GuestsController guestsController;
 
     @FXML
-    void onClickAddGuest(ActionEvent event) throws Exception
-    {
+    void onClickAddGuest(ActionEvent event) throws Exception {
         Validator.check(lastNameTxtfield.getText().trim().isEmpty() || emailTxtfield.getText().trim().isEmpty()
                 , "Bitte füllen sie die Felder aus");
 
-        Person guest = new Gast(firstNameTxtfield.getText(), lastNameTxtfield.getText(), emailTxtfield.getText(),dateChooser.getValue(), telefonNrTxtfield.getText()
+        Person guest = new Gast(firstNameTxtfield.getText(), lastNameTxtfield.getText(), emailTxtfield.getText(), dateChooser.getValue(), telefonNrTxtfield.getText()
         );
 
         Hotel.gastHinzufuegen(guest);
         guestsController.updateListView(Hotel.getAllGasts());
         stage.close();
     }
-    public void setStage(Stage stage){
+
+    public void setStage(Stage stage) {
         this.stage = stage;
     }
 
-    public void setRoomsController(GuestsController guestsController) {
+    public void setGuestsController(GuestsController guestsController) {
         this.guestsController = guestsController;
     }
 }

@@ -46,6 +46,7 @@ public class GuestsController {
 
         AddGuestController addGuestController = fxmlLoader.getController();
         addGuestController.setStage(stage);
+        addGuestController.setGuestsController(this);
 
         stage.showAndWait();
     }

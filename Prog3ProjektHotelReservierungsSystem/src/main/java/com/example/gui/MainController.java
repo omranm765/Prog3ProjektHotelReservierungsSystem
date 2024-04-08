@@ -38,7 +38,7 @@ public class MainController {
         stage.setScene(new Scene(root));
 
         NewBookingController newBookingController = fxmlLoader.getController();
-        newBookingController.setStage(stage);
+        //newBookingController.setStage(stage);
 
         stage.showAndWait();
     }
