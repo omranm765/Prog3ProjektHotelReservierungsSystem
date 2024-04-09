@@ -22,10 +22,6 @@ public class LoadingPageController extends Application {
     @FXML
     private ImageView image;
 
-    @FXML
-    private ProgressIndicator progressIndicator;
-
-
     @Override
     public void start(Stage stage) throws IOException {
         FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("/com/example/prog3projekthotelreservierungssystem/loadingPage.fxml"));
@@ -41,7 +37,7 @@ public class LoadingPageController extends Application {
 
         anchorPane.getChildren().add(imageView);
 
-        stage.setTitle("Test");
+        stage.setTitle("Hotellaro");
         stage.setScene(scene);
 
         stage.setMaximized(true);

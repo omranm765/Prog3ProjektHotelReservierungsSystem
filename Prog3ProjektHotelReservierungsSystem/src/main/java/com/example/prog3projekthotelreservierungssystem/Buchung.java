@@ -65,33 +65,22 @@ public class Buchung {
     public Buchung(){
 
     }
-
-    /**
-     * Storniert die Rechnung dieser Buchung.
-     *
-     * @param rechnung Die zu stornierende Rechnung.
-     */
-    public void rechnungStornieren(Rechnung rechnung) {
-        rechnung = null;
-    }
-    public void rechnungErstellen(){
+    public void rechnungErstellen() throws HotelException {
         if (!istGueltig()) {
             System.err.println("Buchung ist nicht gültig für Rechnungserstellung.");
             return;
         }
         BuchungConnector buchungConnector = new BuchungConnector();
         int rechnungID = buchungConnector.getRechnungIdForBuchung(this.getBuchungID());
-        System.out.println(rechnungID);
         RechnungConnector rechnungConnector = new RechnungConnector();
         Rechnung rechnung1 = rechnungConnector.datenbankSuchNachId(rechnungID);
-        System.out.println(rechnung1);
 
         StringBuilder sb = new StringBuilder();
 
+        sb.append("Kunde: ").append(this.getGast());
         sb.append("Rechnungsnummer: ").append(rechnungID).append("\n");
         sb.append("Buchungsdatum: ").append(rechnung1.getErstellungsDatum()).append("\n");
         sb.append("Betrag: ").append(this.getZimmer().getPreis()).append(" EUR\n");
-
         String rechnungsText = sb.toString();
 
         String dateiname = "Rechnung_" + rechnungID + ".txt";

@@ -26,6 +26,7 @@ public class JDBCConnector {
     private static EntityManager entityManager;
     private static SessionFactory sessionFactory;
     private static final String PERSISTENCE = "hotel";
+    //Wir hatten Probleme mit den Persistence.xml deswegen kein Entity-manager mehr, sondern Session
     private static EntityManagerFactory entityManagerFactory;
     private static Session session;
 

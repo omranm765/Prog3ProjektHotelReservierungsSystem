@@ -4,6 +4,7 @@ import jakarta.persistence.*;
 
 import java.time.LocalDate;
 import java.util.List;
+
 /**
  * Eine abstrakte Klasse, die eine Person im Hotel repräsentiert.
  */
@@ -55,7 +56,7 @@ public abstract class Person {
         this.telefonNr = telefonNr;
     }
 
-    public Person(){
+    public Person() {
 
     }
 
@@ -95,7 +96,7 @@ public abstract class Person {
         this.buchungList = buchungList;
     }
 
-    public int getId(){
+    public int getId() {
         return id;
     }
 
@@ -121,6 +122,7 @@ public abstract class Person {
             return false;
         return getTelefonNr() != null ? getTelefonNr().equals(person.getTelefonNr()) : person.getTelefonNr() == null;
     }
+
     /**
      * Gibt den Hashcode dieser Person zurück.
      *
@@ -136,6 +138,7 @@ public abstract class Person {
         result = 31 * result + (getTelefonNr() != null ? getTelefonNr().hashCode() : 0);
         return result;
     }
+
     /**
      * Gibt eine String-Repräsentation dieser Person zurück.
      *
@@ -145,6 +148,6 @@ public abstract class Person {
         return this.getClass().getSimpleName() +
                 "\nName: " + vorname + " " + name + "\nGeburtsdatum: " + geburtsdatum
                 + "\nEmail: " + email
-                + "\nTelefonNr: " + telefonNr;
+                + "\nTelefonNr: " + telefonNr + "\n";
     }
 }

@@ -109,8 +109,7 @@ public class Zimmer {
         return "Zimmer: " + "\nzimmerNr: " + zimmerNr +
                 "\netage: " + etage +
                 "\nflaeche: " + flaeche +
-                "\npreis: " + preis +
-                "\nbuchungen: " + buchungen;
+                "\npreis: " + preis;
     }
     public int getId(){
         return zimmerId;

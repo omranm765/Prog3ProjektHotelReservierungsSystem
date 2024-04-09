@@ -62,6 +62,9 @@ public class ZimmerConnector implements DbOperator {
     @Override
     public <T> T datenbankSuchNachId(int id) {
         try (Session session = JDBCConnector.getSession()) {
+            if (id <= 0) {
+                throw new HotelException("Die ID muss größer als 0 sein.");
+            }
             session.getTransaction().begin();
             Zimmer zimmer = session.find(Zimmer.class, id);
             session.getTransaction().commit();
@@ -97,8 +100,10 @@ public class ZimmerConnector implements DbOperator {
      */
     @Override
     public void datenbankLoeschNachId(int id) {
-
         try (Session session = JDBCConnector.getSession()) {
+            if (id <= 0) {
+                throw new HotelException("Die ID muss größer als 0 sein.");
+            }
             session.getTransaction().begin();
             Zimmer zimmer = session.find(Zimmer.class, id);
             if (zimmer != null) {
@@ -120,9 +125,13 @@ public class ZimmerConnector implements DbOperator {
      */
     @Override
     public void datenbankAktualisieren(Object object) {
-
-
         try (Session session = JDBCConnector.getSession()) {
+            if (object == null){
+                throw new HotelException("Zimmer existiert nicht");
+            }
+            if (!(object instanceof Zimmer)) {
+                throw new HotelException("Das Objekt ist kein Zimmer");
+            }
             Zimmer zimmer = (Zimmer) object;
             session.getTransaction().begin();
             session.merge(zimmer);

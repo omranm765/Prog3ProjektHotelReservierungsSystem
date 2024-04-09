@@ -101,7 +101,7 @@ public class DashboardController {
     }
 
     @FXML
-    void onClickRechnungErstellen(ActionEvent event) {
+    void onClickRechnungErstellen(ActionEvent event) throws HotelException {
         Buchung selectedBuchung = listView.getSelectionModel().getSelectedItem();
         if (selectedBuchung != null) {
             selectedBuchung.rechnungErstellen();

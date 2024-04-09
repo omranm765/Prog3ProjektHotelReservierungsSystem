@@ -59,8 +59,11 @@ public class RechnungConnector implements DbOperator {
      * @return Die gefundene Rechnung oder null, wenn keine Rechnung mit dieser ID gefunden wurde.
      */
     @Override
-    public <T> T datenbankSuchNachId(int id) {
+    public <T> T datenbankSuchNachId(int id) throws HotelException {
         try (Session session = JDBCConnector.getSession()) {
+            if (id <= 0) {
+                throw new HotelException("Die ID muss größer als 0 sein.");
+            }
             session.getTransaction().begin();
             Rechnung rechnung = session.find(Rechnung.class, id);
             session.getTransaction().commit();
@@ -90,8 +93,10 @@ public class RechnungConnector implements DbOperator {
      */
     @Override
     public void datenbankLoeschNachId(int id) {
-
         try (Session session = JDBCConnector.getSession()) {
+            if (id <= 0) {
+                throw new HotelException("Die ID muss größer als 0 sein.");
+            }
             session.getTransaction().begin();
             Rechnung rechnung = session.find(Rechnung.class, id);
             if (rechnung != null) {
@@ -113,6 +118,12 @@ public class RechnungConnector implements DbOperator {
     @Override
     public void datenbankAktualisieren(Object object) {
         try (Session session = JDBCConnector.getSession()) {
+            if (object == null){
+                throw new HotelException("Rechnung existiert nicht");
+            }
+            if (!(object instanceof Rechnung)) {
+                throw new HotelException("Das Objekt ist kein Rechnung");
+            }
             Rechnung rechnung = (Rechnung) object;
             session.getTransaction().begin();
             session.merge(rechnung);

@@ -21,6 +21,9 @@ public class BuchungConnector implements DbOperator {
      */
     @Override
     public void datenbankErstellen(Object object) throws HotelException {
+        if (object == null) {
+            throw new HotelException("Buchung existiert nicht");
+        }
         if (!(object instanceof Buchung)) {
             throw new HotelException("Das Objekt ist kein Buchung");
         }
@@ -62,6 +65,9 @@ public class BuchungConnector implements DbOperator {
     @Override
     public <T> T datenbankSuchNachId(int id) {
         try (Session session = JDBCConnector.getSession()) {
+            if (id <= 0) {
+                throw new HotelException("Die ID muss größer als 0 sein.");
+            }
             session.getTransaction().begin();
             Buchung buchung = session.find(Buchung.class, id);
             session.getTransaction().commit();
@@ -83,7 +89,7 @@ public class BuchungConnector implements DbOperator {
             String queryString = "DELETE FROM Zimmer";
             Query query = session.createQuery(queryString, Buchung.class);
             int geloeschteBuchung = query.executeUpdate();
-            System.out.println(geloeschteBuchung + " Buchung erfolgreich gelöscht.");
+            System.out.println(geloeschteBuchung + " Buchung erfolgreich gelöscht");
             session.getTransaction().commit();
         } catch (Exception e) {
             e.printStackTrace();
@@ -99,6 +105,9 @@ public class BuchungConnector implements DbOperator {
     @Override
     public void datenbankLoeschNachId(int id) {
         try (Session session = JDBCConnector.getSession()) {
+            if (id <= 0) {
+                throw new HotelException("Die ID muss größer als 0 sein.");
+            }
             session.getTransaction().begin();
             Buchung buchung = session.find(Buchung.class, id);
             if (buchung != null) {
@@ -122,8 +131,13 @@ public class BuchungConnector implements DbOperator {
 
     @Override
     public void datenbankAktualisieren(Object object) {
-
         try (Session session = JDBCConnector.getSession()) {
+            if (object == null) {
+                throw new HotelException("Buchung existiert nicht");
+            }
+            if (!(object instanceof Buchung)) {
+                throw new HotelException("Das Objekt ist kein Buchung");
+            }
             Buchung buchung = (Buchung) object;
             session.getTransaction().begin();
             session.merge(buchung);
@@ -133,14 +147,20 @@ public class BuchungConnector implements DbOperator {
         }
     }
 
+    /**
+     * @param buchungId Das id zum suchen
+     * @return Das gefundene id
+     */
     public int getRechnungIdForBuchung(int buchungId) {
         try (Session session = JDBCConnector.getSession()) {
+            if (buchungId <= 0) {
+                throw new HotelException("Die ID muss größer als 0 sein.");
+            }
             session.getTransaction().begin();
-            String queryString = "SELECT rechnung_id FROM buchung WHERE buchung_id";
+            String queryString = "SELECT b.rechnung.rechnungsID FROM Buchung b WHERE b.BuchungID = :buchungId";
             Query query = session.createQuery(queryString, Buchung.class);
             query.setParameter("buchungId", buchungId);
-            Integer rechnungId = (Integer) query.getSingleResult();
-            int rechnungId1 = rechnungId;
+            int rechnungId = (Integer) query.getSingleResult();
             session.getTransaction().commit();
             return rechnungId;
         } catch (Exception e) {

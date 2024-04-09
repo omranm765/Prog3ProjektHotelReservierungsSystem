@@ -159,7 +159,7 @@ public class Hotel {
         return buchungConnector.datenbankSuchNachId(buchungId);
     }
 
-    public static Rechnung getRechnungById(int rechnungId) {
+    public static Rechnung getRechnungById(int rechnungId) throws HotelException {
         RechnungConnector rechnungConnector = new RechnungConnector();
         return rechnungConnector.datenbankSuchNachId(rechnungId);
     }

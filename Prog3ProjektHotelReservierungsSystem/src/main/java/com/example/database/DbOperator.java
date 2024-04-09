@@ -12,7 +12,7 @@ public interface DbOperator {
     public void datenbankErstellen (Object object) throws HotelException;
 
     public List<?> datenbankSuchAlles();
-    public <T> T datenbankSuchNachId  (int id);
+    public <T> T datenbankSuchNachId  (int id) throws HotelException;
 
     public void datenbankLoeschAlles();
     public void datenbankLoeschNachId(int id);

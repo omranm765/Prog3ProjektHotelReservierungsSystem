@@ -64,6 +64,9 @@ public class PersonConnector implements DbOperator {
     @Override
     public <T> T datenbankSuchNachId(int id) {
         try (Session session = JDBCConnector.getSession()) {
+            if (id <= 0) {
+                throw new HotelException("Die ID muss größer als 0 sein.");
+            }
             session.getTransaction().begin();
             Person person = session.find(Person.class, id);
             session.getTransaction().commit();
@@ -72,7 +75,7 @@ public class PersonConnector implements DbOperator {
         } catch (Exception e) {
             e.printStackTrace();
         }
-        return null;//TODO niemals null zurück KEINE UMLAUTE
+        return null;
     }
 
     /**
@@ -100,6 +103,9 @@ public class PersonConnector implements DbOperator {
     @Override
     public void datenbankLoeschNachId(int id) {
         try (Session session = JDBCConnector.getSession()) {
+            if (id <= 0) {
+                throw new HotelException("Die ID muss größer als 0 sein.");
+            }
             session.getTransaction().begin();
             Person person = session.find(Person.class, id);
             if (person != null) {
@@ -122,8 +128,13 @@ public class PersonConnector implements DbOperator {
      */
     @Override
     public void datenbankAktualisieren(Object object) {
-
         try (Session session = JDBCConnector.getSession()) {
+            if (object == null){
+                throw new HotelException("Person existiert nicht");
+            }
+            if (!(object instanceof Person)) {
+                throw new HotelException("Das Objekt ist kein Person");
+            }
             Person person = (Person) object;
             session.getTransaction().begin();
             session.merge(person);
