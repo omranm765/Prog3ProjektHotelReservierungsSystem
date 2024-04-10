@@ -4,7 +4,6 @@ import com.example.database.BuchungConnector;
 import com.example.prog3projekthotelreservierungssystem.Buchung;
 import com.example.prog3projekthotelreservierungssystem.Hotel;
 import com.example.prog3projekthotelreservierungssystem.HotelException;
-import com.example.prog3projekthotelreservierungssystem.Zimmer;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
@@ -12,7 +11,6 @@ import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
-import javafx.scene.control.Button;
 import javafx.scene.control.ChoiceBox;
 import javafx.scene.control.ListView;
 import javafx.stage.Modality;
@@ -83,7 +81,7 @@ public class DashboardController {
     @FXML
     public void onClickAddBuchung(ActionEvent actionEvent) throws IOException {
         String windowTitle = "Add Room";
-        URL fxmlName = getClass().getResource("/com/example/prog3projekthotelreservierungssystem/newBooking.fxml");
+        URL fxmlName = getClass().getResource("/com/example/prog3projekthotelreservierungssystem/addBuchung.fxml");
         FXMLLoader fxmlLoader = new FXMLLoader(fxmlName);
         Parent root = fxmlLoader.load();
 

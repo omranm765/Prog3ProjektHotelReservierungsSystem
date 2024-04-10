@@ -19,17 +19,17 @@
                      </font>
                   </Label>
                   <Label />
-                  <Button fx:id="Buchung" mnemonicParsing="false" onAction="#onClickOpenBuchungDashboard" prefHeight="59.0" prefWidth="211.0" style="-fx-background-color: grey;" text="Buchungen">
+                  <Button mnemonicParsing="false" onAction="#onClickOpenBuchungDashboard" prefHeight="59.0" prefWidth="211.0" style="-fx-background-color: grey;" text="Buchungen">
                      <font>
                         <Font size="18.0" />
                      </font>
                   </Button>
-                  <Button fx:id="Zimmer" mnemonicParsing="false" onAction="#onClickOpenZimmerDashboard" prefHeight="59.0" prefWidth="211.0" style="-fx-background-color: grey;" text="Zimmer">
+                  <Button mnemonicParsing="false" onAction="#onClickOpenZimmerDashboard" prefHeight="59.0" prefWidth="211.0" style="-fx-background-color: grey;" text="Zimmer">
                      <font>
                         <Font size="18.0" />
                      </font>
                   </Button>
-                  <Button fx:id="Gäste" mnemonicParsing="false" onAction="#onClickOpenGuestDashboard" prefHeight="59.0" prefWidth="211.0" style="-fx-background-color: grey;" text="Gäste">
+                  <Button mnemonicParsing="false" onAction="#onClickOpenGuestDashboard" prefHeight="59.0" prefWidth="211.0" style="-fx-background-color: grey;" text="Gäste">
                      <font>
                         <Font size="18.0" />
                      </font>

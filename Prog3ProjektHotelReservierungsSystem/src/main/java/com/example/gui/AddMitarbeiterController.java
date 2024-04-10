@@ -8,6 +8,7 @@ import javafx.scene.control.Button;
 import javafx.scene.control.DatePicker;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
+import javafx.stage.Stage;
 
 public class AddMitarbeiterController {
     @FXML
@@ -26,6 +27,8 @@ public class AddMitarbeiterController {
     private TextField telefonNrTxtfield;
     @FXML
     private Label errorLabel;
+    private MitarbeiterController mitarbeiterController;
+    private Stage stage;
 
     @FXML
     void onClickAddMitarbeiter(ActionEvent event) throws HotelException {
@@ -41,5 +44,13 @@ public class AddMitarbeiterController {
         Person mitarbeiter = new Mitarbeiter(firstName, lastName, email, geburtsdatum,
                 telefonNr);
         Hotel.mitarbeiterHinzufuegen(mitarbeiter);
+    }
+
+    public void setStage(Stage stage) {
+        this.stage = stage;
+    }
+
+    public void setMitarbeiterController(MitarbeiterController mitarbeiterController) {
+        this.mitarbeiterController = mitarbeiterController;
     }
 }

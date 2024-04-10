@@ -22,8 +22,8 @@ public class GuestsController {
 
     @FXML
     void onClickAddGuest(ActionEvent event) throws IOException {
-        String windowTitle = "Add Room";
-        URL fxmlName = getClass().getResource("/com/example/prog3projekthotelreservierungssystem/addGuest.fxml");
+        String windowTitle = "Add Gast";
+        URL fxmlName = getClass().getResource("/com/example/prog3projekthotelreservierungssystem/addGast.fxml");
         FXMLLoader fxmlLoader = new FXMLLoader(fxmlName);
         Parent root = fxmlLoader.load();
 
@@ -35,7 +35,6 @@ public class GuestsController {
         AddGuestController addGuestController = fxmlLoader.getController();
         addGuestController.setStage(stage);
         addGuestController.setGuestsController(this);
-
         stage.showAndWait();
     }
 

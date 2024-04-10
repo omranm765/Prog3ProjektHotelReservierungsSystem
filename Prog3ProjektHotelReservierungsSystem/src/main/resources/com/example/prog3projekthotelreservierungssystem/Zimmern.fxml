@@ -6,13 +6,13 @@
 
 <AnchorPane prefHeight="518.0" prefWidth="705.0" style="-fx-background-color: #C39746;" xmlns="http://javafx.com/javafx/17.0.2-ea" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.gui.RoomsController">
     <children>
-        <Text layoutX="57.0" layoutY="53.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Rooms">
+        <Text layoutX="57.0" layoutY="53.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Zimmern">
             <font>
                 <Font size="16.0" />
             </font>
         </Text>
         <ListView fx:id="listView" layoutX="48.0" layoutY="90.0" prefHeight="363.0" prefWidth="622.0" />
-      <Button layoutX="48.0" layoutY="469.0" mnemonicParsing="false" onAction="#onClickAddRoom" prefHeight="26.0" prefWidth="78.0" style="-fx-cursor: HAND;" text="Add Room" />
-      <Button layoutX="245.0" layoutY="469.0" mnemonicParsing="false" onAction="#onClickDeleteRoom" prefHeight="26.0" prefWidth="78.0" text="Delete" />
+      <Button layoutX="48.0" layoutY="469.0" mnemonicParsing="false" onAction="#onClickAddRoom" prefHeight="26.0" prefWidth="87.0" style="-fx-cursor: HAND;" text="Add Zimmer" />
+      <Button layoutX="245.0" layoutY="469.0" mnemonicParsing="false" onAction="#onClickDeleteRoom" prefHeight="26.0" prefWidth="78.0" text="Löschen" />
     </children>
 </AnchorPane>

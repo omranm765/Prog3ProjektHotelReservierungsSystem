@@ -5,11 +5,7 @@ import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
-import javafx.scene.Scene;
-import javafx.scene.control.Button;
 import javafx.scene.layout.BorderPane;
-import javafx.stage.Modality;
-import javafx.stage.Stage;
 
 import java.io.IOException;
 import java.net.URL;
@@ -27,7 +23,7 @@ public class MainController {
 
     @FXML
     void onClickOpenGuestDashboard(ActionEvent event) throws IOException {
-        URL fxmlName = getClass().getResource("/com/example/prog3projekthotelreservierungssystem/Guests.fxml");
+        URL fxmlName = getClass().getResource("/com/example/prog3projekthotelreservierungssystem/Gaeste.fxml");
         FXMLLoader fxmlLoader = new FXMLLoader(fxmlName);
         Parent node = fxmlLoader.load();
         guestsController = fxmlLoader.getController();
@@ -48,7 +44,7 @@ public class MainController {
 
     @FXML
     void onClickOpenZimmerDashboard(ActionEvent event) throws IOException {
-        URL fxmlName = getClass().getResource("/com/example/prog3projekthotelreservierungssystem/Rooms.fxml");
+        URL fxmlName = getClass().getResource("/com/example/prog3projekthotelreservierungssystem/Zimmern.fxml");
         FXMLLoader fxmlLoader = new FXMLLoader(fxmlName);
         Parent node = fxmlLoader.load();
         roomsController = fxmlLoader.getController();

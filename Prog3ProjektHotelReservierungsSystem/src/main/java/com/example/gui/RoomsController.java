@@ -10,8 +10,6 @@ import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
-import javafx.scene.control.Button;
-import javafx.scene.control.ChoiceBox;
 import javafx.scene.control.ListView;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
@@ -26,7 +24,7 @@ public class RoomsController {
     @FXML
     void onClickAddRoom(ActionEvent event) throws IOException {
         String windowTitle = "Add Room";
-        URL fxmlName = getClass().getResource("/com/example/prog3projekthotelreservierungssystem/addRoom.fxml");
+        URL fxmlName = getClass().getResource("/com/example/prog3projekthotelreservierungssystem/addZimmer.fxml");
         FXMLLoader fxmlLoader = new FXMLLoader(fxmlName);
         Parent root = fxmlLoader.load();
 
