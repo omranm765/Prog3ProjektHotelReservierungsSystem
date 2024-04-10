@@ -90,10 +90,10 @@ public class DashboardController {
         stage.setTitle(windowTitle);
         stage.setScene(new Scene(root));
 
-        NewBookingController newBookingController = fxmlLoader.getController();
-        newBookingController.setStage(stage);
-        newBookingController.fillRoomChoiceBox();
-        newBookingController.setDashboardController(this);
+        AddBuchungController addBuchungController = fxmlLoader.getController();
+        addBuchungController.setStage(stage);
+        addBuchungController.fillRoomChoiceBox();
+        addBuchungController.setDashboardController(this);
 
         stage.showAndWait();
     }

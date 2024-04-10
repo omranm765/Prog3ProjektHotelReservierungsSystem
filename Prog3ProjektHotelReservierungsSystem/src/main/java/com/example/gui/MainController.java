@@ -15,9 +15,9 @@ public class MainController {
     @FXML
     private BorderPane borderpane;
     @FXML
-    private RoomsController roomsController;
+    private ZimmerController zimmerController;
     @FXML
-    private GuestsController guestsController;
+    private GaesteController gaesteController;
     @FXML
     private DashboardController dashboardController;
 
@@ -26,8 +26,8 @@ public class MainController {
         URL fxmlName = getClass().getResource("/com/example/prog3projekthotelreservierungssystem/Gaeste.fxml");
         FXMLLoader fxmlLoader = new FXMLLoader(fxmlName);
         Parent node = fxmlLoader.load();
-        guestsController = fxmlLoader.getController();
-        guestsController.updateListView(Hotel.getAllGasts());
+        gaesteController = fxmlLoader.getController();
+        gaesteController.updateListView(Hotel.getAllGasts());
         borderpane.setCenter(node);
     }
 
@@ -47,8 +47,8 @@ public class MainController {
         URL fxmlName = getClass().getResource("/com/example/prog3projekthotelreservierungssystem/Zimmern.fxml");
         FXMLLoader fxmlLoader = new FXMLLoader(fxmlName);
         Parent node = fxmlLoader.load();
-        roomsController = fxmlLoader.getController();
-        roomsController.updateListView(Hotel.getAllZimmer());
+        zimmerController = fxmlLoader.getController();
+        zimmerController.updateListView(Hotel.getAllZimmer());
         borderpane.setCenter(node);
     }
     @FXML

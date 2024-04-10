@@ -56,10 +56,10 @@ public class MitarbeiterController {
                 Hotel.GastEntfernen(selectedPerson);
                 updateListView(Hotel.getAllGasts());
             } else {
-                System.out.println("Bitte wählen Sie ein Gast zum Löschen aus.");
+                System.out.println("Bitte wählen Sie ein Mitarbeiter zum Löschen aus.");
             }
         } catch (HotelException e) {
-            System.out.println("Fehler beim Löschen des Gasts: " + e.getMessage());
+            System.out.println("Fehler beim Löschen des Mitarbeiter: " + e.getMessage());
         }
     }
 

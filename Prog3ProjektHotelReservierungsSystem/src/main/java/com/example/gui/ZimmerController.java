@@ -18,12 +18,12 @@ import java.io.IOException;
 import java.net.URL;
 import java.util.List;
 
-public class RoomsController {
+public class ZimmerController {
     @FXML
     private ListView<Zimmer> listView;
     @FXML
     void onClickAddRoom(ActionEvent event) throws IOException {
-        String windowTitle = "Add Room";
+        String windowTitle = "Add Zimmer";
         URL fxmlName = getClass().getResource("/com/example/prog3projekthotelreservierungssystem/addZimmer.fxml");
         FXMLLoader fxmlLoader = new FXMLLoader(fxmlName);
         Parent root = fxmlLoader.load();
@@ -33,9 +33,9 @@ public class RoomsController {
         stage.setTitle(windowTitle);
         stage.setScene(new Scene(root));
 
-        AddRoomController addRoomController = fxmlLoader.getController();
-        addRoomController.setStage(stage);
-        addRoomController.setRoomsController(this);
+        AddZimmerController addZimmerController = fxmlLoader.getController();
+        addZimmerController.setStage(stage);
+        addZimmerController.setRoomsController(this);
 
         stage.showAndWait();
     }

@@ -16,7 +16,7 @@ import java.io.IOException;
 import java.net.URL;
 import java.util.List;
 
-public class GuestsController {
+public class GaesteController {
     @FXML
     private ListView<Person> listView;
 
@@ -32,9 +32,9 @@ public class GuestsController {
         stage.setTitle(windowTitle);
         stage.setScene(new Scene(root));
 
-        AddGuestController addGuestController = fxmlLoader.getController();
-        addGuestController.setStage(stage);
-        addGuestController.setGuestsController(this);
+        AddGastController addGastController = fxmlLoader.getController();
+        addGastController.setStage(stage);
+        addGastController.setGuestsController(this);
         stage.showAndWait();
     }
 

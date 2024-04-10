@@ -1,0 +1,114 @@
+@font-face {
+    -fx-font-family: "Roboto";
+    src: url('../../../../../../src/main/resources/com/example/prog3projekthotelreservierungssystem/fonts/Roboto-Regular.ttf');
+}
+
+.root {
+    -fx-background-color: #ffffff;
+    -fx-border-radius: 10px;
+    -fx-background-radius: 10px;
+    -fx-font-family: 'Roboto';
+}
+
+.modal-title {
+    -fx-font-family: 'Roboto';
+    -fx-font-size: 26px;
+    -fx-font-weight: bold;
+}
+
+.input {
+    -fx-border-color: gray;
+    -fx-border-style: solid;
+    -fx-border-width: 1px;
+    -fx-border-radius: 5px;
+    -fx-padding: 5px 10px;
+    -fx-font-size: 13px;
+    -fx-border-width: 1;
+    -fx-border-color: #b0afac;
+    -fx-border-radius: 5px;
+}
+
+.birth-input {
+   -fx-border-width: 1;
+   -fx-border-color: #b0afac;
+   -fx-border-radius: 5px;
+   -fx-cursor: HAND;
+}
+
+.select {
+   -fx-cursor: HAND;
+   -fx-padding: 2px 4px;
+   -fx-border-width: 1;
+   -fx-border-color: #b0afac;
+   -fx-border-radius: 5px;
+   -fx-background-color: transparent;
+}
+
+.add-btn {
+   -fx-background-color: #0261fa;
+   -fx-cursor: HAND;
+   -fx-padding: 7px 18px;
+   -fx-border-radius: 5px;
+   -fx-text-fill: white;
+   -fx-font-size: 19px;
+}
+
+.add-btn:hover {
+   -fx-background-color: #13479c;
+}
+
+.hotel-title {
+   -fx-text-fill: black;
+   -fx-text-alignment: center;
+   -fx-font-family: "Roboto"
+}
+
+.menu {
+   -fx-background-color: #f3f3f3;
+   -fx-border-color: #d7dbd8;
+   -fx-border-width: 0 2 0 0;
+}
+
+.menu-btn {
+   -fx-background-color: transparent;
+   -fx-text-fill: black;
+   -fx-font-weight: bold;
+   -fx-font-size: 19px;
+   -fx-border-color: #d7dbd8;
+   -fx-border-width: 0 0 1 0;
+   -fx-cursor: HAND;
+}
+
+.menu-btn:hover {
+   -fx-text-fill: #0261fa;
+}
+
+.menu-btn-active {
+   -fx-text-fill: white !important;
+   -fx-background-color: #0261fa !important;
+   -fx-border-color: #0261fa !important;
+}
+
+.cancel-btn {
+   -fx-background-color: red;
+   -fx-text-fill: white;
+   -fx-font-size: 15px;
+   -fx-padding: 4px 10px;
+   -fx-cursor: HAND;
+}
+
+.cancel-btn:hover {
+   -fx-background-color: #cf0007;
+}
+
+.dashboard-btn {
+    -fx-background-color: #0261fa;
+    -fx-text-fill: white;
+    -fx-font-size: 15px;
+    -fx-padding: 4px 10px;
+    -fx-cursor: HAND;
+}
+
+.dashboard-btn:hover {
+   -fx-background-color: #0049bf;
+}

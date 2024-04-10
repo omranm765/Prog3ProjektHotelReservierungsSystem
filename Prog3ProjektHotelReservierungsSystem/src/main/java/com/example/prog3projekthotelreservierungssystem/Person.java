@@ -145,7 +145,7 @@ public abstract class Person {
      * @return Eine String-Repräsentation der Person.
      */
     public String toString() {
-        return this.getClass().getSimpleName() +
+        return this.getClass().getSimpleName() + "\nId: " + id +
                 "\nName: " + vorname + " " + name + "\nGeburtsdatum: " + geburtsdatum
                 + "\nEmail: " + email
                 + "\nTelefonNr: " + telefonNr + "\n";

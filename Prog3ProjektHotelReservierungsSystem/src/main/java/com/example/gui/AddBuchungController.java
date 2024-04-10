@@ -1,6 +1,5 @@
 package com.example.gui;
 
-import com.example.database.PersonConnector;
 import com.example.prog3projekthotelreservierungssystem.*;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
@@ -13,7 +12,7 @@ import javafx.stage.Stage;
 import java.util.ArrayList;
 import java.util.List;
 
-public class NewBookingController {
+public class AddBuchungController {
 
 
     @FXML

@@ -37,7 +37,7 @@ public class LoadingPageController extends Application {
 
         anchorPane.getChildren().add(imageView);
 
-        stage.setTitle("Hotellaro");
+        stage.setTitle("Syria Hotel");
         stage.setScene(scene);
 
         stage.setMaximized(true);

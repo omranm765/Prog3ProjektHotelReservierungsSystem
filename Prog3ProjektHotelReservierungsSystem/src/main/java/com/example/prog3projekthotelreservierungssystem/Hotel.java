@@ -53,9 +53,15 @@ public class Hotel {
 
     public static void zimmerEntfernen(Zimmer zimmer) throws HotelException {
         Validator.check(zimmer == null, "Zimmer existiert nicht");
-        zimmern.remove(zimmer);
         ZimmerConnector zimmerConnector = new ZimmerConnector();
-        zimmerConnector.datenbankLoeschNachId(zimmer.getId());
+        List<Buchung> buchungen = zimmer.getBuchungen();
+        boolean isStorniert = buchungen.stream().anyMatch(Buchung::isStorniert);
+        if (isStorniert) {
+            zimmern.remove(zimmer);
+            zimmerConnector.datenbankLoeschNachId(zimmer.getId());
+        } else {
+            throw new HotelException("Das Zimmer kann nicht entfernt werden da eine Buchung nicht storniert ist.");
+        }
     }
 
     /**

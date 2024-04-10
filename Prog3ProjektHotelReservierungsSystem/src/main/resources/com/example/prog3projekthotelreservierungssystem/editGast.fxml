@@ -8,55 +8,51 @@
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
-<VBox maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="418.0" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.gui.EditGastController">
+<VBox maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="527.0" prefWidth="418.0" styleClass="root" stylesheets="@styles/style.css" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.gui.EditGastController">
     <children>
-        <AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="554.0" prefWidth="425.0" style="-fx-background-color: #C39746;">
+        <AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="528.0" prefWidth="425.0" styleClass="root">
             <children>
-                <Label layoutX="45.0" layoutY="23.0" text="Edit Guest">
+                <Label layoutX="153.0" layoutY="21.0" styleClass="modal-title" text="Edit Guest">
                     <font>
                         <Font size="25.0" />
                     </font>
                 </Label>
-                <Label layoutX="57.0" layoutY="86.0" text="First Name">
+                <Label layoutX="22.0" layoutY="86.0" text="First Name">
                     <font>
                         <Font size="14.0" />
                     </font>
                 </Label>
-                <Label layoutX="263.0" layoutY="86.0" text="Last Name">
+                <Label layoutX="245.0" layoutY="86.0" text="Last Name">
                     <font>
                         <Font size="14.0" />
                     </font>
                 </Label>
-                <Label layoutX="57.0" layoutY="181.0" text="Email">
+                <Label layoutX="22.0" layoutY="171.0" text="Email">
                     <font>
                         <Font size="14.0" />
                     </font>
                 </Label>
-                <Label layoutX="55.0" layoutY="285.0" text="Tel-number">
+                <Label layoutX="20.0" layoutY="264.0" text="Tel-number">
                     <font>
                         <Font size="14.0" />
                     </font>
                 </Label>
-                <TextField fx:id="lastNameTxtfield" layoutX="217.0" layoutY="130.0" promptText="Last Name" />
-                <TextField fx:id="emailTxtfield" layoutX="27.0" layoutY="230.0" promptText="name@example.com" />
-                <TextField fx:id="telefonNrTxtfield" layoutX="26.0" layoutY="324.0" promptText="Tel-number" />
-                <TextField fx:id="firstNameTxtfield" layoutX="27.0" layoutY="130.0" promptText="First Name" />
-                <Label layoutX="271.0" layoutY="181.0" text="B-date">
+                <TextField fx:id="lastNameTxtfield" layoutX="244.0" layoutY="118.0" prefHeight="25.0" prefWidth="164.0" promptText="Last Name" styleClass="input" />
+                <TextField fx:id="emailTxtfield" layoutX="20.0" layoutY="201.0" promptText="name@example.com" styleClass="input" />
+                <TextField fx:id="telefonNrTxtfield" layoutX="20.0" layoutY="295.0" prefHeight="31.0" prefWidth="168.0" promptText="Tel-number" styleClass="input" />
+                <TextField fx:id="firstNameTxtfield" layoutX="20.0" layoutY="118.0" promptText="First Name" styleClass="input" />
+                <Label layoutX="245.0" layoutY="171.0" text="B-date">
                     <font>
                         <Font size="14.0" />
                     </font>
                 </Label>
-                <DatePicker fx:id="dateChooser" layoutX="209.0" layoutY="230.0" />
-                <Button fx:id="saveChangesBtn" layoutX="98.0" layoutY="428.0" mnemonicParsing="false" onAction="#onClickSaveChanges" prefHeight="31.0" prefWidth="222.0" text="Save changes ">
+                <DatePicker fx:id="dateChooser" layoutX="245.0" layoutY="201.0" prefHeight="25.0" prefWidth="164.0" promptText="2024-03-01" styleClass="birth-input" />
+                <Button fx:id="saveChangesBtn" layoutX="98.0" layoutY="428.0" mnemonicParsing="false" onAction="#onClickSaveChanges" prefHeight="31.0" prefWidth="222.0" styleClass="add-btn" text="Save changes ">
                     <font>
                         <Font size="15.0" />
                     </font>
                 </Button>
             </children>
         </AnchorPane>
-        <Label fx:id="errorLabel" alignment="CENTER" layoutX="6.0" layoutY="77.0" prefHeight="18.0" prefWidth="406.0" textFill="#ff0900">
-            <font>
-                <Font size="16.0" />
-            </font></Label>
     </children>
 </VBox>

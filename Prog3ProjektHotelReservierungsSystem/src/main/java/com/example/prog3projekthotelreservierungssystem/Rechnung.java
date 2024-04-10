@@ -10,6 +10,8 @@ import java.time.LocalDate;
 @Table(name = "Rechnung")
 public class Rechnung {
 
+
+
     public enum Status{
         BEZAHLT, NICHT_BEZAHLT;
     }
@@ -92,5 +94,9 @@ public class Rechnung {
         result = (int) (temp ^ (temp >>> 32));
         result = 31 * result + (getErstellungsDatum() != null ? getErstellungsDatum().hashCode() : 0);
         return result;
+    }
+
+    public int getRechnungsID() {
+      return rechnungsID;
     }
 }

@@ -1,5 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<?import java.lang.Integer?>
+<?import javafx.collections.FXCollections?>
 <?import javafx.scene.control.Button?>
 <?import javafx.scene.control.ChoiceBox?>
 <?import javafx.scene.control.Label?>
@@ -7,40 +9,41 @@
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.text.Font?>
 
-<?import javafx.collections.FXCollections?>
-<?import java.lang.Integer?>
-<AnchorPane prefHeight="479.0" prefWidth="359.0" style="-fx-background-color: #C39746;" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.gui.AddRoomController">
+<AnchorPane prefHeight="479.0" prefWidth="426.0" styleClass="root" stylesheets="@styles/style.css" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.gui.AddZimmerController">
     <children>
-        <Label layoutX="30.0" layoutY="26.0" prefHeight="27.0" prefWidth="103.0" text="New Room">
+        <Label layoutX="142.0" layoutY="25.0" prefHeight="38.0" prefWidth="142.0" styleClass="modal-title" text="New Room">
             <font>
                 <Font size="18.0" />
             </font>
         </Label>
-        <Label layoutX="50.0" layoutY="83.0" prefHeight="17.0" prefWidth="88.0" text="RoomNr">
+        <Label layoutX="17.0" layoutY="80.0" prefHeight="20.0" prefWidth="67.0" text="RoomNr">
             <font>
                 <Font size="14.0" />
             </font>
         </Label>
-        <TextField fx:id="roomNrTxtfield" layoutX="40.0" layoutY="117.0" />
-        <Label layoutX="50.0" layoutY="168.0" text="Floor">
+        <TextField fx:id="roomNrTxtfield" layoutX="16.0" layoutY="110.0" prefHeight="25.0" prefWidth="164.0" promptText="1" styleClass="input" />
+        <Label layoutX="233.0" layoutY="80.0" prefHeight="20.0" prefWidth="32.0" text="Floor">
             <font>
                 <Font size="14.0" />
             </font>
         </Label>
-        <ChoiceBox fx:id="floorChoiceBox" layoutX="40.0" layoutY="200.0" prefWidth="150.0">
+        <ChoiceBox fx:id="floorChoiceBox" layoutX="233.0" layoutY="110.0" prefHeight="31.0" prefWidth="172.0" styleClass="select">
             <items>
                 <FXCollections fx:factory="observableArrayList">
                     <Integer fx:value="1" />
                     <Integer fx:value="2" />
                 </FXCollections>
             </items>
+            <value>
+                <Integer fx:value="1" />
+            </value>
         </ChoiceBox>
-        <Label layoutX="52.0" layoutY="247.0" text="Area">
+        <Label layoutX="17.0" layoutY="178.0" text="Area">
             <font>
                 <Font size="14.0" />
             </font>
         </Label>
-        <ChoiceBox fx:id="areaChoicheBox" layoutX="40.0" layoutY="279.0" prefWidth="150.0">
+        <ChoiceBox fx:id="areaChoicheBox" layoutX="16.0" layoutY="207.0" prefHeight="20.0" prefWidth="164.0" styleClass="select">
             <items>
                 <FXCollections fx:factory="observableArrayList">
                     <Integer fx:value="50" />
@@ -48,17 +51,16 @@
                     <Integer fx:value="200" />
                 </FXCollections>
             </items>
+            <value>
+                <Integer fx:value="50" />
+            </value>
         </ChoiceBox>
-        <Label layoutX="38.0" layoutY="350.0" text="Cost">
+        <Label layoutX="235.0" layoutY="178.0" text="Cost">
             <font>
                 <Font size="14.0" />
             </font>
         </Label>
-        <TextField fx:id="costTxtfield" layoutX="82.0" layoutY="348.0" promptText="price per night" />
-        <Button fx:id="addRoomBtn" layoutX="66.0" layoutY="425.0" mnemonicParsing="false" onAction="#onClickAddRoom" prefHeight="25.0" prefWidth="207.0" text="add Room" />
-        <Label fx:id="errorLabel" alignment="CENTER" layoutX="6.0" layoutY="77.0" prefHeight="18.0" prefWidth="406.0" textFill="#ff0900">
-            <font>
-                <Font size="16.0" />
-            </font></Label>
+        <TextField fx:id="costTxtfield" layoutX="235.0" layoutY="207.0" prefHeight="25.0" prefWidth="172.0" promptText="price per night" styleClass="input" />
+        <Button fx:id="addRoomBtn" layoutX="110.0" layoutY="398.0" mnemonicParsing="false" onAction="#onClickAddRoom" prefHeight="25.0" prefWidth="207.0" styleClass="add-btn" text="Add Room" />
     </children>
 </AnchorPane>

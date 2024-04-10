@@ -2,7 +2,6 @@ package com.example.gui;
 
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
-import javafx.scene.control.Button;
 import javafx.scene.control.DatePicker;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
@@ -10,9 +9,7 @@ import com.example.prog3projekthotelreservierungssystem.*;
 import com.example.prog3projekthotelreservierungssystem.Hotel;
 import javafx.stage.Stage;
 
-import java.io.IOException;
-
-public class AddGuestController {
+public class AddGastController {
 
 
     @FXML
@@ -30,7 +27,7 @@ public class AddGuestController {
     @FXML
     private TextField telefonNrTxtfield;
     private Stage stage;
-    private GuestsController guestsController;
+    private GaesteController gaesteController;
     @FXML
     private Label errorLabel;
 
@@ -45,7 +42,7 @@ public class AddGuestController {
         );
 
         Hotel.gastHinzufuegen(guest);
-        guestsController.updateListView(Hotel.getAllGasts());
+        gaesteController.updateListView(Hotel.getAllGasts());
         stage.close();
     }
 
@@ -53,7 +50,7 @@ public class AddGuestController {
         this.stage = stage;
     }
 
-    public void setGuestsController(GuestsController guestsController) {
-        this.guestsController = guestsController;
+    public void setGuestsController(GaesteController gaesteController) {
+        this.gaesteController = gaesteController;
     }
 }

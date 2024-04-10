@@ -11,14 +11,14 @@
 
 <VBox maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="679.0" prefWidth="1025.0" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.gui.GastsDashboardController">
     <children>
-        <AnchorPane prefHeight="685.0" prefWidth="1332.0" style="-fx-background-color: C39746;">
+        <AnchorPane prefHeight="679.0" prefWidth="1034.0" stylesheets="@styles/style.css">
             <children>
-                <Text layoutX="14.0" layoutY="38.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Guests">
+                <Text layoutX="16.0" layoutY="38.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Guests">
                     <font>
                         <Font size="22.0" />
                     </font>
                 </Text>
-                <TableView fx:id="tabelView" layoutX="7.0" layoutY="57.0" prefHeight="480.0" prefWidth="1016.0">
+                <TableView fx:id="tabelView" layoutX="16.0" layoutY="57.0" prefHeight="480.0" prefWidth="989.0">
                     <columns>
                         <TableColumn fx:id="nameColumn" prefWidth="143.0" text="Name" />
                         <TableColumn fx:id="lastNameColumn" prefWidth="197.0" text="Last Name" />
@@ -27,18 +27,18 @@
                         <TableColumn fx:id="birthdateColumn" prefWidth="185.0" text="Birth Date" />
                     </columns>
                 </TableView>
-                <Button fx:id="addGuestBtn" layoutX="14.0" layoutY="559.0" mnemonicParsing="false" onAction="#onClickaddGuest" text="Add Guest">
+                <Button fx:id="addGuestBtn" layoutX="14.0" layoutY="559.0" mnemonicParsing="false" onAction="#onClickaddGuest" prefHeight="31.0" prefWidth="96.0" styleClass="dashboard-btn" text="Add Guest">
                     <font>
                         <Font size="15.0" />
                     </font>
                 </Button>
-                <Button fx:id="editGuestBtn" layoutX="145.0" layoutY="559.0" mnemonicParsing="false" onAction="#onClickEditGuest" text="Edit Guest">
+                <Button fx:id="editGuestBtn" layoutX="145.0" layoutY="559.0" mnemonicParsing="false" onAction="#onClickEditGuest" prefHeight="31.0" prefWidth="96.0" styleClass="dashboard-btn" text="Edit Guest">
                     <font>
                         <Font size="15.0" />
                     </font>
                 </Button>
-                <TextField fx:id="firstNameTxtfield" layoutX="838.0" layoutY="16.0" promptText="First Name" />
-                <Text layoutX="762.0" layoutY="36.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Search">
+                <TextField fx:id="firstNameTxtfield" layoutX="827.0" layoutY="16.0" prefHeight="31.0" prefWidth="180.0" promptText="First Name" styleClass="input" />
+                <Text layoutX="752.0" layoutY="40.0" strokeType="OUTSIDE" strokeWidth="0.0" style="-fx-font-size: 21px; -fx-font-family: Roboto;" text="Search:">
                     <font>
                         <Font size="22.0" />
                     </font>

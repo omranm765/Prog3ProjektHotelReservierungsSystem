@@ -70,10 +70,14 @@ public class Buchung {
             System.err.println("Buchung ist nicht gültig für Rechnungserstellung.");
             return;
         }
-        BuchungConnector buchungConnector = new BuchungConnector();
+        /*BuchungConnector buchungConnector = new BuchungConnector();
         int rechnungID = buchungConnector.getRechnungIdForBuchung(this.getBuchungID());
         RechnungConnector rechnungConnector = new RechnungConnector();
-        Rechnung rechnung1 = rechnungConnector.datenbankSuchNachId(rechnungID);
+        Rechnung rechnung1 = rechnungConnector.datenbankSuchNachId(rechnungID);*/
+
+
+        Rechnung rechnung1 = this.getRechnung();
+        int rechnungID = rechnung1.getRechnungsID();
 
         StringBuilder sb = new StringBuilder();
 

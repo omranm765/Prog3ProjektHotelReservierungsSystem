@@ -1,0 +1,9 @@
+Kunde: Gast
+Id: 1
+Name: Mhd Omran Alrahban
+Geburtsdatum: 2001-01-01
+Email: omran@gmail.com
+TelefonNr: 1234
+Rechnungsnummer: 10
+Buchungsdatum: 2024-04-10
+Betrag: 5.0 EUR

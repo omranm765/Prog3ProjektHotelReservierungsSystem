@@ -1,8 +1,6 @@
 package com.example.gui;
 
 import com.example.prog3projekthotelreservierungssystem.Hotel;
-import com.example.prog3projekthotelreservierungssystem.HotelException;
-import com.example.prog3projekthotelreservierungssystem.Validator;
 import com.example.prog3projekthotelreservierungssystem.Zimmer;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
@@ -12,9 +10,7 @@ import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
 import javafx.stage.Stage;
 
-import static java.lang.Double.parseDouble;
-
-public class AddRoomController {
+public class AddZimmerController {
 
     @FXML
     private Button addRoomBtn;
@@ -31,7 +27,7 @@ public class AddRoomController {
     @FXML
     private TextField roomNrTxtfield;
     private Stage stage;
-    private RoomsController roomsController;
+    private ZimmerController zimmerController;
     @FXML
     private Label errorLabel;
 
@@ -53,7 +49,7 @@ public class AddRoomController {
             Zimmer zimmer = new Zimmer(roomNr, floorChoiceBox.getValue(), area, price);
 
             Hotel.zimmerHinzufuegen(zimmer);
-            roomsController.updateListView(Hotel.getAllZimmer());
+            zimmerController.updateListView(Hotel.getAllZimmer());
             stage.close();
 
         } catch (NumberFormatException e) {
@@ -65,7 +61,7 @@ public class AddRoomController {
         this.stage = stage;
     }
 
-    public void setRoomsController(RoomsController roomsController) {
-        this.roomsController = roomsController;
+    public void setRoomsController(ZimmerController zimmerController) {
+        this.zimmerController = zimmerController;
     }
 }
