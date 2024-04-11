@@ -1,10 +1,10 @@
 package com.example.prog3projekthotelreservierungssystem;
 
 import com.example.database.*;
+import javafx.scene.control.Alert;
 
 import java.time.LocalDate;
 import java.util.ArrayList;
-import java.util.LinkedList;
 import java.util.List;
 
 /**
@@ -28,13 +28,15 @@ public class Hotel {
         gaeste = new ArrayList<>();
     }
 
+    //Da die meisten Methoden Static sind
     static {
         zimmern = new ArrayList<>();
         mitarbeitern = new ArrayList<>();
         gaeste = new ArrayList<>();
     }
+
     /**
-     * Fügt ein Zimmer zur Liste der Hotelzimmer hinzu.
+     * Fügt ein Zimmer zur Liste der Hotelzimmer und im Datenbank hinzu.
      *
      * @param zimmer Das hinzuzufügende Zimmer.
      * @throws HotelException Wenn das Zimmer nicht existiert.
@@ -43,7 +45,7 @@ public class Hotel {
         Validator.check(zimmer == null, "Zimmer existiert nicht");
         ZimmerConnector zimmerConnector = new ZimmerConnector();
         List<Zimmer> tempZimmer = zimmerConnector.datenbankSuchAlles();
-        for (Zimmer z: tempZimmer){
+        for (Zimmer z : tempZimmer) {
             Validator.check(z.getZimmerNr() == zimmer.getZimmerNr(),
                     "Es existiert bereits ein Zimmer mit diesen ZimmerNr");
         }
@@ -51,16 +53,43 @@ public class Hotel {
         zimmerConnector.datenbankErstellen(zimmer);
     }
 
+    /**
+     * Entfernt der Zimmer aus der Liste sowie der Datenbank
+     *
+     * @param zimmer Das zu entfernende Zimmer.
+     * @throws HotelException Wenn das Zimmer nicht existiert.
+     */
     public static void zimmerEntfernen(Zimmer zimmer) throws HotelException {
-        Validator.check(zimmer == null, "Zimmer existiert nicht");
-        ZimmerConnector zimmerConnector = new ZimmerConnector();
-        List<Buchung> buchungen = zimmer.getBuchungen();
-        boolean isStorniert = buchungen.stream().anyMatch(Buchung::isStorniert);
-        if (isStorniert) {
+        try {
+            Validator.check(zimmer == null, "Zimmer existiert nicht");
+
+            BuchungConnector buchungConnector = new BuchungConnector();
+            List<Buchung> buchungen = buchungConnector.datenbankSuchAlles();
+            for (Buchung buchung : buchungen) {
+                if (buchung.getZimmer() != null) {
+                    if (buchung.getZimmer().getId() == zimmer.getId()) {
+                        /*if statements getrennt, weil wir hier ein problem beim debuggen hatten.
+                        problem war in der Klasse Zimmer bei der id annotation,
+                        und zwar zimmerid war auf referencedColumnName = "buchung_id" gesetzt und
+                        dürfte deswegen nicht löschen, was uns verrückt gemacht hat🥲
+                        wir lassen es getrennt zur sicherheit 😅*/
+                        if (buchung.isStorniert()) {
+                            buchung.setZimmer(null);
+                            //buchung.setZimmerNr(-1); unnötig weil man weiß sonst nicht was storniert wurde
+                            buchungConnector.datenbankAktualisieren(buchung);
+                        }
+                    }
+                }
+            }
+            ZimmerConnector zimmerConnector = new ZimmerConnector();
             zimmern.remove(zimmer);
             zimmerConnector.datenbankLoeschNachId(zimmer.getId());
-        } else {
-            throw new HotelException("Das Zimmer kann nicht entfernt werden da eine Buchung nicht storniert ist.");
+        } catch (HotelException e) {
+            Alert alert = new Alert(Alert.AlertType.WARNING);
+            alert.setTitle("Warning");
+            alert.setHeaderText(null);
+            alert.setContentText("Die Buchung ist nicht storniert");
+            alert.showAndWait();
         }
     }
 
@@ -77,11 +106,49 @@ public class Hotel {
         personConnector.datenbankErstellen(gast);
     }
 
+    /**
+     * Entfernt den Gast aus der Liste sowie der Datenbank
+     *
+     * @param gast Das hinzuzufügende Zimmer.
+     * @throws HotelException Wenn der Gast nicht existiert.
+     */
     public static void GastEntfernen(Person gast) throws HotelException {
-        Validator.check(gast == null, "Zimmer existiert nicht");
-        zimmern.remove(gast);
+        try {
+            Validator.check(gast == null, "Gast existiert nicht");
+            BuchungConnector buchungConnector = new BuchungConnector();
+            List<Buchung> buchungen = buchungConnector.datenbankSuchAlles();
+            for (Buchung buchung : buchungen) {
+                if (!buchung.isStorniert()) {
+                    throw new HotelException("Die Buchung ist nicht storniert");
+                }
+                if (buchung.getGast() != null && buchung.getGast().equals(gast) && buchung.isStorniert()) {
+                    buchung.setGast(null);
+                    buchungConnector.datenbankAktualisieren(buchung);
+                }
+            }
+            PersonConnector personConnector = new PersonConnector();
+            gaeste.remove(gast);
+            personConnector.datenbankLoeschNachId(gast.getId());
+        } catch (HotelException e) {
+            Alert alert = new Alert(Alert.AlertType.WARNING);
+            alert.setTitle("Warning");
+            alert.setHeaderText(null);
+            alert.setContentText(e.getMessage());
+            alert.showAndWait();
+        }
+    }
+
+    public static void gastAendern(Person gast, String neuerVorname, String neuerNachname,
+                                   String neueEmail, LocalDate neuesGeburtsdatum,
+                                   String neueTelefonNr) throws HotelException {
+        Validator.check(gast == null, "Gast existiert nicht");
+        gast.setVorname(neuerVorname);
+        gast.setName(neuerNachname);
+        gast.setEmail(neueEmail);
+        gast.setGeburtsdatum(neuesGeburtsdatum);
+        gast.setTelefonNr(neueTelefonNr);
         PersonConnector personConnector = new PersonConnector();
-        personConnector.datenbankLoeschNachId(gast.getId());
+        personConnector.datenbankAktualisieren(gast);
     }
 
     /**
@@ -112,6 +179,12 @@ public class Hotel {
         return new Buchung(gast, buchungDatumBeginn, buchungDatumEnde, zimmerNr);
     }
 
+    /**
+     * Fügt der Zimmer zur der Liste sowie der Datenbank hinzu.
+     *
+     * @param buchung Das hinzuzufügende Zimmer.
+     * @throws HotelException Wenn das Zimmer nicht existiert.
+     */
     public static void buchungHinzufuegen(Buchung buchung) throws HotelException {
         Validator.check(buchung == null, "Buchung existiert nicht");
         Zimmer zimmer = null;
@@ -135,27 +208,27 @@ public class Hotel {
         buchungConnector.datenbankErstellen(buchung);
     }
 
-    public static List<Person> getAllGasts(){
+    public static List<Person> getAllGasts() {
         PersonConnector personConnector = new PersonConnector();
         return (List<Person>) personConnector.datenbankSuchAlles();
     }
 
-    public static List<Zimmer> getAllZimmer(){
+    public static List<Zimmer> getAllZimmer() {
         ZimmerConnector zimmerConnector = new ZimmerConnector();
         return (List<Zimmer>) zimmerConnector.datenbankSuchAlles();
     }
 
-    public static List<Rechnung> getAllRechnungen(){
+    public static List<Rechnung> getAllRechnungen() {
         RechnungConnector rechnungConnector = new RechnungConnector();
         return (List<Rechnung>) rechnungConnector.datenbankSuchAlles();
     }
 
-    public static List<Buchung> getAllBuchungen(){
+    public static List<Buchung> getAllBuchungen() {
         BuchungConnector buchungConnector = new BuchungConnector();
         return (List<Buchung>) buchungConnector.datenbankSuchAlles();
     }
 
-    public static Person getPersonById(int gastId){
+    public static Person getPersonById(int gastId) {
         PersonConnector personConnector = new PersonConnector();
         return personConnector.datenbankSuchNachId(gastId);
     }
@@ -175,7 +248,7 @@ public class Hotel {
         return zimmerConnector.datenbankSuchNachId(zimmerId);
     }
 
-    public void removeGastId(int gastId){
+    public void removeGastId(int gastId) {
         PersonConnector personConnector = new PersonConnector();
         personConnector.datenbankLoeschNachId(gastId);
     }
@@ -195,7 +268,7 @@ public class Hotel {
         buchungConnector.datenbankLoeschNachId(buchungId);
     }
 
-    public void removeAllePersonen(){
+    public void removeAllePersonen() {
         PersonConnector personConnector = new PersonConnector();
         personConnector.datenbankLoeschAlles();
     }
@@ -215,7 +288,7 @@ public class Hotel {
         buchungConnector.datenbankLoeschAlles();
     }
 
-    public void aktualisierePersonen(Person person){
+    public void aktualisierePersonen(Person person) {
         PersonConnector personConnector = new PersonConnector();
         personConnector.datenbankAktualisieren(person);
     }
@@ -254,8 +327,8 @@ public class Hotel {
     }
 
     public static Zimmer getZimmerByNummer(int nr) throws HotelException {
-        for(Zimmer z: zimmern){
-            if (nr == z.getZimmerNr()){
+        for (Zimmer z : zimmern) {
+            if (nr == z.getZimmerNr()) {
                 return z;
             }
         }

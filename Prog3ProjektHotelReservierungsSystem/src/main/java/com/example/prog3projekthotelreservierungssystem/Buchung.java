@@ -9,6 +9,7 @@ import java.io.BufferedWriter;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.time.LocalDate;
+import java.time.temporal.ChronoUnit;
 /**
  * Diese Klasse repräsentiert eine Buchung für ein Hotelzimmer.
  */
@@ -24,15 +25,16 @@ public class Buchung {
     @ManyToOne(fetch = FetchType.EAGER)
     @JoinColumn(name = "gast_id", nullable = true)
     private Person gast;
-
+    //die funktioniert nicht beim löschen wenn nullabe = false deswegen auf true gesetzt;
     @OneToOne(fetch = FetchType.EAGER, cascade = CascadeType.ALL)
-    @JoinColumn(name = "zimmer_id", nullable = false)
+    @JoinColumn(name = "zimmer_id", nullable = true)
     private Zimmer zimmer;
+    //die funktioniert nicht beim löschen wenn nullabe = false deswegen auf true gesetzt;
     @Column(name = "datum_beginn", nullable = false)
     private LocalDate buchungDatumBeginn;
     @Column(name = "datum_ende", nullable = false)
     private LocalDate buchungDatumEnde;
-    @Column
+    @Column(nullable = true)
     private int zimmerNr;
 
     @Column
@@ -66,14 +68,21 @@ public class Buchung {
 
     }
     public void rechnungErstellen() throws HotelException {
+        if (this.storniert){
+            throw new HotelException("Buchung ist Storniert");
+        }
         if (!istGueltig()) {
-            System.err.println("Buchung ist nicht gültig für Rechnungserstellung.");
-            return;
+            throw new HotelException("Buchung ist nicht gültig für Rechnungserstellung.");
         }
         /*BuchungConnector buchungConnector = new BuchungConnector();
         int rechnungID = buchungConnector.getRechnungIdForBuchung(this.getBuchungID());
         RechnungConnector rechnungConnector = new RechnungConnector();
         Rechnung rechnung1 = rechnungConnector.datenbankSuchNachId(rechnungID);*/
+        LocalDate date1 = this.buchungDatumBeginn;
+        LocalDate date2 = this.buchungDatumEnde;
+
+        long diffInDays = ChronoUnit.DAYS.between(date1, date2);
+        int diffInDaysInt = Math.abs((int) diffInDays);
 
 
         Rechnung rechnung1 = this.getRechnung();
@@ -84,7 +93,7 @@ public class Buchung {
         sb.append("Kunde: ").append(this.getGast());
         sb.append("Rechnungsnummer: ").append(rechnungID).append("\n");
         sb.append("Buchungsdatum: ").append(rechnung1.getErstellungsDatum()).append("\n");
-        sb.append("Betrag: ").append(this.getZimmer().getPreis()).append(" EUR\n");
+        sb.append("Betrag: ").append(this.getZimmer().getPreis() * diffInDaysInt).append(" EUR\n");
         String rechnungsText = sb.toString();
 
         String dateiname = "Rechnung_" + rechnungID + ".txt";
@@ -99,16 +108,16 @@ public class Buchung {
 
     private boolean istGueltig() {
         if (this.gast == null) {
-            System.err.println("Gast fehlt.");
+            System.out.println("Gast fehlt");
             return false;
         }
         if (this.buchungDatumBeginn == null || this.buchungDatumEnde == null
                 || this.buchungDatumBeginn.isAfter(this.buchungDatumEnde)) {
-            System.err.println("Ungültige Buchungsdaten.");
+            System.out.println("Ungültige Buchungsdaten");
             return false;
         }
         if (this.zimmerNr <= 0) {
-            System.err.println("Ungültige Zimmernummer");
+            System.out.println("Ungültige Zimmernummer");
             return false;
         }
         return true;
@@ -132,6 +141,9 @@ public class Buchung {
      */
     public void buchungStornieren() {
         storniert = true;
+        this.setZimmer(null);
+        BuchungConnector buchungConnector = new BuchungConnector();
+        buchungConnector.datenbankAktualisieren(this);
     }
 
     public void setGast(Gast gast) {

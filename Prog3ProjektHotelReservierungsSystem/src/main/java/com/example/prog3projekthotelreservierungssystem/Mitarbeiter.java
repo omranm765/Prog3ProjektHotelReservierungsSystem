@@ -6,6 +6,8 @@ import jakarta.persistence.Table;
 import java.time.LocalDate;
 /**
  * Diese Klasse repräsentiert einen Mitarbeiter im Hotel.
+ * wir haben sonst mit dieser Klasse nichts gemacht.
+ * Sie hat einen Gui aber wir benutzen es nicht.
  */
 @Table(name ="mitarbeiter")
 @Entity

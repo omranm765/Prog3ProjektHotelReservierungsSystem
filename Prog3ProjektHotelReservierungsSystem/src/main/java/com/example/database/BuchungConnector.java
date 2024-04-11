@@ -6,12 +6,19 @@ import jakarta.persistence.Query;
 import jakarta.persistence.TypedQuery;
 import org.hibernate.Session;
 
+import java.io.BufferedWriter;
+import java.io.FileWriter;
+import java.io.IOException;
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
 import java.util.List;
 
 /**
  * Stellt Methoden bereit, um mit Buchungsdaten in der Datenbank zu interagieren.
  */
 public class BuchungConnector implements DbOperator {
+
+    private static final String DELETED_BOOKINGS_FILE = "deletedBookings.txt";
 
     /**
      * Fügt eine Buchung der Datenbank hinzu.
@@ -111,6 +118,7 @@ public class BuchungConnector implements DbOperator {
             session.getTransaction().begin();
             Buchung buchung = session.find(Buchung.class, id);
             if (buchung != null) {
+                saveDeletedBooking(buchung);
                 session.remove(buchung);
                 System.out.println("Buchung mit ID " + id + " erfolgreich gelöscht.");
             } else {
@@ -120,7 +128,6 @@ public class BuchungConnector implements DbOperator {
         } catch (Exception e) {
             e.printStackTrace();
         }
-
     }
 
     /**
@@ -166,6 +173,18 @@ public class BuchungConnector implements DbOperator {
         } catch (Exception e) {
             e.printStackTrace();
             return -1;
+        }
+    }
+
+    private void saveDeletedBooking(Buchung buchung) {
+        try (BufferedWriter writer = new BufferedWriter(new FileWriter(DELETED_BOOKINGS_FILE, true))) {
+            LocalDateTime now = LocalDateTime.now();
+            DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss");
+            String formattedDateTime = now.format(formatter);
+            writer.write("Gelöschte Buchung: ID=" + buchung.getBuchungID() + ", Zeitpunkt=" + formattedDateTime);
+            writer.newLine();
+        } catch (IOException e) {
+            e.printStackTrace();
         }
     }
 }

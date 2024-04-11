@@ -9,6 +9,7 @@
 <?import javafx.scene.text.Font?>
 <?import javafx.scene.text.Text?>
 
+<?import javafx.scene.control.Label?>
 <AnchorPane prefHeight="518.0" prefWidth="705.0" stylesheets="@styles/style.css" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.gui.DashboardController">
     <children>
         <Text layoutX="32.0" layoutY="60.0" strokeType="OUTSIDE" strokeWidth="0.0" styleClass="modal-title" text="Dashboard">
@@ -28,6 +29,7 @@
                 </FXCollections>
             </items>
         </ChoiceBox>
-      <Button layoutX="510.0" layoutY="35.0" mnemonicParsing="false" onAction="#onClickRechnungErstellen" prefHeight="29.0" prefWidth="150.0" styleClass="dashboard-btn" text="Rechnung erstellen" />
+        <Label fx:id="errorLabel" alignment="CENTER" layoutX="204.0" layoutY="15.0" prefHeight="18.0" prefWidth="340.0" textFill="RED" />
+        <Button layoutX="510.0" layoutY="35.0" mnemonicParsing="false" onAction="#onClickRechnungErstellen" prefHeight="29.0" prefWidth="150.0" styleClass="dashboard-btn" text="Rechnung erstellen" />
     </children>
 </AnchorPane>

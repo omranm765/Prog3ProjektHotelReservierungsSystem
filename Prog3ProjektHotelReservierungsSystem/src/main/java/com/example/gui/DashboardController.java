@@ -12,6 +12,7 @@ import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.ChoiceBox;
+import javafx.scene.control.Label;
 import javafx.scene.control.ListView;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
@@ -28,17 +29,20 @@ public class DashboardController {
     @FXML
     private ListView<Buchung> listView;
     private Stage stage;
+    @FXML
+    private Label errorLabel;
 
     @FXML
     void onClickCancelBooking(ActionEvent event) {
         Buchung selectedBuchung = listView.getSelectionModel().getSelectedItem();
         if (selectedBuchung != null) {
+            errorLabel.setText("");
             selectedBuchung.buchungStornieren();
             BuchungConnector buchungConnector = new BuchungConnector();
             buchungConnector.datenbankAktualisieren(selectedBuchung);
             updateListView(Hotel.getAllBuchungen());
         } else {
-            System.out.println("Bitte wählen Sie ein Zimmer zum Löschen aus.");
+            errorLabel.setText("Bitte wählen Sie ein Buchung zum Stornieren aus.");
         }
     }
 
@@ -102,9 +106,16 @@ public class DashboardController {
     void onClickRechnungErstellen(ActionEvent event) throws HotelException {
         Buchung selectedBuchung = listView.getSelectionModel().getSelectedItem();
         if (selectedBuchung != null) {
+            if (selectedBuchung.isStorniert()){
+                errorLabel.setText("Die Buchung ist Storniert");
+                return;
+            }
+            errorLabel.setText("");
             selectedBuchung.rechnungErstellen();
+            errorLabel.setText("Rechnung erfolgreich erstellt: Rechnung_"+
+                    selectedBuchung.getRechnung().getRechnungsID() +".txt");
         } else {
-            System.out.println("Bitte wählen Sie ein Zimmer zum Löschen aus.");
+            errorLabel.setText("Bitte wählen Sie ein Buchung um Rechnung zu erstellen aus.");
         }
     }
 }

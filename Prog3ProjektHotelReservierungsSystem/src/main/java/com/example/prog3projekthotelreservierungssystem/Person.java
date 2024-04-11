@@ -26,8 +26,9 @@ public abstract class Person {
     private LocalDate geburtsdatum;
     @Column(name = "telefonnummer")
     private String telefonNr;
-    @OneToMany(mappedBy = "gast")
-    private List<Buchung> buchungList;
+    //@OneToMany(mappedBy = "gast")
+    /*@Transient
+    private List<Buchung> buchungList;*/
 
     /**
      * Konstruktor für eine Person im Hotel.
@@ -60,6 +61,18 @@ public abstract class Person {
 
     }
 
+    public void setVorname(String vorname) {
+        this.vorname = vorname;
+    }
+
+    public void setName(String name) {
+        this.name = name;
+    }
+
+    public void setGeburtsdatum(LocalDate geburtsdatum) {
+        this.geburtsdatum = geburtsdatum;
+    }
+
     public String getVorname() {
         return vorname;
     }
@@ -88,13 +101,13 @@ public abstract class Person {
         this.telefonNr = telefonNr;
     }
 
-    public List<Buchung> getBuchungList() {
+    /*public List<Buchung> getBuchungList() {
         return buchungList;
     }
 
     public void setBuchungList(List<Buchung> buchungList) {
         this.buchungList = buchungList;
-    }
+    }*/
 
     public int getId() {
         return id;

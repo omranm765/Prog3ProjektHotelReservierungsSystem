@@ -1,5 +1,6 @@
 package com.example.gui;
 
+import com.example.database.BuchungConnector;
 import com.example.prog3projekthotelreservierungssystem.*;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
@@ -22,9 +23,6 @@ public class AddBuchungController {
     private DatePicker departureDateChooser;
 
     @FXML
-    private ChoiceBox<Integer> floorChoiceBox;
-
-    @FXML
     private TextField guestId;
 
     @FXML
@@ -38,10 +36,18 @@ public class AddBuchungController {
     void onClickAddBooking(ActionEvent event) throws HotelException {
         if (guestId.getText().trim().isEmpty()
                 || roomChoiceBox.getItems().isEmpty()
-                || floorChoiceBox.getItems().isEmpty() || departureDateChooser.getValue() == null
+                || departureDateChooser.getValue() == null
                 || arrivalDateChooser.getValue() == null) {
             errorLabel.setText("Bitte füllen sie die Felder aus");
             return;
+        }
+        BuchungConnector buchungConnector = new BuchungConnector();
+        List<Buchung> buchungList = buchungConnector.datenbankSuchAlles();
+        for(Buchung b: buchungList){
+            if (b.getZimmerNr() == b.getZimmerNr() && !b.isStorniert()){
+                errorLabel.setText("Es existiert ein Buchung mit dieser ZimmerNr");
+                return;
+            }
         }
         int id = Integer.parseInt(guestId.getText());
         Person guest = Hotel.getPersonById(id);

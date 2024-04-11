@@ -12,12 +12,12 @@
     <children>
         <AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="528.0" prefWidth="425.0" styleClass="root">
             <children>
-                <Label layoutX="153.0" layoutY="21.0" styleClass="modal-title" text="Edit Guest">
+                <Label layoutX="139.0" layoutY="20.0" styleClass="modal-title" text="Gast ändern">
                     <font>
                         <Font size="25.0" />
                     </font>
                 </Label>
-                <Label layoutX="22.0" layoutY="86.0" text="First Name">
+                <Label layoutX="22.0" layoutY="86.0" text="Vorname">
                     <font>
                         <Font size="14.0" />
                     </font>
@@ -32,26 +32,27 @@
                         <Font size="14.0" />
                     </font>
                 </Label>
-                <Label layoutX="20.0" layoutY="264.0" text="Tel-number">
+                <Label layoutX="20.0" layoutY="264.0" text="Telefornummer">
                     <font>
                         <Font size="14.0" />
                     </font>
                 </Label>
-                <TextField fx:id="lastNameTxtfield" layoutX="244.0" layoutY="118.0" prefHeight="25.0" prefWidth="164.0" promptText="Last Name" styleClass="input" />
+                <TextField fx:id="firstNameTxtfield" layoutX="20.0" layoutY="118.0" promptText="Mustermann" styleClass="input" />
+                <TextField fx:id="lastNameTxtfield" layoutX="244.0" layoutY="118.0" prefHeight="25.0" prefWidth="164.0" promptText="Gabler" styleClass="input" />
                 <TextField fx:id="emailTxtfield" layoutX="20.0" layoutY="201.0" promptText="name@example.com" styleClass="input" />
-                <TextField fx:id="telefonNrTxtfield" layoutX="20.0" layoutY="295.0" prefHeight="31.0" prefWidth="168.0" promptText="Tel-number" styleClass="input" />
-                <TextField fx:id="firstNameTxtfield" layoutX="20.0" layoutY="118.0" promptText="First Name" styleClass="input" />
-                <Label layoutX="245.0" layoutY="171.0" text="B-date">
+                <DatePicker fx:id="dateChooser" layoutX="245.0" layoutY="201.0" prefHeight="25.0" prefWidth="164.0" promptText="2024-03-01" styleClass="birth-input" />
+                <TextField fx:id="telefonNrTxtfield" layoutX="20.0" layoutY="295.0" prefHeight="31.0" prefWidth="168.0" promptText="018328371937" styleClass="input" />
+                <Label layoutX="245.0" layoutY="171.0" text="Geburtsdarum">
                     <font>
                         <Font size="14.0" />
                     </font>
                 </Label>
-                <DatePicker fx:id="dateChooser" layoutX="245.0" layoutY="201.0" prefHeight="25.0" prefWidth="164.0" promptText="2024-03-01" styleClass="birth-input" />
-                <Button fx:id="saveChangesBtn" layoutX="98.0" layoutY="428.0" mnemonicParsing="false" onAction="#onClickSaveChanges" prefHeight="31.0" prefWidth="222.0" styleClass="add-btn" text="Save changes ">
+                <Button fx:id="saveChangesBtn" layoutX="98.0" layoutY="428.0" mnemonicParsing="false" onAction="#onClickSpeichern" prefHeight="31.0" prefWidth="222.0" styleClass="add-btn" text="Speichern">
                     <font>
                         <Font size="15.0" />
                     </font>
                 </Button>
+            <Label fx:id="errorLabel" layoutX="75.0" layoutY="357.0" prefHeight="38.0" prefWidth="274.0" textFill="RED" />
             </children>
         </AnchorPane>
     </children>

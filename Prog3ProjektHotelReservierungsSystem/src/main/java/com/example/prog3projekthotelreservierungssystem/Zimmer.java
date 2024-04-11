@@ -14,7 +14,7 @@ import java.util.ArrayList;
 public class Zimmer {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @JoinColumn(name = "zimmer_id", referencedColumnName = "buchung_id")
+    @JoinColumn(name = "zimmer_id")
     private int zimmerId;
 
     @Column

@@ -41,6 +41,14 @@ public class AddMitarbeiterController {
         if (firstName.isEmpty() || lastName.isEmpty() || email.isEmpty() || telefonNr.isEmpty() || dateChooser.getValue() == null) {
             errorLabel.setText("Bitte alle Textfelder ausfüllen");
         }
+        if (!firstNameTxtfield.getText().matches("[a-zA-Z]+") || !lastNameTxtfield.getText().matches("[a-zA-Z]+")) {
+            errorLabel.setText("Vorname und Name dürfen nur Buchstaben enthalten");
+            return;
+        }
+        if (!telefonNrTxtfield.getText().matches("[0-9]+")){
+            errorLabel.setText("TelefonNr darf nur Zahlen enthalten");
+            return;
+        }
         Person mitarbeiter = new Mitarbeiter(firstName, lastName, email, geburtsdatum,
                 telefonNr);
         Hotel.mitarbeiterHinzufuegen(mitarbeiter);

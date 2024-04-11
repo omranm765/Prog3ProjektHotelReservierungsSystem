@@ -10,17 +10,23 @@ import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
-import javafx.scene.control.ListView;
+import javafx.scene.control.*;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
 
 import java.io.IOException;
 import java.net.URL;
 import java.util.List;
+import java.util.Optional;
 
 public class ZimmerController {
     @FXML
     private ListView<Zimmer> listView;
+    @FXML
+    private ChoiceBox<Integer> floorChoiceBox;
+    @FXML
+    private Label errorLabel;
+
     @FXML
     void onClickAddRoom(ActionEvent event) throws IOException {
         String windowTitle = "Add Zimmer";
@@ -40,10 +46,32 @@ public class ZimmerController {
         stage.showAndWait();
     }
 
+    @FXML
+    void initialize() {
+        floorChoiceBox.getSelectionModel().selectedItemProperty().addListener((observable, oldValue, newValue) -> {
+            updateListView(Hotel.getAllZimmer());
+        });
+    }
+
     public void updateListView(List<Zimmer> zimmerList) {
         if (zimmerList != null) {
-            ObservableList<Zimmer> observableZimmerList = FXCollections.observableArrayList(zimmerList);
-            listView.setItems(observableZimmerList);
+            if (floorChoiceBox.getValue() == 1) {
+                ObservableList<Zimmer> observableZimmerList = FXCollections.observableArrayList();
+                for (Zimmer zimmer : zimmerList) {
+                    if (zimmer.getEtage() == 1) {
+                        observableZimmerList.add(zimmer);
+                    }
+                }
+                listView.setItems(observableZimmerList);
+            } else {
+                ObservableList<Zimmer> observableZimmerList = FXCollections.observableArrayList();
+                for (Zimmer zimmer : zimmerList) {
+                    if (zimmer.getEtage() == 2) {
+                        observableZimmerList.add(zimmer);
+                    }
+                }
+                listView.setItems(observableZimmerList);
+            }
         }
     }
 
@@ -60,10 +88,21 @@ public class ZimmerController {
         try {
             Zimmer selectedZimmer = listView.getSelectionModel().getSelectedItem();
             if (selectedZimmer != null) {
-                Hotel.zimmerEntfernen(selectedZimmer);
-                updateListView(Hotel.getAllZimmer());
+                errorLabel.setText("");
+                Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
+                alert.setTitle("Löschen bestätigen");
+                alert.setHeaderText("Möchten Sie dieses Zimmer wirklich löschen?");
+                alert.setContentText("Dieser Prozess kann nicht rückgängig gemacht werden! o_O");
+                ButtonType buttonTypeYes = new ButtonType("Ja");
+                ButtonType buttonTypeNo = new ButtonType("Nein", ButtonBar.ButtonData.CANCEL_CLOSE);
+                alert.getButtonTypes().setAll(buttonTypeYes, buttonTypeNo);
+                Optional<ButtonType> result = alert.showAndWait();
+                if (result.isPresent() && result.get() == buttonTypeYes) {
+                    Hotel.zimmerEntfernen(selectedZimmer);
+                    updateListView(Hotel.getAllZimmer());
+                }
             } else {
-                System.out.println("Bitte wählen Sie ein Zimmer zum Löschen aus.");
+               errorLabel.setText("Bitte wählen Sie ein Zimmer zum Löschen aus.");
             }
         } catch (HotelException e) {
             System.out.println("Fehler beim Löschen des Zimmers: " + e.getMessage());

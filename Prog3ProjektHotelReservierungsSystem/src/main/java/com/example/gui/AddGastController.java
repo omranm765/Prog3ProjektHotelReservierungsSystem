@@ -33,8 +33,18 @@ public class AddGastController {
 
     @FXML
     void onClickAddGuest(ActionEvent event) throws HotelException {
-        if (lastNameTxtfield.getText().trim().isEmpty() || emailTxtfield.getText().trim().isEmpty()){
+        if (lastNameTxtfield.getText().trim().isEmpty() || emailTxtfield.getText().trim().isEmpty()
+                || firstNameTxtfield.getText().trim().isEmpty() || telefonNrTxtfield.getText().trim().isEmpty()
+                || dateChooser.getValue() == null) {
             errorLabel.setText("Bitte füllen sie die Felder aus");
+            return;
+        }
+        if (!firstNameTxtfield.getText().matches("[a-zA-Z]+") || !lastNameTxtfield.getText().matches("[a-zA-Z]+")) {
+            errorLabel.setText("Vorname und Name dürfen nur Buchstaben enthalten");
+            return;
+        }
+        if (!telefonNrTxtfield.getText().matches("[0-9]+")){
+            errorLabel.setText("TelefonNr darf nur Zahlen enthalten");
             return;
         }
 

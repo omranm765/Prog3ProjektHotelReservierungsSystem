@@ -9,17 +9,17 @@
 
 <AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="588.0" prefWidth="424.0" styleClass="root" stylesheets="@styles/style.css" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.gui.AddGastController">
     <children>
-        <Label layoutX="148.0" layoutY="22.0" styleClass="modal-title" text="Add Guest">
+        <Label layoutX="141.0" layoutY="21.0" styleClass="modal-title" text="Neuer Gast">
             <font>
                 <Font name="System Bold" size="25.0" />
             </font>
         </Label>
-        <Label layoutX="25.0" layoutY="107.0" text="First Name">
+        <Label layoutX="25.0" layoutY="107.0" text="Vorname">
             <font>
                 <Font size="14.0" />
             </font>
         </Label>
-        <Label layoutX="229.0" layoutY="107.0" text="Last Name">
+        <Label layoutX="229.0" layoutY="107.0" text="Nachname">
             <font>
                 <Font size="14.0" />
             </font>
@@ -29,22 +29,22 @@
                 <Font size="14.0" />
             </font>
         </Label>
-        <Label layoutX="22.0" layoutY="304.0" text="Tel-number">
+        <Label layoutX="22.0" layoutY="304.0" text="Telefornummer">
             <font>
                 <Font size="14.0" />
             </font>
         </Label>
-        <TextField fx:id="firstNameTxtfield" layoutX="24.0" layoutY="140.0" prefHeight="29.0" prefWidth="164.0" promptText="First Name" styleClass="input" />
-        <TextField fx:id="lastNameTxtfield" layoutX="229.0" layoutY="140.0" prefHeight="29.0" prefWidth="172.0" promptText="Last Name" styleClass="input" />
+        <TextField fx:id="firstNameTxtfield" layoutX="24.0" layoutY="140.0" prefHeight="29.0" prefWidth="164.0" promptText="Mustermann" styleClass="input" />
+        <TextField fx:id="lastNameTxtfield" layoutX="229.0" layoutY="140.0" prefHeight="29.0" prefWidth="172.0" promptText="Gabler" styleClass="input" />
         <TextField fx:id="emailTxtfield" layoutX="24.0" layoutY="235.0" prefHeight="29.0" prefWidth="164.0" promptText="name@example.com" styleClass="input" />
-        <TextField fx:id="telefonNrTxtfield" layoutX="24.0" layoutY="338.0" prefHeight="29.0" prefWidth="164.0" promptText="Tel-number" styleClass="input" />
-        <Label layoutX="229.0" layoutY="205.0" text="B-date">
+        <TextField fx:id="telefonNrTxtfield" layoutX="24.0" layoutY="338.0" prefHeight="29.0" prefWidth="164.0" promptText="015218372048" styleClass="input" />
+        <Label layoutX="229.0" layoutY="205.0" text="Geburtsdatum">
             <font>
                 <Font size="14.0" />
             </font>
         </Label>
         <DatePicker fx:id="dateChooser" layoutX="229.0" layoutY="235.0" prefHeight="29.0" prefWidth="172.0" promptText="2024-03-01" styleClass="birth-input" />
-        <Button fx:id="addGuestBtn" layoutX="98.0" layoutY="491.0" mnemonicParsing="false" onAction="#onClickAddGuest" prefHeight="31.0" prefWidth="222.0" styleClass="add-btn" text="Add Guest">
+        <Button fx:id="addGuestBtn" layoutX="98.0" layoutY="491.0" mnemonicParsing="false" onAction="#onClickAddGuest" prefHeight="31.0" prefWidth="222.0" styleClass="add-btn" text="Add Gast">
             <font>
                 <Font size="15.0" />
             </font>

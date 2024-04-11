@@ -13,5 +13,7 @@
         <property name="hibernate.current_session_context_class">thread</property>
 
         <mapping class="com.example.prog3projekthotelreservierungssystem.Gast"/>
+        <mapping class="com.example.prog3projekthotelreservierungssystem.Zimmer"/>
+        <mapping class="com.example.prog3projekthotelreservierungssystem.Buchung"/>
     </session-factory>
 </hibernate-configuration>
