@@ -1,6 +1,7 @@
 package com.example.gui;
 
 import com.example.database.BuchungConnector;
+import com.example.database.PersonConnector;
 import com.example.prog3projekthotelreservierungssystem.*;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
@@ -10,6 +11,7 @@ import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
 import javafx.stage.Stage;
 
+import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -41,13 +43,37 @@ public class AddBuchungController {
             errorLabel.setText("Bitte füllen sie die Felder aus");
             return;
         }
+        if (!guestId.getText().matches("[0-9]+")){
+            errorLabel.setText("GuestID darf nur Zahlen enthalten");
+            return;
+        }
+        if (arrivalDateChooser.getValue().isBefore(LocalDate.now())){
+            errorLabel.setText("Ankunftsdatum muss mindestens aktuell sein!");
+            return;
+        }
+        if (arrivalDateChooser.getValue().isAfter(departureDateChooser.getValue())){
+            errorLabel.setText("Ankunftsdatum muss vor Abreisedatum sein!");
+            return;
+        }
         BuchungConnector buchungConnector = new BuchungConnector();
         List<Buchung> buchungList = buchungConnector.datenbankSuchAlles();
-        for(Buchung b: buchungList){
-            if (b.getZimmerNr() == b.getZimmerNr() && !b.isStorniert()){
+        for (Buchung b : buchungList) {
+            if (b.getZimmerNr() == roomChoiceBox.getValue() && !b.isStorniert()) {
                 errorLabel.setText("Es existiert ein Buchung mit dieser ZimmerNr");
                 return;
             }
+        }
+        PersonConnector personConnector = new PersonConnector();
+        List<Person> personList = personConnector.datenbankSuchAlles();
+        boolean found = false;
+        for (Person person: personList) {
+            if (person.getId() == Integer.parseInt(guestId.getText())){
+                found = true;
+            }
+        }
+        if (!found){
+            errorLabel.setText("Gast existiert nicht");
+            return;
         }
         int id = Integer.parseInt(guestId.getText());
         Person guest = Hotel.getPersonById(id);

@@ -50,7 +50,7 @@ public class GaesteController {
                 Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
                 alert.setTitle("Löschen bestätigen");
                 alert.setHeaderText("Möchten Sie dieses Gast wirklich löschen?");
-                alert.setContentText("Das Löschen dieses Gast wird auch alle zugehörigen Buchungen löschen.");
+                alert.setContentText("Dieser Prozess kann nicht rückgängig gemacht werden! o_O");
                 ButtonType buttonTypeYes = new ButtonType("Ja");
                 ButtonType buttonTypeNo = new ButtonType("Nein", ButtonBar.ButtonData.CANCEL_CLOSE);
                 alert.getButtonTypes().setAll(buttonTypeYes, buttonTypeNo);

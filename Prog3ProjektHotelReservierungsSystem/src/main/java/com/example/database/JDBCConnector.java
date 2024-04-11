@@ -36,7 +36,6 @@ public class JDBCConnector {
                 .addAnnotatedClass(Buchung.class)
                 .addAnnotatedClass(Rechnung.class)
                 .addAnnotatedClass(Zimmer.class)
-                .addAnnotatedClass(GeloeschteBuchung.class)
                 .addAnnotatedClass(Mitarbeiter.class);
         ServiceRegistry serviceRegistry = new StandardServiceRegistryBuilder()
                 .applySettings(configuration.getProperties()).build();

@@ -1,5 +1,6 @@
 package com.example.gui;
 
+import com.example.database.PersonConnector;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.DatePicker;
@@ -9,11 +10,15 @@ import com.example.prog3projekthotelreservierungssystem.*;
 import com.example.prog3projekthotelreservierungssystem.Hotel;
 import javafx.stage.Stage;
 
+import java.time.LocalDate;
+import java.time.temporal.ChronoUnit;
+import java.util.List;
+
 public class AddGastController {
 
 
     @FXML
-    private DatePicker dateChooser;
+    private DatePicker birthdayDateChooser;
 
     @FXML
     private TextField emailTxtfield;
@@ -35,7 +40,7 @@ public class AddGastController {
     void onClickAddGuest(ActionEvent event) throws HotelException {
         if (lastNameTxtfield.getText().trim().isEmpty() || emailTxtfield.getText().trim().isEmpty()
                 || firstNameTxtfield.getText().trim().isEmpty() || telefonNrTxtfield.getText().trim().isEmpty()
-                || dateChooser.getValue() == null) {
+                || birthdayDateChooser.getValue() == null) {
             errorLabel.setText("Bitte füllen sie die Felder aus");
             return;
         }
@@ -47,8 +52,33 @@ public class AddGastController {
             errorLabel.setText("TelefonNr darf nur Zahlen enthalten");
             return;
         }
+        if (!emailTxtfield.getText().matches("^[\\w-\\.]+@([\\w-]+\\.)+[\\w-]{2,4}$")){
+            errorLabel.setText("Ungültiger Email");
+            return;
+        }
+        if (!telefonNrTxtfield.getText().matches("[0-9]+")){
+            errorLabel.setText("TelefonNr darf nur Zahlen enthalten");
+        }
+        LocalDate date1 = birthdayDateChooser.getValue();
+        LocalDate date2 = LocalDate.now();
 
-        Person guest = new Gast(firstNameTxtfield.getText(), lastNameTxtfield.getText(), emailTxtfield.getText(), dateChooser.getValue(), telefonNrTxtfield.getText()
+        long diffInDays = ChronoUnit.DAYS.between(date1, date2);
+        int diffInDaysInt = Math.abs((int) diffInDays);
+        System.out.println(diffInDaysInt);
+        if (diffInDaysInt < 18){
+            errorLabel.setText("Sie müssen mindestens 18 Jahre alt sein");
+            return;
+        }
+        PersonConnector personConnector = new PersonConnector();
+        List<Person> personList = personConnector.datenbankSuchAlles();
+        for (Person person: personList){
+            if (person.getEmail().equals(emailTxtfield.getText())){
+                errorLabel.setText("Es existiert ein Gast mit diesen Email");
+                return;
+            }
+        }
+
+        Person guest = new Gast(firstNameTxtfield.getText(), lastNameTxtfield.getText(), emailTxtfield.getText(), birthdayDateChooser.getValue(), telefonNrTxtfield.getText()
         );
 
         Hotel.gastHinzufuegen(guest);

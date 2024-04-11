@@ -1,8 +1,9 @@
-Rechnungsnummer: 6
-Buchungsdatum: 2024-04-08
-Betrag: 3.0 EUR
 Kunde: Gast
+Id: 5
 Name: Mhd Omran Alrahban
-Geburtsdatum: 2001-01-01
+Geburtsdatum: 2001-12-05
 Email: omran@gmail.com
-TelefonNr: 1234
+TelefonNr: 015215150841
+Rechnungsnummer: 6
+Buchungsdatum: 2024-04-11
+Betrag: 200.0 EUR

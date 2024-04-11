@@ -94,6 +94,8 @@ public class Buchung {
         sb.append("Rechnungsnummer: ").append(rechnungID).append("\n");
         sb.append("Buchungsdatum: ").append(rechnung1.getErstellungsDatum()).append("\n");
         sb.append("Betrag: ").append(this.getZimmer().getPreis() * diffInDaysInt).append(" EUR\n");
+        sb.append("Buchung von: ").append(this.buchungDatumBeginn).append(" - bis: ")
+                .append(this.buchungDatumEnde);
         String rechnungsText = sb.toString();
 
         String dateiname = "Rechnung_" + rechnungID + ".txt";
@@ -141,6 +143,8 @@ public class Buchung {
      */
     public void buchungStornieren() {
         storniert = true;
+        //Weil Zimmer und Buchung sind OneToOne das heißt wenn ein foreign key von Zimmer bei buchung
+        //Gibt, kann keine neue Buchung für diese Zimmer erstellt werden auch wenn sie Storniert ist
         this.setZimmer(null);
         BuchungConnector buchungConnector = new BuchungConnector();
         buchungConnector.datenbankAktualisieren(this);

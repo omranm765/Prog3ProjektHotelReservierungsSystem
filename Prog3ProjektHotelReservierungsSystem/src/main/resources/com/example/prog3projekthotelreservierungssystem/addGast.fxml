@@ -37,13 +37,13 @@
         <TextField fx:id="firstNameTxtfield" layoutX="24.0" layoutY="140.0" prefHeight="29.0" prefWidth="164.0" promptText="Mustermann" styleClass="input" />
         <TextField fx:id="lastNameTxtfield" layoutX="229.0" layoutY="140.0" prefHeight="29.0" prefWidth="172.0" promptText="Gabler" styleClass="input" />
         <TextField fx:id="emailTxtfield" layoutX="24.0" layoutY="235.0" prefHeight="29.0" prefWidth="164.0" promptText="name@example.com" styleClass="input" />
+        <DatePicker fx:id="birthdayDateChooser" layoutX="229.0" layoutY="235.0" prefHeight="29.0" prefWidth="172.0" promptText="2024-03-01" styleClass="birth-input" />
         <TextField fx:id="telefonNrTxtfield" layoutX="24.0" layoutY="338.0" prefHeight="29.0" prefWidth="164.0" promptText="015218372048" styleClass="input" />
         <Label layoutX="229.0" layoutY="205.0" text="Geburtsdatum">
             <font>
                 <Font size="14.0" />
             </font>
         </Label>
-        <DatePicker fx:id="dateChooser" layoutX="229.0" layoutY="235.0" prefHeight="29.0" prefWidth="172.0" promptText="2024-03-01" styleClass="birth-input" />
         <Button fx:id="addGuestBtn" layoutX="98.0" layoutY="491.0" mnemonicParsing="false" onAction="#onClickAddGuest" prefHeight="31.0" prefWidth="222.0" styleClass="add-btn" text="Add Gast">
             <font>
                 <Font size="15.0" />

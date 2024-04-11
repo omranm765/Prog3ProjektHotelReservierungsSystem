@@ -13,7 +13,9 @@ import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.ChoiceBox;
 import javafx.scene.control.Label;
+import javafx.scene.control.ListCell;
 import javafx.scene.control.ListView;
+import javafx.scene.paint.Color;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
 
@@ -55,6 +57,25 @@ public class DashboardController {
         bookingChoiceBox.getSelectionModel().selectedItemProperty().addListener((observable, oldValue, newValue) -> {
             updateListView(Hotel.getAllBuchungen());
         });
+        listView.setCellFactory(list -> new ListCell<Buchung>() {
+            @Override
+            protected void updateItem(Buchung item, boolean empty) {
+                super.updateItem(item, empty);
+
+                if (empty || item == null) {
+                    setText(null);
+                } else {
+                    setText(item.toString());
+
+                    // Setze die Textfarbe basierend auf dem Stornierungsstatus
+                    if (item.isStorniert()) {
+                        setTextFill(Color.RED);
+                    } else {
+                        setTextFill(Color.BLACK);
+                    }
+                }
+            }
+        });
     }
 
     public void updateListView(List<Buchung> buchungList) {
@@ -67,17 +88,17 @@ public class DashboardController {
                 for (Buchung buchung : buchungList) {
                     if (buchung.isStorniert()) {
                         observableStorniertBuchungList.add(buchung);
-                        listView.setItems(observableStorniertBuchungList);
                     }
                 }
+                listView.setItems(observableStorniertBuchungList);
             } else {
                 ObservableList<Buchung> observableAktivBuchungList = FXCollections.observableArrayList();
                 for (Buchung buchung : buchungList) {
                     if (!buchung.isStorniert()) {
                         observableAktivBuchungList.add(buchung);
-                        listView.setItems(observableAktivBuchungList);
                     }
                 }
+                listView.setItems(observableAktivBuchungList);
             }
         }
     }

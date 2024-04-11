@@ -60,6 +60,10 @@
                 <Font size="14.0" />
             </font>
         </Label>
+        <Label fx:id="errorLabel" alignment="CENTER" layoutX="10.0" layoutY="440.0" prefHeight="18.0" prefWidth="406.0" textFill="#ff0900">
+            <font>
+                <Font size="13.0" />
+            </font></Label>
         <TextField fx:id="costTxtfield" layoutX="235.0" layoutY="207.0" prefHeight="25.0" prefWidth="172.0" promptText="200" styleClass="input" />
         <Button fx:id="addRoomBtn" layoutX="110.0" layoutY="398.0" mnemonicParsing="false" onAction="#onClickAddRoom" prefHeight="25.0" prefWidth="207.0" styleClass="add-btn" text="Add Zimmer" />
     </children>

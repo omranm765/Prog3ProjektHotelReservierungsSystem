@@ -40,7 +40,7 @@
                 <TextField fx:id="firstNameTxtfield" layoutX="20.0" layoutY="118.0" promptText="Mustermann" styleClass="input" />
                 <TextField fx:id="lastNameTxtfield" layoutX="244.0" layoutY="118.0" prefHeight="25.0" prefWidth="164.0" promptText="Gabler" styleClass="input" />
                 <TextField fx:id="emailTxtfield" layoutX="20.0" layoutY="201.0" promptText="name@example.com" styleClass="input" />
-                <DatePicker fx:id="dateChooser" layoutX="245.0" layoutY="201.0" prefHeight="25.0" prefWidth="164.0" promptText="2024-03-01" styleClass="birth-input" />
+                <DatePicker fx:id="birthdayDateChooser" layoutX="245.0" layoutY="201.0" prefHeight="25.0" prefWidth="164.0" promptText="2024-03-01" styleClass="birth-input" />
                 <TextField fx:id="telefonNrTxtfield" layoutX="20.0" layoutY="295.0" prefHeight="31.0" prefWidth="168.0" promptText="018328371937" styleClass="input" />
                 <Label layoutX="245.0" layoutY="171.0" text="Geburtsdarum">
                     <font>
@@ -52,7 +52,7 @@
                         <Font size="15.0" />
                     </font>
                 </Button>
-            <Label fx:id="errorLabel" layoutX="75.0" layoutY="357.0" prefHeight="38.0" prefWidth="274.0" textFill="RED" />
+            <Label fx:id="errorLabel" layoutX="3.0" layoutY="470.0" prefHeight="38.0" prefWidth="418.0" textFill="RED" />
             </children>
         </AnchorPane>
     </children>
