@@ -57,7 +57,8 @@ public class Buchung {
                    int zimmerNr) throws HotelException {
         Validator.check(gast == null, "Gast existiert nichtt");
         Validator.check(buchungDatumBeginn == null || buchungDatumEnde == null
-                || buchungDatumBeginn.isAfter(buchungDatumEnde), "Ungültige Buchungsdaten");
+                || buchungDatumBeginn.isAfter(buchungDatumEnde)
+                || buchungDatumBeginn.isBefore(LocalDate.now()), "Ungültige Buchungsdaten");
         this.gast = gast;
         this.buchungDatumBeginn = buchungDatumBeginn;
         this.buchungDatumEnde = buchungDatumEnde;
@@ -74,10 +75,6 @@ public class Buchung {
         if (!istGueltig()) {
             throw new HotelException("Buchung ist nicht gültig für Rechnungserstellung.");
         }
-        /*BuchungConnector buchungConnector = new BuchungConnector();
-        int rechnungID = buchungConnector.getRechnungIdForBuchung(this.getBuchungID());
-        RechnungConnector rechnungConnector = new RechnungConnector();
-        Rechnung rechnung1 = rechnungConnector.datenbankSuchNachId(rechnungID);*/
         LocalDate date1 = this.buchungDatumBeginn;
         LocalDate date2 = this.buchungDatumEnde;
 
