@@ -1,12 +1,9 @@
 package com.example.prog3projekthotelreservierungssystem;
 
-import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
 import java.time.LocalDate;
-import java.util.ArrayList;
-import java.util.List;
 
 import static org.junit.jupiter.api.Assertions.*;
 
@@ -32,13 +29,14 @@ public class ZimmerTest {
         Person gast = new Gast("Hans", "Müller", "hans.mueller@web.de", LocalDate.of(1990, 1, 1), "1367836");
         Buchung buchung = new Buchung(gast, LocalDate.now(), LocalDate.now().plusDays(7), 1);
 
+        Rechnung rechnung = new Rechnung(100, LocalDate.now(), Rechnung.Status.NICHT_BEZAHLT);
+        buchung.setRechnung(rechnung);
         buchung.setZimmerNr(1);
         buchung.buchungStornieren();
         assertTrue(buchung.isStorniert());
         assertNull(buchung.getZimmer());
 
-        Rechnung rechnung = new Rechnung(100, LocalDate.now(), Rechnung.Status.BEZAHLT);
-        buchung.bezahlen(LocalDate.now(), Rechnung.Status.BEZAHLT, 100);
+        buchung.bezahlen(LocalDate.now(), Rechnung.Status.NICHT_BEZAHLT, 100);
         assertEquals(rechnung, buchung.getRechnung());
     }
 
