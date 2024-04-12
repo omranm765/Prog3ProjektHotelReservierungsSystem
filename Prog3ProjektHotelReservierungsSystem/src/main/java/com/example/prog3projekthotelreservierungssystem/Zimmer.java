@@ -4,6 +4,7 @@ import jakarta.persistence.*;
 
 import java.util.List;
 import java.util.ArrayList;
+import java.util.Objects;
 
 /**
  * Eine Klasse, die ein Zimmer im Hotel repräsentiert.
@@ -111,6 +112,20 @@ public class Zimmer {
                 "\nflaeche: " + flaeche +
                 "\npreis: " + preis;
     }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        Zimmer zimmer = (Zimmer) o;
+        return zimmerId == zimmer.zimmerId && zimmerNr == zimmer.zimmerNr && etage == zimmer.etage && flaeche == zimmer.flaeche && Double.compare(preis, zimmer.preis) == 0 && Objects.equals(buchungen, zimmer.buchungen);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(zimmerId, zimmerNr, etage, flaeche, preis, buchungen);
+    }
+
     public int getId(){
         return zimmerId;
     }
