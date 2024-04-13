@@ -62,10 +62,14 @@ public class EditGastController {
             if (!telefonNrTxtfield.getText().matches("[0-9]+")){
                 errorLabel.setText("TelefonNr darf nur Zahlen enthalten");
             }
+            if (birthdayDateChooser.getValue().isAfter(LocalDate.now())){
+                errorLabel.setText("Ungültige Eingabe!");
+                return;
+            }
             LocalDate date1 = birthdayDateChooser.getValue();
             LocalDate date2 = LocalDate.now();
 
-            long diffInDays = ChronoUnit.DAYS.between(date1, date2);
+            long diffInDays = ChronoUnit.YEARS.between(date1, date2);
             int diffInDaysInt = Math.abs((int) diffInDays);
             System.out.println(diffInDaysInt);
             if (diffInDaysInt < 18){

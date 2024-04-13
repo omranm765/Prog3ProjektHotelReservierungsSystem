@@ -174,7 +174,7 @@ public class Hotel {
      * @return Die erstellte Buchung.
      * @throws HotelException Wenn die Buchung nicht erstellt werden kann.
      */
-    public static Buchung buchungErstellen(Gast gast, LocalDate buchungDatumBeginn,
+    public static Buchung buchungErstellen(Person gast, LocalDate buchungDatumBeginn,
                                            LocalDate buchungDatumEnde, int zimmerNr) throws HotelException {
         return new Buchung(gast, buchungDatumBeginn, buchungDatumEnde, zimmerNr);
     }
