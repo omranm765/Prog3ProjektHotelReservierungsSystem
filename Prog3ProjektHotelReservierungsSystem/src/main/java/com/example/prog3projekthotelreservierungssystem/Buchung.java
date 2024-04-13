@@ -211,6 +211,7 @@ public class Buchung {
         this.storniert = storniert;
     }
 
+
     @Override
     public String toString() {
         return "\nBuchung " + "\ngast: " + gast +

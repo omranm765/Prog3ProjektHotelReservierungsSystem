@@ -18,7 +18,7 @@ import java.util.List;
  */
 public class BuchungConnector implements DbOperator {
 
-    private static final String DELETED_BOOKINGS_FILE = "deletedBookings.txt";
+    public static final String DELETED_BOOKINGS_FILE = "deletedBookings.txt";
 
     /**
      * Fügt eine Buchung der Datenbank hinzu.
