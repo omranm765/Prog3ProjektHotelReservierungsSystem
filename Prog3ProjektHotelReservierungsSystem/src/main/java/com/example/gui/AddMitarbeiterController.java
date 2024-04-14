@@ -41,7 +41,7 @@ public class AddMitarbeiterController {
         if (firstName.isEmpty() || lastName.isEmpty() || email.isEmpty() || telefonNr.isEmpty() || dateChooser.getValue() == null) {
             errorLabel.setText("Bitte alle Textfelder ausfüllen");
         }
-        if (!firstNameTxtfield.getText().matches("[a-zA-Z]+") || !lastNameTxtfield.getText().matches("[a-zA-Z]+")) {
+        if (!firstNameTxtfield.getText().matches("[a-zA-Z ]+") || !lastNameTxtfield.getText().matches("[a-zA-Z ]+")) {
             errorLabel.setText("Vorname und Name dürfen nur Buchstaben enthalten");
             return;
         }

@@ -44,7 +44,7 @@ public class AddGastController {
             errorLabel.setText("Bitte füllen sie die Felder aus");
             return;
         }
-        if (!firstNameTxtfield.getText().matches("[a-zA-Z]+") || !lastNameTxtfield.getText().matches("[a-zA-Z]+")) {
+        if (!firstNameTxtfield.getText().matches("[a-zA-Z ]+") || !lastNameTxtfield.getText().matches("[a-zA-Z ]+")) {
             errorLabel.setText("Vorname und Name dürfen nur Buchstaben enthalten");
             return;
         }
@@ -82,7 +82,11 @@ public class AddGastController {
             }
         }
 
-        Person guest = new Gast(firstNameTxtfield.getText(), lastNameTxtfield.getText(), emailTxtfield.getText(), birthdayDateChooser.getValue(), telefonNrTxtfield.getText()
+        Person guest = new Gast(firstNameTxtfield.getText().trim()
+                , lastNameTxtfield.getText().trim()
+                , emailTxtfield.getText().trim(),
+                birthdayDateChooser.getValue()
+                , telefonNrTxtfield.getText().trim()
         );
 
         Hotel.gastHinzufuegen(guest);

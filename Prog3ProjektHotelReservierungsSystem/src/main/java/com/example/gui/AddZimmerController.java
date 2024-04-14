@@ -38,8 +38,8 @@ public class AddZimmerController {
 
     @FXML
     void onClickAddRoom(ActionEvent event) throws Exception {
-        String roomNrString = roomNrTxtfield.getText();
-        String priceString = costTxtfield.getText();
+        String roomNrString = roomNrTxtfield.getText().trim();
+        String priceString = costTxtfield.getText().trim();
 
         if (roomNrString.trim().isEmpty() || priceString.trim().isEmpty()) {
             errorLabel.setText("Bitte füllen Sie die Felder aus");

@@ -47,7 +47,7 @@ public class EditGastController {
                 errorLabel.setText("Bitte füllen Sie alle Felder aus.");
                 return;
             }
-            if (!firstNameTxtfield.getText().matches("[a-zA-Z]+") || !lastNameTxtfield.getText().matches("[a-zA-Z]+")) {
+            if (!firstNameTxtfield.getText().matches("[a-zA-Z ]+") || !lastNameTxtfield.getText().matches("[a-zA-Z ]+")) {
                 errorLabel.setText("Vorname und Name dürfen nur Buchstaben enthalten");
                 return;
             }
@@ -84,9 +84,12 @@ public class EditGastController {
                     return;
                 }
             }
-            Hotel.gastAendern(selectedPerson, firstNameTxtfield.getText()
-                    , lastNameTxtfield.getText(), emailTxtfield.getText(), birthdayDateChooser.getValue()
-                    , telefonNrTxtfield.getText());
+            Hotel.gastAendern(selectedPerson, firstNameTxtfield.getText().trim()
+                    , lastNameTxtfield.getText().trim()
+                    , emailTxtfield.getText().trim(),
+                    birthdayDateChooser.getValue()
+                    , telefonNrTxtfield.getText().trim()
+            );
             gaesteController.updateListView(Hotel.getAllGasts());
             stage.close();
         } else {
