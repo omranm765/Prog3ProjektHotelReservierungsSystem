@@ -1,6 +1,7 @@
 package com.example.database;
 
 import com.example.prog3projekthotelreservierungssystem.HotelException;
+import com.example.prog3projekthotelreservierungssystem.Person;
 import com.example.prog3projekthotelreservierungssystem.Zimmer;
 import jakarta.persistence.Query;
 import jakarta.persistence.TypedQuery;
@@ -67,6 +68,23 @@ public class ZimmerConnector implements DbOperator {
             }
             session.getTransaction().begin();
             Zimmer zimmer = session.find(Zimmer.class, id);
+            session.getTransaction().commit();
+            return (T) zimmer;
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return null;
+    }
+
+    public <T> T datenbankSuchNachNummer(int nr) {
+        try (Session session = JDBCConnector.getSession()) {
+            if (nr < 0) {
+                throw new HotelException("Nummer muss größer null sein");
+            }
+            session.getTransaction().begin();
+            Query query = session.createQuery("SELECT z FROM Zimmer z WHERE z.zimmerNr = :nr", Zimmer.class);
+            query.setParameter("nr", nr);
+            Zimmer zimmer = (Zimmer) query.getSingleResult();
             session.getTransaction().commit();
             return (T) zimmer;
         } catch (Exception e) {

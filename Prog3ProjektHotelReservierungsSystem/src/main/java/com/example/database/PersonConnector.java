@@ -31,6 +31,7 @@ public class PersonConnector implements DbOperator {
         session.getTransaction().begin();
         session.persist(person);
         session.getTransaction().commit();
+        session.close();
     }
 
     /**
@@ -47,7 +48,6 @@ public class PersonConnector implements DbOperator {
             TypedQuery<Person> query = session.createQuery(queryString, Person.class);
             allPerson = query.getResultList();
             session.getTransaction().commit();
-            session.close();
             return allPerson;
         } catch (Exception e) {
             e.printStackTrace();
@@ -70,7 +70,26 @@ public class PersonConnector implements DbOperator {
             session.getTransaction().begin();
             Person person = session.find(Person.class, id);
             session.getTransaction().commit();
-            session.close();
+            return (T) person;
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return null;
+    }
+
+    public <T> T datenbankSuchNachEmail(String email) {
+        try (Session session = JDBCConnector.getSession()) {
+            if (email == null) {
+                throw new HotelException("Email darf nicht leer sein.");
+            }
+            if (!email.matches("^[\\w-\\.]+@([\\w-]+\\.)+[\\w-]{2,4}$")){
+                throw new HotelException("Ungültiger Email");
+            }
+            session.getTransaction().begin();
+            Query query = session.createQuery("SELECT p FROM Person p WHERE p.email = :email");
+            query.setParameter("email", email);
+            Person person = (Person) query.getSingleResult();
+            session.getTransaction().commit();
             return (T) person;
         } catch (Exception e) {
             e.printStackTrace();

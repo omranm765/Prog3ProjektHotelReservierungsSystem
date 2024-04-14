@@ -6,6 +6,7 @@ import com.example.prog3projekthotelreservierungssystem.Validator;
 import com.example.prog3projekthotelreservierungssystem.Zimmer;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
+import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.ChoiceBox;
 import javafx.scene.control.Label;
@@ -50,26 +51,26 @@ public class AddZimmerController {
         ZimmerConnector zimmerConnector = new ZimmerConnector();
         List<Zimmer> tempZimmer = zimmerConnector.datenbankSuchAlles();
         for (Zimmer z : tempZimmer) {
-            if(z.getZimmerNr() == Integer.parseInt(roomNrString)){
+            if (z.getZimmerNr() == Integer.parseInt(roomNrString)) {
                 errorLabel.setText("Es existiert ein Zimmer mit diesen ZimmerNr");
                 return;
             }
         }
-        if (!priceString.matches("[0-9]+(\\.([0-9]{1,2}))?")){
+        if (!priceString.matches("[0-9]+(\\.([0-9]{1,2}))?")) {
             errorLabel.setText("Preis darf nur Zahlen und komma enthalten und 2 zahlen nach dem komma");
             return;
         }
-                int roomNr = Integer.parseInt(roomNrString);
-                double price = Double.parseDouble(priceString);
+        int roomNr = Integer.parseInt(roomNrString);
+        double price = Double.parseDouble(priceString);
 
-                String areaString = areaChoicheBox.getValue().toString();
-                int area = Integer.parseInt(areaString);
+        String areaString = areaChoicheBox.getValue().toString();
+        int area = Integer.parseInt(areaString);
 
-                Zimmer zimmer = new Zimmer(roomNr, floorChoiceBox.getValue(), area, price);
+        Zimmer zimmer = new Zimmer(roomNr, floorChoiceBox.getValue(), area, price);
 
-                Hotel.zimmerHinzufuegen(zimmer);
-                zimmerController.updateListView(Hotel.getAllZimmer());
-                stage.close();
+        Hotel.zimmerHinzufuegen(zimmer);
+        zimmerController.updateListView(Hotel.getAllZimmer());
+        stage.close();
     }
 
     public void setStage(Stage stage) {

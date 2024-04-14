@@ -88,6 +88,7 @@ public class Buchung {
         StringBuilder sb = new StringBuilder();
 
         sb.append("Kunde: ").append(this.getGast());
+        sb.append("ZimmerNr: ").append(this.getZimmer().getZimmerNr());
         sb.append("Rechnungsnummer: ").append(rechnungID).append("\n");
         sb.append("Buchungsdatum: ").append(rechnung1.getErstellungsDatum()).append("\n");
         sb.append("Betrag: ").append(this.getZimmer().getPreis() * diffInDaysInt).append(" EUR\n");
@@ -214,10 +215,12 @@ public class Buchung {
 
     @Override
     public String toString() {
-        return "\nBuchung " + "\ngast: " + gast +
-                "\nzimmerNr: " + zimmerNr + "," +
-                "\nbuchungDatumBegin: " + buchungDatumBeginn +
-                "\nbuchungDatumEnde: " + buchungDatumEnde +
+        return "\nBuchung " +
+                "\nGast: " + (!storniert ?  gast : "Hat die Buchung storniert") +
+                "\nZimmerNr: " + zimmerNr +
+                (!storniert ? "\nPreis: " + zimmer.getPreis() : "") +
+                "\nBuchungDatumBegin: " + buchungDatumBeginn +
+                "\nBuchungDatumEnde: " + buchungDatumEnde +
                 "\nStorniert: " + (!storniert ? "Nein" : "Ja");
     }
 }

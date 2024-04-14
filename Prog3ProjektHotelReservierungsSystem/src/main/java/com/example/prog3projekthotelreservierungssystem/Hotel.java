@@ -118,12 +118,14 @@ public class Hotel {
             BuchungConnector buchungConnector = new BuchungConnector();
             List<Buchung> buchungen = buchungConnector.datenbankSuchAlles();
             for (Buchung buchung : buchungen) {
-                if (!buchung.isStorniert()) {
-                    throw new HotelException("Die Buchung ist nicht storniert");
-                }
-                if (buchung.getGast() != null && buchung.getGast().equals(gast) && buchung.isStorniert()) {
-                    buchung.setGast(null);
-                    buchungConnector.datenbankAktualisieren(buchung);
+                if (buchung.getGast() != null && buchung.getGast().equals(gast)) {
+                    if (!buchung.isStorniert()) {
+                        throw new HotelException("Die Buchung ist nicht storniert");
+                    }
+                    if (buchung.getGast() != null && buchung.getGast().equals(gast) && buchung.isStorniert()) {
+                        buchung.setGast(null);
+                        buchungConnector.datenbankAktualisieren(buchung);
+                    }
                 }
             }
             PersonConnector personConnector = new PersonConnector();

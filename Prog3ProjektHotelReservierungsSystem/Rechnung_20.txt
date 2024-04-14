@@ -1,0 +1,10 @@
+Kunde: Gast
+Id: 10
+Name: d s
+Geburtsdatum: 2024-04-11
+Email: d@f.com
+TelefonNr: 2
+Rechnungsnummer: 20
+Buchungsdatum: 2024-04-14
+Betrag: 150.0 EUR
+Buchung von: 2024-04-14 - bis: 2024-04-17

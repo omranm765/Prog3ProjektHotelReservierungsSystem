@@ -1,5 +1,6 @@
 package com.example.gui;
 
+import com.example.database.PersonConnector;
 import com.example.prog3projekthotelreservierungssystem.*;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
@@ -9,6 +10,7 @@ import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.*;
+import javafx.scene.input.KeyCode;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
 
@@ -23,6 +25,8 @@ public class GaesteController {
     private Person selectedPerson;
     @FXML
     private Label errorLabel;
+    @FXML
+    private TextField emailSearchTxtField;
     @FXML
     void onClickAddGuest(ActionEvent event) throws IOException {
         String windowTitle = "Add Gast";
@@ -99,6 +103,40 @@ public class GaesteController {
             ObservableList<Person> observablePersonList = FXCollections.observableArrayList(personList);
             listView.setItems(observablePersonList);
         }
+    }
+
+    @FXML
+    void onClickSuchGastNachEmail(){
+        PersonConnector personConnector = new PersonConnector();
+        Person gast = personConnector.datenbankSuchNachEmail(emailSearchTxtField.getText().trim());
+        if (gast == null){
+            errorLabel.setText("Gast nicht gefunden");
+            return;
+        }
+        ObservableList<Person> observableList = FXCollections.observableArrayList();
+        observableList.add(gast);
+        listView.setItems(observableList);
+    }
+
+    @FXML
+    void initialize() {
+        emailSearchTxtField.setOnKeyPressed(keyEvent -> {
+            if (keyEvent.getCode() == KeyCode.ENTER) {
+                onClickSuchGastNachEmail();
+            }
+        });
+        listView.setOnKeyPressed(keyEvent -> {
+            if (listView.getSelectionModel().getSelectedItem() != null){
+                if (keyEvent.getCode() == KeyCode.DELETE){
+                    onClickDeleteGuest(new ActionEvent());
+                }
+            }
+        });
+    }
+
+    @FXML
+    void onClickRefreshListview(){
+        this.updateListView(Hotel.getAllGasts());
     }
 
     public ListView<Person> getListView(){

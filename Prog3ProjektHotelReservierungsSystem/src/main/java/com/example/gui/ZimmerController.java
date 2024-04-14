@@ -1,5 +1,6 @@
 package com.example.gui;
 
+import com.example.database.ZimmerConnector;
 import com.example.prog3projekthotelreservierungssystem.Hotel;
 import com.example.prog3projekthotelreservierungssystem.HotelException;
 import com.example.prog3projekthotelreservierungssystem.Zimmer;
@@ -11,6 +12,7 @@ import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.*;
+import javafx.scene.input.KeyCode;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
 
@@ -20,6 +22,8 @@ import java.util.List;
 import java.util.Optional;
 
 public class ZimmerController {
+    @FXML
+    public TextField zimmerNrSearchTxtField;
     @FXML
     private ListView<Zimmer> listView;
     @FXML
@@ -48,9 +52,22 @@ public class ZimmerController {
 
     @FXML
     void initialize() {
+        zimmerNrSearchTxtField.setOnKeyPressed(keyEvent -> {
+            if (keyEvent.getCode() == KeyCode.ENTER) {
+                onClickSuchZimmerNachNummer();
+            }
+        });
         floorChoiceBox.getSelectionModel().selectedItemProperty().addListener((observable, oldValue, newValue) -> {
             updateListView(Hotel.getAllZimmer());
         });
+        listView.setOnKeyPressed(keyEvent -> {
+            if (listView.getSelectionModel().getSelectedItem() != null) {
+                if (keyEvent.getCode() == KeyCode.DELETE) {
+                    onClickDeleteRoom(new ActionEvent());
+                }
+            }
+        });
+
     }
 
     public void updateListView(List<Zimmer> zimmerList) {
@@ -102,10 +119,33 @@ public class ZimmerController {
                     updateListView(Hotel.getAllZimmer());
                 }
             } else {
-               errorLabel.setText("Bitte wählen Sie ein Zimmer zum Löschen aus.");
+                errorLabel.setText("Bitte wählen Sie ein Zimmer zum Löschen aus.");
             }
         } catch (HotelException e) {
             System.out.println("Fehler beim Löschen des Zimmers: " + e.getMessage());
         }
+    }
+
+    @FXML
+    void onClickRefreshListview() {
+        this.updateListView(Hotel.getAllZimmer());
+    }
+
+    @FXML
+    void onClickSuchZimmerNachNummer() {
+        ZimmerConnector zimmerConnector = new ZimmerConnector();
+        String text = zimmerNrSearchTxtField.getText().trim();
+        if (text.isEmpty()){
+            errorLabel.setText("Zimmer nicht gefunden");
+            return;
+        }
+        Zimmer zimmer = zimmerConnector.datenbankSuchNachNummer(Integer.parseInt(text));
+        if (zimmer == null){
+            errorLabel.setText("Zimmer nicht gefunden");
+            return;
+        }
+        ObservableList<Zimmer> observableList = FXCollections.observableArrayList();
+        observableList.add(zimmer);
+        listView.setItems(observableList);
     }
 }
