@@ -8,6 +8,7 @@ import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
 import com.example.prog3projekthotelreservierungssystem.*;
 import com.example.prog3projekthotelreservierungssystem.Hotel;
+import javafx.scene.input.KeyCode;
 import javafx.stage.Stage;
 
 import java.time.LocalDate;
@@ -35,6 +36,54 @@ public class AddGastController {
     private GaesteController gaesteController;
     @FXML
     private Label errorLabel;
+    @FXML
+    void initialize(){
+        firstNameTxtfield.setOnKeyPressed(keyEvent -> {
+            if (keyEvent.getCode() == KeyCode.ENTER) {
+                try {
+                    onClickAddGuest(new ActionEvent());
+                } catch (HotelException e) {
+                    throw new RuntimeException(e);
+                }
+            }
+        });
+        lastNameTxtfield.setOnKeyPressed(keyEvent -> {
+            if (keyEvent.getCode() == KeyCode.ENTER) {
+                try {
+                    onClickAddGuest(new ActionEvent());
+                } catch (HotelException e) {
+                    throw new RuntimeException(e);
+                }
+            }
+        });
+        emailTxtfield.setOnKeyPressed(keyEvent -> {
+            if (keyEvent.getCode() == KeyCode.ENTER) {
+                try {
+                    onClickAddGuest(new ActionEvent());
+                } catch (HotelException e) {
+                    throw new RuntimeException(e);
+                }
+            }
+        });
+        birthdayDateChooser.setOnKeyPressed(keyEvent -> {
+            if (keyEvent.getCode() == KeyCode.ENTER) {
+                try {
+                    onClickAddGuest(new ActionEvent());
+                } catch (HotelException e) {
+                    throw new RuntimeException(e);
+                }
+            }
+        });
+        telefonNrTxtfield.setOnKeyPressed(keyEvent -> {
+            if (keyEvent.getCode() == KeyCode.ENTER) {
+                try {
+                    onClickAddGuest(new ActionEvent());
+                } catch (HotelException e) {
+                    throw new RuntimeException(e);
+                }
+            }
+        });
+    }
 
     @FXML
     void onClickAddGuest(ActionEvent event) throws HotelException {

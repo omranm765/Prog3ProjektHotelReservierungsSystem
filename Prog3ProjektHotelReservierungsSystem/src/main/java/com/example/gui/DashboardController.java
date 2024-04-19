@@ -23,6 +23,7 @@ import java.io.IOException;
 import java.net.URL;
 import java.util.List;
 
+//Dashboard von die Buchungen
 public class DashboardController {
 
     @FXML
@@ -59,16 +60,14 @@ public class DashboardController {
         });
         listView.setCellFactory(list -> new ListCell<Buchung>() {
             @Override
-            protected void updateItem(Buchung item, boolean empty) {
-                super.updateItem(item, empty);
+            protected void updateItem(Buchung buchung, boolean leer) {
+                super.updateItem(buchung, leer);
 
-                if (empty || item == null) {
+                if (leer || buchung == null) {
                     setText(null);
                 } else {
-                    setText(item.toString());
-
-                    // Setze die Textfarbe basierend auf dem Stornierungsstatus
-                    if (item.isStorniert()) {
+                    setText(buchung.toString());
+                    if (buchung.isStorniert()) {
                         setTextFill(Color.RED);
                     } else {
                         setTextFill(Color.BLACK);

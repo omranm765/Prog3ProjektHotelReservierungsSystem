@@ -8,6 +8,7 @@ import com.example.prog3projekthotelreservierungssystem.Person;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.*;
+import javafx.scene.input.KeyCode;
 import javafx.stage.Stage;
 
 import java.time.LocalDate;
@@ -36,6 +37,55 @@ public class EditGastController {
     private Stage stage;
     private ListView<Person> listView;
     private Person selectedPerson;
+
+    @FXML
+    void initialize(){
+        firstNameTxtfield.setOnKeyPressed(keyEvent -> {
+            if (keyEvent.getCode() == KeyCode.ENTER) {
+                try {
+                    onClickSpeichern(new ActionEvent());
+                } catch (HotelException e) {
+                    throw new RuntimeException(e);
+                }
+            }
+        });
+        lastNameTxtfield.setOnKeyPressed(keyEvent -> {
+            if (keyEvent.getCode() == KeyCode.ENTER) {
+                try {
+                    onClickSpeichern(new ActionEvent());
+                } catch (HotelException e) {
+                    throw new RuntimeException(e);
+                }
+            }
+        });
+        emailTxtfield.setOnKeyPressed(keyEvent -> {
+            if (keyEvent.getCode() == KeyCode.ENTER) {
+                try {
+                    onClickSpeichern(new ActionEvent());
+                } catch (HotelException e) {
+                    throw new RuntimeException(e);
+                }
+            }
+        });
+        birthdayDateChooser.setOnKeyPressed(keyEvent -> {
+            if (keyEvent.getCode() == KeyCode.ENTER) {
+                try {
+                    onClickSpeichern(new ActionEvent());
+                } catch (HotelException e) {
+                    throw new RuntimeException(e);
+                }
+            }
+        });
+        telefonNrTxtfield.setOnKeyPressed(keyEvent -> {
+            if (keyEvent.getCode() == KeyCode.ENTER) {
+                try {
+                    onClickSpeichern(new ActionEvent());
+                } catch (HotelException e) {
+                    throw new RuntimeException(e);
+                }
+            }
+        });
+    }
 
     @FXML
     void onClickSpeichern(ActionEvent event) throws HotelException {

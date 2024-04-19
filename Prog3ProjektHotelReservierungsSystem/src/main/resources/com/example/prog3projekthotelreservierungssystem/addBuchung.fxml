@@ -19,7 +19,7 @@
                         <Font size="26.0" />
                     </font>
                 </Text>
-                <TextField fx:id="guestId" layoutX="13.0" layoutY="122.0" prefHeight="25.0" prefWidth="165.0" promptText="1" styleClass="input" />
+                <TextField fx:id="guestIdTxtField" layoutX="13.0" layoutY="122.0" prefHeight="25.0" prefWidth="165.0" promptText="1" styleClass="input" />
                 <Text layoutX="13.0" layoutY="195.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Abreise">
                     <font>
                         <Font size="20.0" />
@@ -30,8 +30,8 @@
                         <Font size="20.0" />
                     </font>
                 </Text>
-                <DatePicker fx:id="departureDateChooser" layoutX="13.0" layoutY="211.0" prefHeight="31.0" prefWidth="165.0" promptText="2024-03-01" styleClass="birth-input" />
                 <DatePicker fx:id="arrivalDateChooser" layoutX="223.0" layoutY="122.0" prefHeight="31.0" prefWidth="165.0" promptText="2024-03-03" styleClass="birth-input" />
+                <DatePicker fx:id="departureDateChooser" layoutX="13.0" layoutY="211.0" prefHeight="31.0" prefWidth="165.0" promptText="2024-03-01" styleClass="birth-input" />
                 <Text layoutX="222.0" layoutY="196.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Zimmer">
                     <font>
                         <Font size="20.0" />

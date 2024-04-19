@@ -9,6 +9,7 @@ import javafx.scene.control.ChoiceBox;
 import javafx.scene.control.DatePicker;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
+import javafx.scene.input.KeyCode;
 import javafx.stage.Stage;
 
 import java.time.LocalDate;
@@ -25,7 +26,7 @@ public class AddBuchungController {
     private DatePicker departureDateChooser;
 
     @FXML
-    private TextField guestId;
+    private TextField guestIdTxtField;
 
     @FXML
     private ChoiceBox<Integer> roomChoiceBox;
@@ -35,15 +36,55 @@ public class AddBuchungController {
     private DashboardController dashboardController;
 
     @FXML
+    void initialize(){
+        guestIdTxtField.setOnKeyPressed(keyEvent -> {
+            if (keyEvent.getCode() == KeyCode.ENTER) {
+                try {
+                    onClickAddBooking(new ActionEvent());
+                } catch (HotelException e) {
+                    throw new RuntimeException(e);
+                }
+            }
+        });
+        arrivalDateChooser.setOnKeyPressed(keyEvent -> {
+            if (keyEvent.getCode() == KeyCode.ENTER) {
+                try {
+                    onClickAddBooking(new ActionEvent());
+                } catch (HotelException e) {
+                    throw new RuntimeException(e);
+                }
+            }
+        });
+        departureDateChooser.setOnKeyPressed(keyEvent -> {
+            if (keyEvent.getCode() == KeyCode.ENTER) {
+                try {
+                    onClickAddBooking(new ActionEvent());
+                } catch (HotelException e) {
+                    throw new RuntimeException(e);
+                }
+            }
+        });
+        roomChoiceBox.setOnKeyPressed(keyEvent -> {
+            if (keyEvent.getCode() == KeyCode.ENTER) {
+                try {
+                    onClickAddBooking(new ActionEvent());
+                } catch (HotelException e) {
+                    throw new RuntimeException(e);
+                }
+            }
+        });
+    }
+
+    @FXML
     void onClickAddBooking(ActionEvent event) throws HotelException {
-        if (guestId.getText().trim().isEmpty()
+        if (guestIdTxtField.getText().trim().isEmpty()
                 || roomChoiceBox.getItems().isEmpty()
                 || departureDateChooser.getValue() == null
                 || arrivalDateChooser.getValue() == null) {
             errorLabel.setText("Bitte füllen sie die Felder aus");
             return;
         }
-        if (!guestId.getText().matches("[0-9]+")){
+        if (!guestIdTxtField.getText().matches("[0-9]+")){
             errorLabel.setText("GuestID darf nur Zahlen enthalten");
             return;
         }
@@ -67,7 +108,7 @@ public class AddBuchungController {
         List<Person> personList = personConnector.datenbankSuchAlles();
         boolean found = false;
         for (Person person: personList) {
-            if (person.getId() == Integer.parseInt(guestId.getText())){
+            if (person.getId() == Integer.parseInt(guestIdTxtField.getText())){
                 found = true;
             }
         }
@@ -75,7 +116,7 @@ public class AddBuchungController {
             errorLabel.setText("Gast existiert nicht");
             return;
         }
-        int id = Integer.parseInt(guestId.getText());
+        int id = Integer.parseInt(guestIdTxtField.getText());
         Person guest = Hotel.getPersonById(id);
         Buchung buchung = new Buchung(guest, arrivalDateChooser.getValue(),
                 departureDateChooser.getValue(), roomChoiceBox.getValue());
