@@ -3,14 +3,11 @@ package com.example.database;
 import com.example.prog3projekthotelreservierungssystem.*;
 import jakarta.persistence.EntityManager;
 import jakarta.persistence.EntityManagerFactory;
-import jakarta.persistence.EntityTransaction;
 import jakarta.persistence.Persistence;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.hibernate.boot.registry.StandardServiceRegistryBuilder;
 import org.hibernate.cfg.Configuration;
-
-import org.hibernate.service.StandardServiceInitiators;
 import org.hibernate.service.ServiceRegistry;
 
 import java.sql.Connection;
@@ -30,7 +27,7 @@ public class JDBCConnector {
     private static EntityManagerFactory entityManagerFactory;
     private static Session session;
 
-    // Statischer Initialisierungsblock für die Initialisierung der SessionFactory
+    // Statischer Initialisierungsblock für die Initialisierung der SessionFactory, Session, usw.
     static {
         Configuration configuration = new Configuration().configure().addAnnotatedClass(Gast.class)
                 .addAnnotatedClass(Buchung.class)

@@ -88,7 +88,7 @@ public class Buchung {
         StringBuilder sb = new StringBuilder();
 
         sb.append("Kunde: ").append(this.getGast());
-        sb.append("ZimmerNr: ").append(this.getZimmer().getZimmerNr());
+        sb.append("ZimmerNr: ").append(this.getZimmer().getZimmerNr()).append("\n");
         sb.append("Rechnungsnummer: ").append(rechnungID).append("\n");
         sb.append("Buchungsdatum: ").append(rechnung1.getErstellungsDatum()).append("\n");
         sb.append("Betrag: ").append(this.getZimmer().getPreis() * diffInDaysInt).append(" EUR\n");

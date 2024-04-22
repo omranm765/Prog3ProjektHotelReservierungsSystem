@@ -18,5 +18,4 @@ public interface DbOperator {
     public void datenbankLoeschNachId(int id);
 
     public void datenbankAktualisieren(Object object);
-
 }

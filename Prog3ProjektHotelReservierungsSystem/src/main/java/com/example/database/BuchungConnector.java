@@ -1,7 +1,6 @@
 package com.example.database;
 
 import com.example.prog3projekthotelreservierungssystem.*;
-import jakarta.persistence.EntityManager;
 import jakarta.persistence.Query;
 import jakarta.persistence.TypedQuery;
 import org.hibernate.Session;
@@ -39,6 +38,7 @@ public class BuchungConnector implements DbOperator {
         session.getTransaction().begin();
         session.persist(buchung);
         session.getTransaction().commit();
+        session.close();
     }
 
     /**
@@ -176,6 +176,11 @@ public class BuchungConnector implements DbOperator {
         }
     }
 
+    /**
+     * Speichert gelöschte Buchungen in eine Datei damit die Informationen
+     * nicht verloren gehen
+     * @param buchung Die Buchung, die in der Datei gespeichert werden muss
+     */
     private void saveDeletedBooking(Buchung buchung) {
         try (BufferedWriter writer = new BufferedWriter(new FileWriter(DELETED_BOOKINGS_FILE, true))) {
             LocalDateTime now = LocalDateTime.now();

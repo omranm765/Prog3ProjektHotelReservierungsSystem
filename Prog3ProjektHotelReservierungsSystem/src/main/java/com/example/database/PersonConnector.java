@@ -3,7 +3,6 @@ package com.example.database;
 
 import com.example.prog3projekthotelreservierungssystem.*;
 
-import jakarta.persistence.EntityManager;
 import jakarta.persistence.Query;
 import jakarta.persistence.TypedQuery;
 import org.hibernate.Session;
@@ -77,6 +76,11 @@ public class PersonConnector implements DbOperator {
         return null;
     }
 
+    /**
+     * Sucht eine Person im Datenbank, die die übergebene E-Mail hat
+     * @param email Die zu suchende E-Mail
+     * @return Die Gefundene Person
+     */
     public <T> T datenbankSuchNachEmail(String email) {
         try (Session session = JDBCConnector.getSession()) {
             if (email == null) {
@@ -86,7 +90,7 @@ public class PersonConnector implements DbOperator {
                 throw new HotelException("Ungültiger Email");
             }
             session.getTransaction().begin();
-            Query query = session.createQuery("SELECT p FROM Person p WHERE p.email = :email");
+            Query query = session.createQuery("SELECT p FROM Person p WHERE p.email = :email", Person.class);
             query.setParameter("email", email);
             Person person = (Person) query.getSingleResult();
             session.getTransaction().commit();

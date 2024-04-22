@@ -30,6 +30,7 @@ public class RechnungConnector implements DbOperator {
         session.getTransaction().begin();
         session.persist(rechnung);
         session.getTransaction().commit();
+        session.close();
     }
     /**
      * Methode zum Abrufen aller Rechnungen aus der Datenbank.

@@ -31,6 +31,7 @@ public class ZimmerConnector implements DbOperator {
         session.getTransaction().begin();
         session.persist(zimmer);
         session.getTransaction().commit();
+        session.close();
     }
 
     /**
